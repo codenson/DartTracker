@@ -1,11 +1,16 @@
 package com.cs321.core;
 
+import java.util.UUID;
+
 /**
  * This class represents the configurations for the game (or gamemode).
  * 
  * @author James Luna, Hasnain Raza, Marouane Guerouji
  */
 public class GameConfiguration {
+
+    /** The unique ID of the gamemode. */
+    private String id;
 
     /** The name of the gamemode. */
     private String name;
@@ -40,6 +45,24 @@ public class GameConfiguration {
 
     /** Whether or not to count downwards towards zero. */
     private boolean subtractPoints;
+
+    /**
+     * Get the unique ID of the gamemode.
+     * 
+     * @return The unique ID of the gamemode.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set the unique ID of the gamemode.
+     * 
+     * @param id The unique ID of the gamemode.
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * Get the name of the gamemode.
@@ -216,6 +239,7 @@ public class GameConfiguration {
      * @return A new GameConfiguration with default values.
      */
     private GameConfiguration() {
+        this.id = UUID.randomUUID().toString();
         this.name = "Default";
         this.dartsPerRound = 3;
         this.maximumRounds = -1;
@@ -244,6 +268,26 @@ public class GameConfiguration {
          */
         public GameConfigurationBuilder() {
             gameConfiguration = new GameConfiguration();
+        }
+
+        /**
+         * Build the GameConfiguration.
+         * 
+         * @return The GameConfiguration.
+         */
+        public GameConfiguration build() {
+            return gameConfiguration;
+        }
+
+        /**
+         * Set the unique id of the gamemode.
+         * 
+         * @param id The unique id of the gamemode.
+         * @return The GameConfigurationBuilder.
+         */
+        public GameConfigurationBuilder withId(String id) {
+            gameConfiguration.setId(id);
+            return this;
         }
 
         /**
@@ -343,15 +387,6 @@ public class GameConfiguration {
         public GameConfigurationBuilder withSubtractPoints(boolean subtractPoints) {
             gameConfiguration.setSubtractPoints(subtractPoints);
             return this;
-        }
-
-        /**
-         * Build the GameConfiguration.
-         * 
-         * @return The GameConfiguration.
-         */
-        public GameConfiguration build() {
-            return gameConfiguration;
         }
 
     }

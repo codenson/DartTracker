@@ -77,6 +77,15 @@ public class Player {
     }
 
     /**
+     * Add a new gamestats to this player.
+     * 
+     * @param gameStats The gamestats to add.
+     */
+    public void addGameStats(GameStats gameStats) {
+        this.gameStats.add(gameStats);
+    }
+
+    /**
      * Create a new player with the given ID, name, and GameStats.
      * 
      * @param id The ID of this player.
@@ -141,6 +150,35 @@ public class Player {
      */
     public float getWinLossRatio() {
         return (float) getWins() / getLosses();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Player other = (Player) obj;
+        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
 }

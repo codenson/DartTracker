@@ -234,11 +234,10 @@ public class GameConfiguration {
 
     /**
      * Create a new GameConfiguration with default values.
-     * Please use the builder class to create a new GameConfiguration.
      * 
      * @return A new GameConfiguration with default values.
      */
-    private GameConfiguration() {
+    public GameConfiguration() {
         this.id = UUID.randomUUID().toString();
         this.name = "Default";
         this.dartsPerRound = 3;
@@ -389,6 +388,35 @@ public class GameConfiguration {
             return this;
         }
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        GameConfiguration other = (GameConfiguration) obj;
+        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
 }

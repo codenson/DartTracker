@@ -9,6 +9,27 @@ import com.cs321.core.GameConfiguration.GameConfigurationBuilder;
 public class GameConfigurationTest {
     
     /**
+     * GameConfiguration should be initialized with default values.
+     */
+    @Test
+    public void defaultGameConfiguration() {
+        GameConfiguration config = new GameConfiguration();
+
+        int[] defaultScoreList = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50};
+        float[] defaultMultiplers = new float[] {2.0f, 3.0f};
+
+        assertEquals("Default", config.getName());
+        assertEquals(3, config.getDartsPerRound());
+        assertEquals(-1, config.getMaximumRounds());
+        assertEquals(301, config.getStartingScore());
+        assertEquals(0, config.getOffboardPenalty());
+        assertArrayEquals(defaultScoreList, config.getScoreList());
+        assertArrayEquals(defaultMultiplers, config.getMultipliers(), 0.001f);
+        assertTrue(config.isExactZeroWin());
+        assertTrue(config.isSubtractPoints());
+    }
+
+    /**
      * GameConfigurationBuilder should be able to build a default GameConfiguration.
      */
     @Test
@@ -58,6 +79,30 @@ public class GameConfigurationTest {
         assertArrayEquals(customMultiplers, config.getMultipliers(), 0.001f);
         assertTrue(config.isExactZeroWin());
         assertTrue(config.isSubtractPoints());
+    }
+
+    /**
+     * GameConfigurations should have unique ids.
+     */
+    @Test
+    public void gameConfigurationIdsUnique() {
+        GameConfiguration config1 = new GameConfigurationBuilder().build();
+        GameConfiguration config2 = new GameConfigurationBuilder().build();
+
+        assertNotEquals(config1.getId(), config2.getId());
+    }
+
+    /**
+     * GameConfiguration should be equal based on the id.
+     */
+    @Test
+    public void gameConfigurationEquals() {
+        String id = "random_uuid";
+
+        GameConfiguration config1 = new GameConfigurationBuilder().withId(id).build();
+        GameConfiguration config2 = new GameConfigurationBuilder().withId(id).build();
+
+        assertEquals(config1, config2);
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.UUID;
  * @author James Luna, Hasnain Raza, Marouane Guerouji
  */
 public class Team {
-    
+
     /** The ID of this team. */
     private String id;
 
@@ -86,6 +86,16 @@ public class Team {
         setId(UUID.randomUUID().toString());
         setName(name);
         setPlayers(players);
+    }
+
+    /**
+     * Check whether or not the team has this player.
+     * 
+     * @param player The player to check.
+     * @return Whether or not the team has this player.
+     */
+    public boolean hasPlayer(Player player) {
+        return players.contains(player);
     }
 
     /**

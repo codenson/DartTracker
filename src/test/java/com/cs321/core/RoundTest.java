@@ -35,4 +35,27 @@ public class RoundTest {
         assertEquals(10, round.getScores()[0]);
     }
 
+    /**
+     * isPlayedBy for teams works properly.
+     */
+    @Test
+    public void isPlayedByForTeams() {
+        String playername1 = "John Doe";
+        String playername2 = "Jane Doe";
+        Player player1 = new Player(playername1);
+        Player player2 = new Player(playername2);
+
+        String teamname1 = "Team 1";
+        String teamname2 = "Team 2";
+        Player[] players1 = new Player[] { player1 };
+        Player[] players2 = new Player[] { player2 };
+        Team team1 = new Team(teamname1, players1);
+        Team team2 = new Team(teamname2, players2);
+
+        Round round = new Round(player1);
+
+        assertTrue(round.isPlayedBy(team1));
+        assertFalse(round.isPlayedBy(team2));
+    }
+
 }

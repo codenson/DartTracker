@@ -106,6 +106,16 @@ public class Round {
     }
 
     /**
+     * Check whether or not this round is played by this team.
+     * 
+     * @param team The team to check.
+     * @return Whether or not this round is played by this team.
+     */
+    public boolean isPlayedBy(Team team) {
+        return team.hasPlayer(player);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

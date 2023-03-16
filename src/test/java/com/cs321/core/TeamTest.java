@@ -22,4 +22,22 @@ public class TeamTest {
         assertNotNull(team.getPlayers());
     }
 
+    /**
+     * hasPlayer works properly.
+     */
+    @Test
+    public void hasPlayer() {
+        String playername1 = "John Doe";
+        String playername2 = "Jane Doe";
+        Player player1 = new Player(playername1);
+        Player player2 = new Player(playername2);
+
+        String teamname = "Team 1";
+        Player[] players = new Player[] { player1 };
+        Team team = new Team(teamname, players);
+
+        assertTrue(team.hasPlayer(player1));
+        assertFalse(team.hasPlayer(player2));
+    }
+
 }

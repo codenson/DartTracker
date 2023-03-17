@@ -8,19 +8,19 @@ package com.cs321.core;
 public class GameManager {
     
     /** The game configuration for this game. */
-    GameConfiguration gameConfiguration;
+    private GameConfiguration gameConfiguration;
 
     /** The teams manager for this game. */
-    TeamsManager teamsManager;
+    private TeamsManager teamsManager;
 
     /** The turn manager for this game. */
-    TurnManager turnManager;
+    private TurnManager turnManager;
 
     /** The rounds manager for this game. */
-    RoundsManager roundsManager;
+    private RoundsManager roundsManager;
 
     /** The current round. */
-    Round currentRound;
+    private Round currentRound;
 
     /**
      * Get the game configuration for this game.

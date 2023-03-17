@@ -7,7 +7,7 @@
         "startingScore":451,
         "offBoardPenalty":-100,
         "scoreList":[11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,100],
-        "multipliers":[3.0,5.0],
+        "multipliers":[3.0,5.0,2.0],
         "exactZeroWin": true,
         "subtractPoints":true
     }

@@ -50,6 +50,15 @@ public class RoundsManager {
     }
 
     /**
+     * Get total number of rounds.
+     * 
+     * @return The total number of rounds.
+     */
+    public int getTotalRounds() {
+        return rounds.size();
+    }
+
+    /**
      * Get the rounds of a team.
      * 
      * @param team The team to get the rounds of.
@@ -67,6 +76,16 @@ public class RoundsManager {
      */
     public int[] getTeamScores(Team team) {
         return Arrays.stream(getRoundsOfTeam(team)).mapToInt(round -> round.getTotalScore()).toArray();
+    }
+
+    /**
+     * Get the total score of a team.
+     * 
+     * @param team The team to get the total score of.
+     * @return The total score of the team.
+     */
+    public int getTeamTotalScore(Team team) {
+        return Arrays.stream(getTeamScores(team)).sum();
     }
 
 }

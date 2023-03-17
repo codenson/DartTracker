@@ -116,6 +116,15 @@ public class Round {
     }
 
     /**
+     * Get the total throws of this round.
+     * 
+     * @return The total throws of this round.
+     */
+    public int getTotalThrows() {
+        return scores.size();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

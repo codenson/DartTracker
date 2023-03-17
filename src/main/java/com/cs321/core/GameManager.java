@@ -19,6 +19,9 @@ public class GameManager {
     /** The rounds manager for this game. */
     RoundsManager roundsManager;
 
+    /** The current round. */
+    Round currentRound;
+
     /**
      * Get the game configuration for this game.
      * 
@@ -92,6 +95,15 @@ public class GameManager {
     }
 
     /**
+     * Get the current round.
+     * 
+     * @return The current round.
+     */
+    public Round getCurrentRound() {
+        return currentRound;
+    }
+
+    /**
      * Create a new game manager.
      * 
      * @param gameConfiguration The game configuration for this game.
@@ -130,6 +142,50 @@ public class GameManager {
         }
 
         return false;
+    }
+
+    /**
+     * Begin a new round.
+     */
+    public void beginRound() {
+        if (isGameFinished()) {
+            throw new IllegalStateException("Cannot begin a new round while the game is finished.");
+        }
+        if (currentRound != null) {
+            throw new IllegalStateException("Cannot begin a new round while the current round is still in progress.");
+        }
+
+        currentRound = new Round(turnManager.getCurrentPlayer());
+        turnManager.nextTurn();
+    }
+
+    /**
+     * Progress the current round.
+     * 
+     * @param score The next score for the current round.
+     */
+    public void progressRound(int score) {
+        if (isGameFinished()) {
+            throw new IllegalStateException("Cannot progress a round while the game is finished.");
+        }
+        if (currentRound == null) {
+            throw new IllegalStateException("Cannot progress a round that has not been started.");
+        }
+
+        currentRound.addScore(score);
+        if (currentRound.getTotalThrows() == gameConfiguration.getDartsPerRound()) {
+            roundsManager.addRound(currentRound);
+            currentRound = null;
+        }
+    }
+
+    /**
+     * Whether or not the current round is finished.
+     * 
+     * @return Whether or not the current round is finished.
+     */
+    public boolean isRoundFinished() {
+        return currentRound == null;
     }
 
 }

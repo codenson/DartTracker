@@ -42,4 +42,20 @@ public class TeamsManager {
         setTeams(teams);
     }
 
+    /**
+     * Get the given player's team.
+     * 
+     * @param player The player.
+     * @return The player's team.
+     */
+    public Team getPlayerTeam(Player player) {
+        for (Team team : teams) {
+            if (team.hasPlayer(player)) {
+                return team;
+            }
+        }
+        
+        return null;
+    }
+
 }

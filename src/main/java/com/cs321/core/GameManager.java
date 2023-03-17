@@ -160,7 +160,14 @@ public class GameManager {
     }
 
     /**
-     * Progress the current round.
+     * Progress the current round. Takes into account the number of throws per round and isExactZeroWin.
+     * The round is finished if:
+     * 
+     * 1. The number of throws per round is reached.
+     * 2. The score is overshot and isExactZeroWin is false.
+     * 
+     * If the round is finished, the round is added to the rounds manager. However, if the score is overshot and
+     * isExactZeroWin is true, the round is not added to the rounds manager.
      * 
      * @param score The next score for the current round.
      */
@@ -173,9 +180,23 @@ public class GameManager {
         }
 
         currentRound.addScore(score);
-        if (currentRound.getTotalThrows() == gameConfiguration.getDartsPerRound()) {
-            roundsManager.addRound(currentRound);
-            currentRound = null;
+        int teamTotalScore = roundsManager.getTeamTotalScore(getCurrentTeam()) + score;
+        boolean throwsDone = currentRound.getTotalThrows() == gameConfiguration.getDartsPerRound();
+        boolean scoreDone = teamTotalScore == gameConfiguration.getStartingScore();
+        boolean scoreOvershot = teamTotalScore > gameConfiguration.getStartingScore();
+
+        if (gameConfiguration.isExactZeroWin()) {
+            if (scoreOvershot) {
+                currentRound = null;
+            } else if (throwsDone) {
+                roundsManager.addRound(currentRound);
+                currentRound = null;
+            }
+        } else {
+            if (throwsDone || scoreDone || scoreOvershot) {
+                roundsManager.addRound(currentRound);
+                currentRound = null;
+            }
         }
     }
 
@@ -186,6 +207,70 @@ public class GameManager {
      */
     public boolean isRoundFinished() {
         return currentRound == null;
+    }
+
+    /**
+     * Get the current player.
+     * 
+     * @return The current player.
+     */
+    public Player getCurrentPlayer() {
+        if (currentRound == null) {
+            throw new IllegalStateException("Cannot get the current player when there is no current round.");
+        }
+
+        return currentRound.getPlayer();
+    }
+
+    /**
+     * Get the current team.
+     * 
+     * @return The current team.
+     */
+    public Team getCurrentTeam() {
+        if (currentRound == null) {
+            throw new IllegalStateException("Cannot get the current team when there is no current round.");
+        }
+
+        return teamsManager.getPlayerTeam(currentRound.getPlayer());
+    }
+
+    /**
+     * Get the winner team of the game.
+     * 
+     * @return The winner team of the game.
+     */
+    public Team getWinnerTeam() {
+        if (!isGameFinished()) {
+            throw new IllegalStateException("Cannot get the winner team when the game is not finished.");
+        }
+
+        if (gameConfiguration.getMaximumRounds() > 0) {
+            // If there is a maximum number of rounds, the team with the highest score wins.
+            Team winnerTeam = null;
+            int winnerTeamScore = 0;
+
+            for (Team team : teamsManager.getTeams()) {
+                int teamScore = roundsManager.getTeamTotalScore(team);
+                if (teamScore > winnerTeamScore) {
+                    winnerTeam = team;
+                    winnerTeamScore = teamScore;
+                }
+            }
+
+            return winnerTeam;
+        } else {
+            // If there is no maximum number of rounds, the team which reached the starting score first wins.
+            for (Team team : teamsManager.getTeams()) {
+                int teamScore = roundsManager.getTeamTotalScore(team);
+                if (teamScore >= gameConfiguration.getStartingScore()) {
+                    return team;
+                }
+            }
+        }
+
+        // This should never happen, its just here to make the compiler happy.
+        return null;
     }
 
 }

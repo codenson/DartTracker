@@ -160,14 +160,9 @@ public class GameManager {
     }
 
     /**
-     * Progress the current round. Takes into account the number of throws per round and isExactZeroWin.
-     * The round is finished if:
-     * 
-     * 1. The number of throws per round is reached.
-     * 2. The score is overshot and isExactZeroWin is false.
-     * 
-     * If the round is finished, the round is added to the rounds manager. However, if the score is overshot and
-     * isExactZeroWin is true, the round is not added to the rounds manager.
+     * Progress the current round by adding the score to the current round. The round is finished if
+     * the number of throws is equal to the number of darts per round. If the score is overshot, the
+     * round is not added to the rounds manager.
      * 
      * @param score The next score for the current round.
      */
@@ -182,21 +177,14 @@ public class GameManager {
         currentRound.addScore(score);
         int teamTotalScore = roundsManager.getTeamTotalScore(getCurrentTeam()) + score;
         boolean throwsDone = currentRound.getTotalThrows() == gameConfiguration.getDartsPerRound();
-        boolean scoreDone = teamTotalScore == gameConfiguration.getStartingScore();
+
         boolean scoreOvershot = teamTotalScore > gameConfiguration.getStartingScore();
 
-        if (gameConfiguration.isExactZeroWin()) {
-            if (scoreOvershot) {
-                currentRound = null;
-            } else if (throwsDone) {
+        if (throwsDone) {
+            if (!scoreOvershot) {
                 roundsManager.addRound(currentRound);
-                currentRound = null;
             }
-        } else {
-            if (throwsDone || scoreDone || scoreOvershot) {
-                roundsManager.addRound(currentRound);
-                currentRound = null;
-            }
+            currentRound = null;
         }
     }
 

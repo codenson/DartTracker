@@ -34,9 +34,10 @@ public class GameConfiguration {
     private int[] scoreList;
 
     /**
-     * A list of 2 floats representing the multiplier for the two rings.
+     * A list of 3 floats representing the multiplier for the two rings.
      * The first float is the multiplier for the outer ring, the second is the
-     * multiplier for the inner ring.
+     * multiplier for the inner ring, and the third is the multiplier for the
+     * bullseye ring.
      */
     private float[] multipliers;
 
@@ -181,8 +182,8 @@ public class GameConfiguration {
      * @return The multiplier for the two rings.
      */
     public float[] getMultipliers() {
-        float[] multipliersCopy = new float[2];
-        System.arraycopy(multipliers, 0, multipliersCopy, 0, 2);
+        float[] multipliersCopy = new float[multipliers.length];
+        System.arraycopy(multipliers, 0, multipliersCopy, 0, multipliers.length);
         return multipliersCopy;
     }
 
@@ -192,8 +193,8 @@ public class GameConfiguration {
      * @param multipliers The multiplier for the two rings.
      */
     public void setMultipliers(float[] multipliers) {
-        this.multipliers = new float[2];
-        System.arraycopy(multipliers, 0, this.multipliers, 0, 2);
+        this.multipliers = new float[multipliers.length];
+        System.arraycopy(multipliers, 0, this.multipliers, 0, multipliers.length);
     }
 
     /**

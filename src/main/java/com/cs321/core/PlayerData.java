@@ -109,7 +109,7 @@ public class PlayerData<A> {
      * @param gameStat player's gameStats to be written into the file. 
      */
     public void writePlayerData(String filePath, String id, String name, ArrayList<A> gameStat) {
-        /// this method might need to check if the file exists and id the player's id and name match the ones in the method's arguments. 
+        /// this method might need to check if the file exists and id the player's id and name match the ones in the method's arguments.
         try {
             FileWriter file = new FileWriter(filePath);
             BufferedWriter bufferedWriter = new BufferedWriter(file);

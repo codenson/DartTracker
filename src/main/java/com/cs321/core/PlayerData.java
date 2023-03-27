@@ -54,10 +54,18 @@ public class PlayerData<A> {
         return name;
     }
 
+    /**
+     *a list of player's gamestat from file. 
+     * @return a list of game stats as a list. 
+     */
     protected ArrayList<A> gameStat() {
         return gameStatList;
     }
 
+    /**
+     *method to parse a file and get player's Id and Name and his gamestats. 
+     * @param filePath filename path. 
+     */
     public void getPlayerData(String filePath) {
 
         try {
@@ -93,7 +101,15 @@ public class PlayerData<A> {
 
     }
 
+    /**
+     *Method to write player's stats into a file. 
+     * @param filePath file name to write data into. 
+     * @param id player's Id to be written into the file. 
+     * @param name player's name to be written into the file. 
+     * @param gameStat player's gameStats to be written into the file. 
+     */
     public void writePlayerData(String filePath, String id, String name, ArrayList<A> gameStat) {
+        /// this method might need to check if the file exists and id the player's id and name match the ones in the method's arguments. 
         try {
             FileWriter file = new FileWriter(filePath);
             BufferedWriter bufferedWriter = new BufferedWriter(file);

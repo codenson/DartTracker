@@ -514,4 +514,166 @@ public class GameManagerTest {
         gameManager.progressRound(1);
     }
 
+    /**
+     * Run a standard game to completion.
+     * 
+     * The game is taken from the following spreadsheet:
+     * https://docs.google.com/spreadsheets/d/1CAsLWLlYBvktNcJPJBf4WI0lvo3m7a7DbqZx6AjBsNo/edit?usp=sharing
+     */
+    @Test
+    public void standardGameToCompletion() {
+        String playername1 = "p1";
+        String playername2 = "p2";
+        String playername3 = "p3";
+        String playername4 = "p4";
+        Player player1 = new Player(playername1);
+        Player player2 = new Player(playername2);
+        Player player3 = new Player(playername3);
+        Player player4 = new Player(playername4);
+
+        String teamname1 = "tA";
+        String teamname2 = "tB";
+        Player[] players1 = new Player[] { player1, player2 };
+        Player[] players2 = new Player[] { player3, player4 };
+        Team team1 = new Team(teamname1, players1);
+        Team team2 = new Team(teamname2, players2);
+
+        GameConfiguration gameConfiguration = new GameConfiguration();
+        TeamsManager teamsManager = new TeamsManager(new Team[] { team1, team2 });
+        TurnManager turnManager = new TurnManagerBuilder()
+            .withPlayer(player1, team1, 1)
+            .withPlayer(player2, team1, 2)
+            .withPlayer(player3, team2, 3)
+            .withPlayer(player4, team2, 4)
+            .build();
+        RoundsManager roundsManager = new RoundsManager();
+        
+        GameManager gameManager = new GameManager(gameConfiguration, teamsManager,
+            turnManager, roundsManager);
+        
+        assertEquals(0, roundsManager.getTeamTotalScore(team1));
+        assertEquals(0, roundsManager.getTeamTotalScore(team2));
+
+        gameManager.beginRound();
+        assertEquals(player4, gameManager.getCurrentPlayer());
+        gameManager.progressRound(0);
+        gameManager.progressRound(8);
+        gameManager.progressRound(10);
+        assertEquals(18, roundsManager.getTeamTotalScore(team2));
+
+        gameManager.beginRound();
+        assertEquals(player2, gameManager.getCurrentPlayer());
+        gameManager.progressRound(6);
+        gameManager.progressRound(3);
+        gameManager.progressRound(1);
+        assertEquals(10, roundsManager.getTeamTotalScore(team1));
+
+        gameManager.beginRound();
+        assertEquals(player3, gameManager.getCurrentPlayer());
+        gameManager.progressRound(8);
+        gameManager.progressRound(9);
+        gameManager.progressRound(10);
+        assertEquals(45, roundsManager.getTeamTotalScore(team2));
+
+        gameManager.beginRound();
+        assertEquals(player1, gameManager.getCurrentPlayer());
+        gameManager.progressRound(15);
+        gameManager.progressRound(9);
+        gameManager.progressRound(10);
+        assertEquals(44, roundsManager.getTeamTotalScore(team1));
+
+        gameManager.beginRound();
+        assertEquals(player4, gameManager.getCurrentPlayer());
+        gameManager.progressRound(19);
+        gameManager.progressRound(18);
+        gameManager.progressRound(13);
+        assertEquals(95, roundsManager.getTeamTotalScore(team2));
+
+        gameManager.beginRound();
+        assertEquals(player2, gameManager.getCurrentPlayer());
+        gameManager.progressRound(19);
+        gameManager.progressRound(5);
+        gameManager.progressRound(12);
+        assertEquals(80, roundsManager.getTeamTotalScore(team1));
+
+        gameManager.beginRound();
+        assertEquals(player3, gameManager.getCurrentPlayer());
+        gameManager.progressRound(7);
+        gameManager.progressRound(13);
+        gameManager.progressRound(17);
+        assertEquals(132, roundsManager.getTeamTotalScore(team2));
+
+        gameManager.beginRound();
+        assertEquals(player1, gameManager.getCurrentPlayer());
+        gameManager.progressRound(13);
+        gameManager.progressRound(10);
+        gameManager.progressRound(11);
+        assertEquals(114, roundsManager.getTeamTotalScore(team1));
+
+        gameManager.beginRound();
+        assertEquals(player4, gameManager.getCurrentPlayer());
+        gameManager.progressRound(10);
+        gameManager.progressRound(11);
+        gameManager.progressRound(20);
+        assertEquals(173, roundsManager.getTeamTotalScore(team2));
+
+        gameManager.beginRound();
+        assertEquals(player2, gameManager.getCurrentPlayer());
+        gameManager.progressRound(12);
+        gameManager.progressRound(1);
+        gameManager.progressRound(6);
+        assertEquals(133, roundsManager.getTeamTotalScore(team1));
+
+        gameManager.beginRound();
+        assertEquals(player3, gameManager.getCurrentPlayer());
+        gameManager.progressRound(8);
+        gameManager.progressRound(11);
+        gameManager.progressRound(12);
+        assertEquals(204, roundsManager.getTeamTotalScore(team2));
+
+        gameManager.beginRound();
+        assertEquals(player1, gameManager.getCurrentPlayer());
+        gameManager.progressRound(2);
+        gameManager.progressRound(6);
+        gameManager.progressRound(1);
+        assertEquals(142, roundsManager.getTeamTotalScore(team1));
+
+        gameManager.beginRound();
+        assertEquals(player4, gameManager.getCurrentPlayer());
+        gameManager.progressRound(20);
+        gameManager.progressRound(16);
+        gameManager.progressRound(1);
+        assertEquals(241, roundsManager.getTeamTotalScore(team2));
+
+        gameManager.beginRound();
+        assertEquals(player2, gameManager.getCurrentPlayer());
+        gameManager.progressRound(4);
+        gameManager.progressRound(19);
+        gameManager.progressRound(18);
+        assertEquals(183, roundsManager.getTeamTotalScore(team1));
+
+        gameManager.beginRound();
+        assertEquals(player3, gameManager.getCurrentPlayer());
+        gameManager.progressRound(8);
+        gameManager.progressRound(15);
+        gameManager.progressRound(13);
+        assertEquals(277, roundsManager.getTeamTotalScore(team2));
+
+        gameManager.beginRound();
+        assertEquals(player1, gameManager.getCurrentPlayer());
+        gameManager.progressRound(9);
+        gameManager.progressRound(2);
+        gameManager.progressRound(4);
+        assertEquals(198, roundsManager.getTeamTotalScore(team1));
+
+        gameManager.beginRound();
+        assertEquals(player4, gameManager.getCurrentPlayer());
+        gameManager.progressRound(4);
+        gameManager.progressRound(4);
+        gameManager.progressRound(16);
+        assertEquals(301, roundsManager.getTeamTotalScore(team2));
+
+        assertTrue(gameManager.isGameFinished());
+    }
+
 }

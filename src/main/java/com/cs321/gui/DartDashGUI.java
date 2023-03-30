@@ -80,21 +80,41 @@ public class DartDashGUI extends javax.swing.JFrame {
 
         MainMenuPlayGameButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         MainMenuPlayGameButton.setText("Play Game");
+        MainMenuPlayGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainMenuPlayGameButtonActionPerformed(evt);
+            }
+        });
         MainMenuButtonsPanel.add(MainMenuPlayGameButton);
         MainMenuButtonsPanel.add(filler6);
 
         MainMenuViewPlayersButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         MainMenuViewPlayersButton.setText("View Players");
+        MainMenuViewPlayersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainMenuViewPlayersButtonActionPerformed(evt);
+            }
+        });
         MainMenuButtonsPanel.add(MainMenuViewPlayersButton);
         MainMenuButtonsPanel.add(filler7);
 
         MainMenuViewGamemodesButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         MainMenuViewGamemodesButton.setText("View Gamemodes");
+        MainMenuViewGamemodesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainMenuViewGamemodesButtonActionPerformed(evt);
+            }
+        });
         MainMenuButtonsPanel.add(MainMenuViewGamemodesButton);
         MainMenuButtonsPanel.add(filler8);
 
         MainMenuQuitButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         MainMenuQuitButton.setText("Quit");
+        MainMenuQuitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainMenuQuitButtonActionPerformed(evt);
+            }
+        });
         MainMenuButtonsPanel.add(MainMenuQuitButton);
 
         jPanel2.add(MainMenuButtonsPanel);
@@ -124,6 +144,24 @@ public class DartDashGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MainMenuPlayGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuPlayGameButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MainMenuPlayGameButtonActionPerformed
+
+    private void MainMenuQuitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuQuitButtonActionPerformed
+        // TODO add your handling code here:
+        //exits the game. 
+        System.exit(0);
+    }//GEN-LAST:event_MainMenuQuitButtonActionPerformed
+
+    private void MainMenuViewGamemodesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuViewGamemodesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MainMenuViewGamemodesButtonActionPerformed
+
+    private void MainMenuViewPlayersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuViewPlayersButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MainMenuViewPlayersButtonActionPerformed
 
     /**
      * @param args the command line arguments

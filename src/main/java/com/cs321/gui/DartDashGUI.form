@@ -172,6 +172,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Play Game"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MainMenuPlayGameButtonActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.Box$Filler" name="filler6">
                       <Properties>
@@ -196,6 +199,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="View Players"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MainMenuViewPlayersButtonActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.Box$Filler" name="filler7">
                       <Properties>
@@ -220,6 +226,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="View Gamemodes"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MainMenuViewGamemodesButtonActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.Box$Filler" name="filler8">
                       <Properties>
@@ -244,6 +253,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Quit"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MainMenuQuitButtonActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

@@ -25,7 +25,6 @@ public class DartDashGUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         MainDisplayPanel = new javax.swing.JPanel();
         MainMenuPanel = new javax.swing.JPanel();
@@ -105,14 +104,14 @@ public class DartDashGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(MainDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(MainDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(MainDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(MainDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -122,40 +121,40 @@ public class DartDashGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
+//     public static void main(String args[]) {
+//         /* Set the Nimbus look and feel */
+//         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//          */
+//         try {
+// //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+// //                if ("Nimbus".equals(info.getName())) {
+// //                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+// //                    break;
+// //                }
+// //            }
             
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+//             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
             
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DartDashGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DartDashGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DartDashGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DartDashGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+//         } catch (ClassNotFoundException ex) {
+//             java.util.logging.Logger.getLogger(DartDashGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//         } catch (InstantiationException ex) {
+//             java.util.logging.Logger.getLogger(DartDashGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//         } catch (IllegalAccessException ex) {
+//             java.util.logging.Logger.getLogger(DartDashGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//             java.util.logging.Logger.getLogger(DartDashGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//         }
+//         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DartDashGUI().setVisible(true);
-            }
-        });
-    }
+//         /* Create and display the form */
+//         java.awt.EventQueue.invokeLater(new Runnable() {
+//             public void run() {
+//                 new DartDashGUI().setVisible(true);
+//             }
+//         });
+//     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainDisplayPanel;

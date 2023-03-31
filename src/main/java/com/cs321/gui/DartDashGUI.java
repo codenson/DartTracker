@@ -32,6 +32,7 @@ public class DartDashGUI extends javax.swing.JFrame {
         MainMenuTitlePanel = new javax.swing.JPanel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         MainMenuTitleLabel = new javax.swing.JLabel();
+        MainMenuTitleImageLabel = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jPanel2 = new javax.swing.JPanel();
@@ -59,8 +60,14 @@ public class DartDashGUI extends javax.swing.JFrame {
         MainMenuTitlePanel.add(filler2);
 
         MainMenuTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        MainMenuTitleLabel.setText("DartDash");
+        MainMenuTitleLabel.setText("DartDash ");
         MainMenuTitlePanel.add(MainMenuTitleLabel);
+
+        MainMenuTitleImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dartboard.png"))); // NOI18N
+        MainMenuTitleImageLabel.setMaximumSize(new java.awt.Dimension(48, 48));
+        MainMenuTitleImageLabel.setMinimumSize(new java.awt.Dimension(48, 48));
+        MainMenuTitleImageLabel.setPreferredSize(new java.awt.Dimension(48, 48));
+        MainMenuTitlePanel.add(MainMenuTitleImageLabel);
         MainMenuTitlePanel.add(filler3);
 
         MainMenuPanel.add(MainMenuTitlePanel);
@@ -104,14 +111,14 @@ public class DartDashGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(MainDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+                .addComponent(MainDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(MainDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addComponent(MainDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -162,6 +169,7 @@ public class DartDashGUI extends javax.swing.JFrame {
     private javax.swing.JPanel MainMenuPanel;
     private javax.swing.JButton MainMenuPlayGameButton;
     private javax.swing.JButton MainMenuQuitButton;
+    private javax.swing.JLabel MainMenuTitleImageLabel;
     private javax.swing.JLabel MainMenuTitleLabel;
     private javax.swing.JPanel MainMenuTitlePanel;
     private javax.swing.JButton MainMenuViewGamemodesButton;

@@ -21,6 +21,14 @@ public class dart extends javax.swing.JFrame {
         jTextField3.setText("player");
         jTextField4.setText("0");
     }
+    /**
+     * Total round score getter. 
+     * @return totalRound Score. 
+     */
+    public int getScore(){
+    
+    return this.totalRoundScore;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

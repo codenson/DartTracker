@@ -4,6 +4,11 @@
  */
 package com.cs321.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Hasna
@@ -48,8 +53,7 @@ public class DartDashGUI extends javax.swing.JFrame {
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20), new java.awt.Dimension(32767, 20));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         MainDisplayPanel.setLayout(new java.awt.CardLayout());
 
@@ -64,9 +68,6 @@ public class DartDashGUI extends javax.swing.JFrame {
         MainMenuTitlePanel.add(MainMenuTitleLabel);
 
         MainMenuTitleImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dartboard.png"))); // NOI18N
-        MainMenuTitleImageLabel.setMaximumSize(new java.awt.Dimension(48, 48));
-        MainMenuTitleImageLabel.setMinimumSize(new java.awt.Dimension(48, 48));
-        MainMenuTitleImageLabel.setPreferredSize(new java.awt.Dimension(48, 48));
         MainMenuTitlePanel.add(MainMenuTitleImageLabel);
         MainMenuTitlePanel.add(filler3);
 
@@ -147,6 +148,15 @@ public class DartDashGUI extends javax.swing.JFrame {
 
     private void MainMenuPlayGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuPlayGameButtonActionPerformed
         // TODO add your handling code here:
+        
+       
+    
+      // this is supposed to open the PLAY frame (dart class) but it is not opening for some reason. 
+    
+            dart dartFrame = new dart();         
+            dartFrame.setVisible(true);
+        
+ 
     }//GEN-LAST:event_MainMenuPlayGameButtonActionPerformed
 
     private void MainMenuQuitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuQuitButtonActionPerformed

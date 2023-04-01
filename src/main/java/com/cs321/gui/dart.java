@@ -359,13 +359,13 @@ public class dart extends javax.swing.JFrame {
         ///totalRoundScore-= throwScore();
         throwScore= 0; 
         label14.setText("0");
-        label1.setText(totalRoundScore+"");
+        label1.setText(totalRoundScore+""); 
     }//GEN-LAST:event_button3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) {  
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

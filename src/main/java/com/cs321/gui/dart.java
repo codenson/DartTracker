@@ -55,7 +55,7 @@ public class dart extends javax.swing.JFrame {
         jLabel1.setText("Total Score: ");
 
         jLabel3Board.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3Board.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dartBoard.png"))); // NOI18N
+        jLabel3Board.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dartBoard_1.png"))); // NOI18N
         jLabel3Board.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3BoardMouseClicked(evt);

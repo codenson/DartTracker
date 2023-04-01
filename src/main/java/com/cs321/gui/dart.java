@@ -3,7 +3,8 @@ package com.cs321.gui;
 
 
 import java.util.Random;
-
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 /**
  *
  * @author guero
@@ -381,10 +382,16 @@ public class dart extends javax.swing.JFrame {
         // TODO add your handling code here:
         ///totalRoundScore-= throwScore();
         throwScore= 0;
+       
         
         throwRounds-=1; 
+     
         if (throwRounds < 0){  ///this is debatable, since I think throws are going to be controllded by the game's manager's control flow. 
-        throwRounds=0;
+ javax.swing.JOptionPane.showMessageDialog(null, "You cannot undo a throw ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        
+
+            throwRounds=0;
         }
         
         label14.setText("0");

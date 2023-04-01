@@ -7,6 +7,7 @@ package com.cs321.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -150,10 +151,12 @@ public class DartDashGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
        
-    
+   
       // this is supposed to open the PLAY frame (dart class) but it is not opening for some reason. 
     
-            dart dartFrame = new dart();         
+            dart dartFrame = new dart();   
+           
+        
             dartFrame.setVisible(true);   
         
  

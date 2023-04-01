@@ -9,7 +9,7 @@ import java.util.UUID;
  * 
  * @author James Luna, Hasnain Raza, Marouane Guerouji
  */
-public class Player {
+public class Player {     
     
     /** The ID of this player. */
     private String id;

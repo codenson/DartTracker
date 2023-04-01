@@ -14,7 +14,7 @@ public class dart extends javax.swing.JFrame {
     /**
      * Creates new form dart
      */
-    public dart() {
+    public dart() {    
         initComponents();
         jTextField1.setText("0");
         jTextField2.setText("team"); 

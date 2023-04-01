@@ -17,7 +17,7 @@ public class dart extends javax.swing.JFrame {
     public dart() {
         initComponents();
         jTextField1.setText("0");
-        jTextField2.setText("team");
+        jTextField2.setText("team"); 
         jTextField3.setText("player");
         jTextField4.setText("0");
     }

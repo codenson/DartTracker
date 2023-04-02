@@ -11,10 +11,21 @@ import javax.swing.JFrame;
  * @author guero
  */
 public class dart extends javax.swing.JFrame {
+    /**
+     * Total round score. 
+     */
     private int totalRoundScore= 0; 
+    /**
+     * current throw score. 
+     */
     private int throwScore=0; 
+    /**
+     * how many throws happned. 
+     */
     private int throwRounds =0; 
     private int round =0; //
+    private int confirmed= 0; 
+    private boolean confimredLast= false; 
 
     /**
      * Creates new form dart
@@ -378,19 +389,20 @@ public class dart extends javax.swing.JFrame {
     private void jLabel3BoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3BoardMouseClicked
         // TODO add your handling code here:
         
-        setPanel2Color();////changes panel's color for fun. 
+        
         if (throwRounds >2)
         {
            javax.swing.JOptionPane.showMessageDialog(null, "You completed all 3 Throws ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
            return; 
         }
+        setPanel2Color();////changes panel's color for fun. 
         Random rand = new Random();
         int score = rand.nextInt(20) + 1;
         throwScore = score; 
         //totalRoundScore+= score; 
-        throwRounds+=1; 
+        /*throwRounds+=1; 
         String s= throwRounds+ "/3";
-        label13.setText(s);
+        label13.setText(s);*/
         label14.setText(score+"");
        
         
@@ -406,10 +418,21 @@ public class dart extends javax.swing.JFrame {
      */
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // TODO add your handling code here:
+        if (throwRounds > 3|| throwRounds < 0 || confirmed > 2)
+        {
+            javax.swing.JOptionPane.showMessageDialog(null, "You cannot confim this round ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        }
         setPanel2Color();////changes panel's color for fun. 
+        throwRounds+=1;  
+        String s= throwRounds+ "/3";
+        label13.setText(s);
         totalRoundScore+= throwScore();
         throwScore= 0; 
         label1.setText(totalRoundScore+"");
+        confirmed+= 1; 
+        confimredLast = true; 
+                
     }//GEN-LAST:event_button2ActionPerformed
    /**
     * Method to undo score. 
@@ -418,19 +441,21 @@ public class dart extends javax.swing.JFrame {
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         // TODO add your handling code here:
         ///totalRoundScore-= throwScore();
-        setPanel2Color();////changes panel's color for fun. 
-        throwScore= 0;
+        
        
         
        
-     
-        if (throwRounds == 0){  ///this is debatable, since I think throws are going to be controllded by the game's manager's control flow. 
+        System.out.println("confirmed: "+confimredLast );
+        if (throwRounds == 0 || confirmed > 2 || confimredLast == false){  ///this is debatable, since I think throws are going to be controllded by the game's manager's control flow. 
  javax.swing.JOptionPane.showMessageDialog(null, "You cannot undo a throw ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
         return; 
 
             //throwRounds=0;
         }
+        confimredLast= false; 
+        setPanel2Color();////changes panel's color for fun. 
+        throwScore= 0;
          throwRounds-=1; 
         label14.setText("0");
         

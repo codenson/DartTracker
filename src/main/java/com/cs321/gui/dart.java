@@ -379,7 +379,7 @@ public class dart extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         setPanel2Color();////changes panel's color for fun. 
-        if (throwRounds ==3)
+        if (throwRounds >2)
         {
            javax.swing.JOptionPane.showMessageDialog(null, "You completed all 3 Throws ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
            return; 
@@ -427,9 +427,9 @@ public class dart extends javax.swing.JFrame {
         if (throwRounds == 0){  ///this is debatable, since I think throws are going to be controllded by the game's manager's control flow. 
  javax.swing.JOptionPane.showMessageDialog(null, "You cannot undo a throw ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-        
+        return; 
 
-            throwRounds=0;
+            //throwRounds=0;
         }
          throwRounds-=1; 
         label14.setText("0");

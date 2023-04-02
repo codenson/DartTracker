@@ -1,42 +1,51 @@
 package com.cs321.gui;
 
-
-
 import java.awt.Color;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+
 /**
  *
  * @author guero
  */
 public class dart extends javax.swing.JFrame {
+
     /**
-     * Total round score. 
+     * Total round score.
      */
-    private int totalRoundScore= 0; 
+    private int totalRoundScore = 0;
     /**
-     * current throw score. 
+     * current throw score.
      */
-    private int throwScore=0; 
+    private int throwScore = 0;
     /**
-     * how many throws happned. 
+     * how many throws happned.
      */
-    private int throwRounds =0; 
-    private int round =0; //
-    private int confirmed= 0; 
-    private boolean confimredLast= false; 
+    private int throwRounds = 0;
+    /**
+     * actual round.
+     */
+    private int round = 0; //
+    /**
+     * how many scores were confirmed.
+     */
+    private int confirmed = 0;
+    /**
+     * tells if the last round was confirmed.
+     */
+    private boolean confimredLast = false;
 
     /**
      * Creates new form dart
      */
-    public dart() {    
+    public dart() {
         initComponents();
-        
+
         setPanel2Color();
-       
+
         label1.setText("0");
-        
+
         label8.setText("A-34");// sets text for team A's name. 
         label9.setText("B-57");//sets text fot team B's name 
         label11.setText("0");// sets texts for round. 
@@ -45,48 +54,59 @@ public class dart extends javax.swing.JFrame {
         label2.setText("A");//sets text for current playing team. 
         label4.setText("plr1");//sets text for player's name. 
         label14.setText("0");// sets current throw score. 
-        //jTextField1.setText("0");
+
         
     }
+
     /**
-     * Method to change dartboard surrounding panel's calor randomly at each touch. 
+     * Method to change dartboard surrounding panel's calor randomly at each
+     * touch.
      */
-    private void setPanel2Color(){
+    private void setPanel2Color() {
         float hue = (float) Math.random();
-              float saturation = 0.9f; // Saturation value between 0.0 and 1.0
-              float brightness = 1.0f; // Brightness value between 0.0 and 1.0
-              Color randomColor = Color.getHSBColor(hue, saturation, brightness);
+        float saturation = 0.9f; // Saturation value between 0.0 and 1.0
+        float brightness = 1.0f; // Brightness value between 0.0 and 1.0
+        Color randomColor = Color.getHSBColor(hue, saturation, brightness);
         jPanel2.setBackground(randomColor);
-    
+
     }
-    /**C
-     * Total round score getter. 
-     * @return totalRound Score. 
+
+    /**
+     * C
+     * Total round score getter.
+     *
+     * @return totalRound Score.
      */
-    public int getScore(){
-    
-    return this.totalRoundScore;
+    public int getScore() {
+
+        return this.totalRoundScore;
     }
-    public int throwScore(){
-    return this.throwScore; 
+
+    public int throwScore() {
+        return this.throwScore;
     }
-    public int throwRounds(){
+
+    public int throwRounds() {
         return throwRounds;
     }
+
     /**
-     * setter for round. 
-     * @param round 
+     * setter for round.
+     *
+     * @param round
      */
-    public void setRound(int round){
-        this.round = round; 
-    
+    public void setRound(int round) {
+        this.round = round;
+
     }
+
     /**
-     * getter for round. 
-     * @return 
+     * getter for round.
+     *
+     * @return
      */
-    public int getRound(){
-    return round; 
+    public int getRound() {
+        return round;
     }
 
     /**
@@ -371,103 +391,105 @@ public class dart extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 849, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /**
- * This method is responsible for clicking on the dartboard. The method uses Random class to give a score. 
- * @param evt  
- */
+     * This method is responsible for clicking on the dartboard. The method uses
+     * Random class to give a score.
+     *
+     * @param evt
+     */
     private void jLabel3BoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3BoardMouseClicked
         // TODO add your handling code here:
-        
-        
-        if (throwRounds >2)
-        {
-           javax.swing.JOptionPane.showMessageDialog(null, "You completed all 3 Throws ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-           return; 
+
+        if (throwRounds > 2) {
+            javax.swing.JOptionPane.showMessageDialog(null, "You completed all 3 Throws ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
         setPanel2Color();////changes panel's color for fun. 
         Random rand = new Random();
         int score = rand.nextInt(20) + 1;
-        throwScore = score; 
+        throwScore = score;
+
         //totalRoundScore+= score; 
         /*throwRounds+=1; 
         String s= throwRounds+ "/3";
         label13.setText(s);*/
-        label14.setText(score+"");
-       
-        
+        label14.setText(score + "");
+
+
     }//GEN-LAST:event_jLabel3BoardMouseClicked
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-     // TODO add your handling code here:
+        // TODO add your handling code here:
         this.dispose();   // closes the current Jframe window. 
+        DartDashGUI gui = new DartDashGUI(); 
+        gui.setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
     /**
-     * method to confirm score. 
-     * @param evt 
+     * method to confirm score.
+     *
+     * @param evt
      */
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // TODO add your handling code here:
-        if (throwRounds > 3|| throwRounds < 0 || confirmed > 2)
-        {
+        if (throwRounds > 3 || throwRounds < 0 || confirmed > 2) {
             javax.swing.JOptionPane.showMessageDialog(null, "You cannot confim this round ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
         }
         setPanel2Color();////changes panel's color for fun. 
-        throwRounds+=1;  
-        String s= throwRounds+ "/3";
+        throwRounds += 1;
+        String s = throwRounds + "/3";
         label13.setText(s);
-        totalRoundScore+= throwScore();
-        throwScore= 0; 
-        label1.setText(totalRoundScore+"");
-        confirmed+= 1; 
-        confimredLast = true; 
-                
+        totalRoundScore += throwScore();
+        throwScore = 0;
+        label1.setText(totalRoundScore + "");
+        confirmed += 1;
+        confimredLast = true;
+
     }//GEN-LAST:event_button2ActionPerformed
-   /**
-    * Method to undo score. 
-    * @param evt 
-    */
+    /**
+     * Method to undo score.
+     *
+     * @param evt
+     */
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         // TODO add your handling code here:
         ///totalRoundScore-= throwScore();
-        
-       
-        
-       
-        System.out.println("confirmed: "+confimredLast );
-        if (throwRounds == 0 || confirmed > 2 || confimredLast == false){  ///this is debatable, since I think throws are going to be controllded by the game's manager's control flow. 
- javax.swing.JOptionPane.showMessageDialog(null, "You cannot undo a throw ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-        return; 
+        System.out.println("confirmed: " + confimredLast);
+        if (throwRounds == 0 || confirmed > 2 || confimredLast == false) {  ///this is debatable, since I think throws are going to be controllded by the game's manager's control flow. 
+            javax.swing.JOptionPane.showMessageDialog(null, "You cannot undo a throw ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            return;
 
             //throwRounds=0;
         }
-        confimredLast= false; 
+
+        confimredLast = false;
         setPanel2Color();////changes panel's color for fun. 
-        throwScore= 0;
-         throwRounds-=1; 
+        throwScore = 0;
+        throwRounds -= 1;
         label14.setText("0");
-        
-        String s= throwRounds+ "/3";
+
+        String s = throwRounds + "/3";
         label13.setText(s);
-        label1.setText(totalRoundScore+""); 
+        label1.setText(totalRoundScore + "");
     }//GEN-LAST:event_button3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {  
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -492,7 +514,7 @@ public class dart extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() { 
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new dart().setVisible(true);
             }

@@ -155,7 +155,8 @@ public class DartDashGUI extends javax.swing.JFrame {
       // this is supposed to open the PLAY frame (dart class) but it is not opening for some reason. 
     
             dart dartFrame = new dart();   
-           // this.dispose();
+            this.dispose();
+          
         
             dartFrame.setVisible(true);   
         

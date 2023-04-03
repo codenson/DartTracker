@@ -469,10 +469,10 @@ public class dart extends javax.swing.JFrame {
 
         setPanel2Color();////changes panel's color for fun. 
         throwScore = 0;
-        throwRounds -= 1;
+        /*throwRounds -= 1;
         if (throwRounds < 0){
         throwRounds =0; 
-        }
+        }*/
         throwScoreBoxValue.setText("0");
 
         String s = throwRounds + "/3";

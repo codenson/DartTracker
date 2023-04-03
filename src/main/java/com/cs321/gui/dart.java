@@ -20,7 +20,7 @@ public class dart extends javax.swing.JFrame {
      */
     private int throwScore = 0;
     /**
-     * how many throws happended.
+     * how many throws happned.
      */
     private int throwRounds = 0;
     /**
@@ -42,16 +42,16 @@ public class dart extends javax.swing.JFrame {
 
         setPanel2Color();
 
-        label1.setText("0");
+        roundScoreBoxValue.setText("0");
 
-        label8.setText("A-34");// sets text for team A's name. 
-        label9.setText("B-57");//sets text fot team B's name 
-        label11.setText("0");// sets texts for round. 
-        label13.setText("0/3");//sets texts for Throw number. ex : 1/3
-        label1.setText("0");//sets text for round score. 
-        label2.setText("A");//sets text for current playing team. 
-        label4.setText("plr1");//sets text for player's name. 
-        label14.setText("0");// sets current throw score. 
+        teamAName.setText("A-34");// sets text for team A's name. 
+        teamBName.setText("B-57");//sets text fot team B's name 
+        roundValueBox.setText("0");// sets texts for round. 
+        throwBoxValue.setText("0/3");//sets texts for Throw number. ex : 1/3
+        roundScoreBoxValue.setText("0");//sets text for round score. 
+        playingTeamBoxValue.setText("A");//sets text for current playing team. 
+        playerNameBoxValue.setText("plr1");//sets text for player's name. 
+        throwScoreBoxValue.setText("0");// sets current throw score. 
 
         
     }
@@ -65,7 +65,7 @@ public class dart extends javax.swing.JFrame {
         float saturation = 0.9f; // Saturation value between 0.0 and 1.0
         float brightness = 1.0f; // Brightness value between 0.0 and 1.0
         Color randomColor = Color.getHSBColor(hue, saturation, brightness);
-        jPanel2.setBackground(randomColor);
+        changingLightsBoardPanel.setBackground(randomColor);
 
     }
 
@@ -119,138 +119,138 @@ public class dart extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        label1 = new java.awt.Label();
-        label3 = new java.awt.Label();
-        label2 = new java.awt.Label();
-        label4 = new java.awt.Label();
+        playingTeamBox = new javax.swing.JLabel();
+        playerNameBox = new javax.swing.JLabel();
+        roundScoreBox = new javax.swing.JLabel();
+        roundScoreBoxValue = new java.awt.Label();
+        requiredScoreBox = new java.awt.Label();
+        playingTeamBoxValue = new java.awt.Label();
+        playerNameBoxValue = new java.awt.Label();
         label5 = new java.awt.Label();
-        label6 = new java.awt.Label();
-        label7 = new java.awt.Label();
-        label8 = new java.awt.Label();
-        label9 = new java.awt.Label();
-        label10 = new java.awt.Label();
-        label11 = new java.awt.Label();
-        label12 = new java.awt.Label();
-        label13 = new java.awt.Label();
-        button1 = new java.awt.Button();
-        button2 = new java.awt.Button();
-        button3 = new java.awt.Button();
-        jLabel6 = new javax.swing.JLabel();
-        label14 = new java.awt.Label();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3Board = new javax.swing.JLabel();
+        teamABox = new java.awt.Label();
+        teamBBox = new java.awt.Label();
+        teamAName = new java.awt.Label();
+        teamBName = new java.awt.Label();
+        roundBox = new java.awt.Label();
+        roundValueBox = new java.awt.Label();
+        throwBox = new java.awt.Label();
+        throwBoxValue = new java.awt.Label();
+        QuitToMainMenuButton = new java.awt.Button();
+        confirmNowButton = new java.awt.Button();
+        undoThrowButton = new java.awt.Button();
+        throwScoreBox = new javax.swing.JLabel();
+        throwScoreBoxValue = new java.awt.Label();
+        changingLightsBoardPanel = new javax.swing.JPanel();
+        dartBoardPicture = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setBackground(new java.awt.Color(204, 0, 51));
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel5.setText("Playing Team: ");
+        playingTeamBox.setBackground(new java.awt.Color(204, 0, 51));
+        playingTeamBox.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        playingTeamBox.setForeground(new java.awt.Color(204, 0, 51));
+        playingTeamBox.setText("Playing Team: ");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel7.setText("Player's name: ");
+        playerNameBox.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        playerNameBox.setForeground(new java.awt.Color(204, 0, 51));
+        playerNameBox.setText("Player's name: ");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel4.setText("Round Score: ");
+        roundScoreBox.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        roundScoreBox.setForeground(new java.awt.Color(204, 0, 51));
+        roundScoreBox.setText("Round Score: ");
 
-        label1.setText("label1");
+        roundScoreBoxValue.setText("label1");
 
-        label3.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
-        label3.setText("Required Score 301");
+        requiredScoreBox.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
+        requiredScoreBox.setText("Required Score 301");
 
-        label2.setText("label2");
+        playingTeamBoxValue.setText("label2");
 
-        label4.setText("label4");
+        playerNameBoxValue.setText("label4");
 
         label5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label5.setText("__________________________________________________________________________________________________________");
 
-        label6.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        label6.setText("Team ");
+        teamABox.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        teamABox.setText("Team ");
 
-        label7.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        label7.setText("Team ");
+        teamBBox.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        teamBBox.setText("Team ");
 
-        label8.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        label8.setText("A -34");
+        teamAName.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        teamAName.setText("A -34");
 
-        label9.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        label9.setText("B-57");
+        teamBName.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        teamBName.setText("B-57");
 
-        label10.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        label10.setText("Round");
+        roundBox.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        roundBox.setText("Round");
 
-        label11.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        label11.setText("1");
+        roundValueBox.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        roundValueBox.setText("1");
 
-        label12.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        label12.setText("Throw");
+        throwBox.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        throwBox.setText("Throw");
 
-        label13.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        label13.setText("1/3");
+        throwBoxValue.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        throwBoxValue.setText("1/3");
 
-        button1.setBackground(new java.awt.Color(255, 255, 255));
-        button1.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        button1.setLabel("Quit to Main Menu");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        QuitToMainMenuButton.setBackground(new java.awt.Color(255, 255, 255));
+        QuitToMainMenuButton.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        QuitToMainMenuButton.setLabel("Quit to Main Menu");
+        QuitToMainMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                QuitToMainMenuButtonActionPerformed(evt);
             }
         });
 
-        button2.setBackground(new java.awt.Color(255, 255, 255));
-        button2.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        button2.setLabel("Confirm Throw");
-        button2.addActionListener(new java.awt.event.ActionListener() {
+        confirmNowButton.setBackground(new java.awt.Color(255, 255, 255));
+        confirmNowButton.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        confirmNowButton.setLabel("Confirm Throw");
+        confirmNowButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
+                confirmNowButtonActionPerformed(evt);
             }
         });
 
-        button3.setBackground(new java.awt.Color(255, 255, 255));
-        button3.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        button3.setLabel("Undo Throw");
-        button3.addActionListener(new java.awt.event.ActionListener() {
+        undoThrowButton.setBackground(new java.awt.Color(255, 255, 255));
+        undoThrowButton.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        undoThrowButton.setLabel("Undo Throw");
+        undoThrowButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
+                undoThrowButtonActionPerformed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(153, 0, 153));
-        jLabel6.setText("Throw Score: ");
+        throwScoreBox.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        throwScoreBox.setForeground(new java.awt.Color(153, 0, 153));
+        throwScoreBox.setText("Throw Score: ");
 
-        label14.setText("label1");
+        throwScoreBoxValue.setText("label1");
 
-        jLabel3Board.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3Board.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dartBoard_1.png"))); // NOI18N
-        jLabel3Board.addMouseListener(new java.awt.event.MouseAdapter() {
+        dartBoardPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dartBoardPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dartBoard_1.png"))); // NOI18N
+        dartBoardPicture.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3BoardMouseClicked(evt);
+                dartBoardPictureMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout changingLightsBoardPanelLayout = new javax.swing.GroupLayout(changingLightsBoardPanel);
+        changingLightsBoardPanel.setLayout(changingLightsBoardPanelLayout);
+        changingLightsBoardPanelLayout.setHorizontalGroup(
+            changingLightsBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(changingLightsBoardPanelLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel3Board, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dartBoardPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        changingLightsBoardPanelLayout.setVerticalGroup(
+            changingLightsBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(changingLightsBoardPanelLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel3Board, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dartBoardPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -263,56 +263,56 @@ public class dart extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(confirmNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(98, 98, 98))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(requiredScoreBox, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(teamABox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(teamAName, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(teamBBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)
-                                .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(teamBName, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(259, 259, 259))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(label10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(roundBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(label11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(roundValueBox, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(label12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(throwBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(label13, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(throwBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(232, 232, 232)
-                                .addComponent(jLabel6)
+                                .addComponent(throwScoreBox)
                                 .addGap(19, 19, 19)
-                                .addComponent(label14, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(throwScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(QuitToMainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
+                                    .addComponent(playerNameBox)
                                     .addGap(6, 6, 6))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
+                                    .addComponent(playingTeamBox)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(roundScoreBox)
                                 .addGap(14, 14, 14)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(roundScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(playingTeamBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(playerNameBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,61 +325,61 @@ public class dart extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(399, Short.MAX_VALUE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(undoThrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(299, 299, 299)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(requiredScoreBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(jLabel3)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(label6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(label8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(label9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(teamABox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(teamAName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(teamBName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(teamBBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(roundBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(roundValueBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(throwBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(throwBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(throwScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(throwScoreBox))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(roundScoreBox)
+                            .addComponent(roundScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(playingTeamBox)
+                            .addComponent(playingTeamBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(playerNameBox)
+                            .addComponent(playerNameBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(button2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(confirmNowButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(QuitToMainMenuButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(64, 64, 64))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(481, Short.MAX_VALUE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(undoThrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(67, 67, 67)))
         );
 
@@ -404,7 +404,7 @@ public class dart extends javax.swing.JFrame {
      *
      * @param evt
      */
-    private void jLabel3BoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3BoardMouseClicked
+    private void dartBoardPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dartBoardPictureMouseClicked
         // TODO add your handling code here:
 
         if (throwRounds > 2) {
@@ -416,23 +416,23 @@ public class dart extends javax.swing.JFrame {
         int score = rand.nextInt(20) + 1;
         throwScore = score;
 
-        label14.setText(score + "");
+        throwScoreBoxValue.setText(score + "");
 
 
-    }//GEN-LAST:event_jLabel3BoardMouseClicked
+    }//GEN-LAST:event_dartBoardPictureMouseClicked
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void QuitToMainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitToMainMenuButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();   // closes the current Jframe window. 
         DartDashGUI gui = new DartDashGUI(); 
         gui.setVisible(true);
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
     /**
      * method to confirm score.
      *
      * @param evt
      */
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+    private void confirmNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmNowButtonActionPerformed
         // TODO add your handling code here:
         if (throwRounds > 3 || throwRounds < 0 || confirmed > 2 || throwScore==0 ) {
             javax.swing.JOptionPane.showMessageDialog(null, "You cannot confim this round ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -441,21 +441,21 @@ public class dart extends javax.swing.JFrame {
         setPanel2Color();////changes panel's color for fun. 
         throwRounds += 1;
         String s = throwRounds + "/3";
-        label13.setText(s);
+        throwBoxValue.setText(s);
         totalRoundScore += throwScore();
         throwScore = 0;
-        label14.setText(throwScore+"");
-        label1.setText(totalRoundScore + "");
+        throwScoreBoxValue.setText(throwScore+"");
+        roundScoreBoxValue.setText(totalRoundScore + "");
         confirmed += 1;
         //confimredLast = true;
 
-    }//GEN-LAST:event_button2ActionPerformed
+    }//GEN-LAST:event_confirmNowButtonActionPerformed
     /**
      * Method to undo score.
      *
      * @param evt
      */
-    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+    private void undoThrowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoThrowButtonActionPerformed
         // TODO add your handling code here:
        
         
@@ -473,12 +473,12 @@ public class dart extends javax.swing.JFrame {
         if (throwRounds < 0){
         throwRounds =0; 
         }
-        label14.setText("0");
+        throwScoreBoxValue.setText("0");
 
         String s = throwRounds + "/3";
-        label13.setText(s);
-        label1.setText(totalRoundScore + "");
-    }//GEN-LAST:event_button3ActionPerformed
+        throwBoxValue.setText(s);
+        roundScoreBoxValue.setText(totalRoundScore + "");
+    }//GEN-LAST:event_undoThrowButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -516,31 +516,31 @@ public class dart extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Button button1;
-    private java.awt.Button button2;
-    private java.awt.Button button3;
+    private java.awt.Button QuitToMainMenuButton;
+    private javax.swing.JPanel changingLightsBoardPanel;
+    private java.awt.Button confirmNowButton;
+    private javax.swing.JLabel dartBoardPicture;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel3Board;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private java.awt.Label label1;
-    private java.awt.Label label10;
-    private java.awt.Label label11;
-    private java.awt.Label label12;
-    private java.awt.Label label13;
-    private java.awt.Label label14;
-    private java.awt.Label label2;
-    private java.awt.Label label3;
-    private java.awt.Label label4;
     private java.awt.Label label5;
-    private java.awt.Label label6;
-    private java.awt.Label label7;
-    private java.awt.Label label8;
-    private java.awt.Label label9;
+    private javax.swing.JLabel playerNameBox;
+    private java.awt.Label playerNameBoxValue;
+    private javax.swing.JLabel playingTeamBox;
+    private java.awt.Label playingTeamBoxValue;
+    private java.awt.Label requiredScoreBox;
+    private java.awt.Label roundBox;
+    private javax.swing.JLabel roundScoreBox;
+    private java.awt.Label roundScoreBoxValue;
+    private java.awt.Label roundValueBox;
+    private java.awt.Label teamABox;
+    private java.awt.Label teamAName;
+    private java.awt.Label teamBBox;
+    private java.awt.Label teamBName;
+    private java.awt.Label throwBox;
+    private java.awt.Label throwBoxValue;
+    private javax.swing.JLabel throwScoreBox;
+    private java.awt.Label throwScoreBoxValue;
+    private java.awt.Button undoThrowButton;
     // End of variables declaration//GEN-END:variables
 }

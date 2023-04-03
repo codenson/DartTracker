@@ -20,7 +20,7 @@ public class dart extends javax.swing.JFrame {
      */
     private int throwScore = 0;
     /**
-     * how many throws happned.
+     * how many throws happened.
      */
     private int throwRounds = 0;
     /**

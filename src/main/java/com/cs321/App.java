@@ -1,7 +1,5 @@
 package com.cs321;
 
-import java.util.Scanner;
-
 import com.cs321.gui.DartDashGUI;
 
 /**

@@ -1,9 +1,13 @@
 package com.cs321.gui;
 
+import com.cs321.core.GameConfiguration;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 
 /**
  *
@@ -11,6 +15,7 @@ import javax.swing.JFrame;
  */
 public class dart extends javax.swing.JFrame {
 
+    private GUIState state;
     /**
      * Total round score.
      */
@@ -31,41 +36,92 @@ public class dart extends javax.swing.JFrame {
      * how many scores were confirmed.
      */
     private int confirmed = 0;
+    String teamA= null; 
+    String teamB= null;
+    private int MaximumRounds=0; 
+    /**
+     * Throws allowed per round. 
+     */
+    private int dartsPerRound=3; ///done 
+    float [] multipliers; 
+    int OffboardPenalty=0; 
+     int [] scoreList= {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,50};//done 
+     int  startingScore=301; 
+     String id=null;
+    
+
   
-  
+    GameConfiguration gameMode; 
 
     /**
      * Creates new form dart
      */
-    public dart() {
+     public dart() {
         initComponents();
 
-        setPanel2Color();
+      
+       setPanels(); //sets the gui. 
+             
+        
+        
+    }
+    /**
+     * Constructor with GameConfig. 
+     * @param gameMode game config to set up the game. 
+     */
+    public dart(GameConfiguration gameMode) {
+        initComponents();
+        
+        this.gameMode = gameMode;
+        MaximumRounds = gameMode.getMaximumRounds();
+        dartsPerRound = gameMode.getDartsPerRound();
+        id = gameMode.getId();//string
+        multipliers = gameMode.getMultipliers();//float.
+        OffboardPenalty = gameMode.getOffboardPenalty();//int
+        scoreList = gameMode.getScoreList();//array of ints 
+        startingScore = gameMode.getStartingScore(); //int
+        
+       
+        setPanels(); //sets the gui. 
+  
+        //state.contentPane.add("frame", this.jPanel1);
 
+
+       
+
+        
+    }
+    private void setPanels(){
+           
+        setPanel2Color(changingLightsBoardPanel);//sets color shift for dart board. 
+        //jPanel2.setVisible(true);
         roundScoreBoxValue.setText("0");
-
         teamAName.setText("A-34");// sets text for team A's name. 
         teamBName.setText("B-57");//sets text fot team B's name 
         roundValueBox.setText("0");// sets texts for round. 
-        throwBoxValue.setText("0/3");//sets texts for Throw number. ex : 1/3
+        throwBoxValue.setText("0/" + dartsPerRound);//sets texts for Throw number. ex : 1/3
         roundScoreBoxValue.setText("0");//sets text for round score. 
         playingTeamBoxValue.setText("A");//sets text for current playing team. 
         playerNameBoxValue.setText("plr1");//sets text for player's name. 
         throwScoreBoxValue.setText("0");// sets current throw score. 
-
+       // jPanel1.setToolTipText(startingScore+"");
+        //jLabel3.setText(startingScore+"");
+        startingScoreBoxValue.setText(startingScore+"");
         
     }
 
     /**
-     * Method to change dartboard surrounding panel's calor randomly at each
-     * touch.
+     * Method to change  panel's background calor randomly 
+     * 
      */
-    private void setPanel2Color() {
+    private void setPanel2Color(JPanel myPanel ) {
         float hue = (float) Math.random();
         float saturation = 0.9f; // Saturation value between 0.0 and 1.0
         float brightness = 1.0f; // Brightness value between 0.0 and 1.0
         Color randomColor = Color.getHSBColor(hue, saturation, brightness);
-        changingLightsBoardPanel.setBackground(randomColor);
+        JPanel tempMyPanel = myPanel;
+        tempMyPanel.setBackground(randomColor);
+  
 
     }
 
@@ -106,7 +162,7 @@ public class dart extends javax.swing.JFrame {
     public int getRound() {
         return round;
     }
-
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,13 +173,15 @@ public class dart extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        label1 = new java.awt.Label();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         playingTeamBox = new javax.swing.JLabel();
         playerNameBox = new javax.swing.JLabel();
         roundScoreBox = new javax.swing.JLabel();
         roundScoreBoxValue = new java.awt.Label();
-        requiredScoreBox = new java.awt.Label();
         playingTeamBoxValue = new java.awt.Label();
         playerNameBoxValue = new java.awt.Label();
         label5 = new java.awt.Label();
@@ -142,10 +200,42 @@ public class dart extends javax.swing.JFrame {
         throwScoreBoxValue = new java.awt.Label();
         changingLightsBoardPanel = new javax.swing.JPanel();
         dartBoardPicture = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        label2 = new java.awt.Label();
+        startingScoreBoxValue = new java.awt.Label();
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jLabel1.setText("Required Score: ");
+
+        label1.setText("label1");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        label1.getAccessibleContext().setAccessibleName("310");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(102, 102, 102));
 
         playingTeamBox.setBackground(new java.awt.Color(204, 0, 51));
         playingTeamBox.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
@@ -161,9 +251,6 @@ public class dart extends javax.swing.JFrame {
         roundScoreBox.setText("Round Score: ");
 
         roundScoreBoxValue.setText("label1");
-
-        requiredScoreBox.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
-        requiredScoreBox.setText("Required Score 301");
 
         playingTeamBoxValue.setText("label2");
 
@@ -251,36 +338,64 @@ public class dart extends javax.swing.JFrame {
             .addGroup(changingLightsBoardPanelLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(dartBoardPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        label2.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        label2.setForeground(new java.awt.Color(102, 102, 102));
+        label2.setText("Required Score: ");
+
+        startingScoreBoxValue.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        startingScoreBoxValue.setForeground(new java.awt.Color(102, 102, 102));
+        startingScoreBoxValue.setText("0");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startingScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(210, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(startingScoreBoxValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        label2.getAccessibleContext().setAccessibleName("Required Score:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(confirmNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(requiredScoreBox, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(confirmNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(98, 98, 98))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(teamABox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(teamAName, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(teamBBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)
-                                .addComponent(teamBName, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(259, 259, 259))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(teamBName, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(249, 249, 249))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(roundBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -293,34 +408,33 @@ public class dart extends javax.swing.JFrame {
                                 .addComponent(throwScoreBox)
                                 .addGap(19, 19, 19)
                                 .addComponent(throwScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(QuitToMainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(playerNameBox)
-                                    .addGap(6, 6, 6))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(playingTeamBox)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(QuitToMainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(roundScoreBox)
-                                .addGap(14, 14, 14)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(roundScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playingTeamBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playerNameBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(playerNameBox)
+                                            .addGap(6, 6, 6))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(playingTeamBox)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(roundScoreBox)
+                                        .addGap(14, 14, 14)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(roundScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(playingTeamBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(playerNameBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60))))
+                    .addComponent(label5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(139, 139, 139)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(label5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -331,11 +445,14 @@ public class dart extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(requiredScoreBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(jLabel3)
-                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -378,7 +495,7 @@ public class dart extends javax.swing.JFrame {
                 .addGap(64, 64, 64))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(481, Short.MAX_VALUE)
+                    .addContainerGap(514, Short.MAX_VALUE)
                     .addComponent(undoThrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(67, 67, 67)))
         );
@@ -407,14 +524,19 @@ public class dart extends javax.swing.JFrame {
     private void dartBoardPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dartBoardPictureMouseClicked
         // TODO add your handling code here:
 
-        if (throwRounds > 2) {
+        if (throwRounds > dartsPerRound-1) {
             javax.swing.JOptionPane.showMessageDialog(null, "You completed all 3 Throws ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        setPanel2Color();////changes panel's color for fun. 
+        setPanel2Color(changingLightsBoardPanel);////changes panel's color for fun. 
+        
+   
         Random rand = new Random();
-        int score = rand.nextInt(20) + 1;
-        throwScore = score;
+        int score = rand.nextInt(scoreList.length-1) ;
+        System.out.println("score: "+ score);
+        throwScore= scoreList[score];
+       System.out.println("score: "+ throwScore);
+    
 
         throwScoreBoxValue.setText(score + "");
 
@@ -426,6 +548,8 @@ public class dart extends javax.swing.JFrame {
         this.dispose();   // closes the current Jframe window. 
         DartDashGUI gui = new DartDashGUI(); 
         gui.setVisible(true);
+        gui.dispose();
+       // state.contentPaneCardLayout.show(state.contentPane, "ViewGamemodesPanel");
     }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
     /**
      * method to confirm score.
@@ -434,13 +558,13 @@ public class dart extends javax.swing.JFrame {
      */
     private void confirmNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmNowButtonActionPerformed
         // TODO add your handling code here:
-        if (throwRounds > 3 || throwRounds < 0 || confirmed > 2 || throwScore==0 ) {
+        if (throwRounds > dartsPerRound || throwRounds < 0 || confirmed > 2 || throwScore==0 ) {
             javax.swing.JOptionPane.showMessageDialog(null, "You cannot confim this round ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             return; 
         }
-        setPanel2Color();////changes panel's color for fun. 
+        setPanel2Color(changingLightsBoardPanel);////changes panel's color for fun. 
         throwRounds += 1;
-        String s = throwRounds + "/3";
+        String s = throwRounds + "/"+dartsPerRound;
         throwBoxValue.setText(s);
         totalRoundScore += throwScore();
         throwScore = 0;
@@ -467,7 +591,7 @@ public class dart extends javax.swing.JFrame {
             //throwRounds=0;
         }
 
-        setPanel2Color();////changes panel's color for fun. 
+        setPanel2Color(changingLightsBoardPanel);////changes panel's color for fun. 
         throwScore = 0;
         /*throwRounds -= 1;
         if (throwRounds < 0){
@@ -475,7 +599,7 @@ public class dart extends javax.swing.JFrame {
         }*/
         throwScoreBoxValue.setText("0");
 
-        String s = throwRounds + "/3";
+        String s = throwRounds + "/"+dartsPerRound;
         throwBoxValue.setText(s);
         roundScoreBoxValue.setText(totalRoundScore + "");
     }//GEN-LAST:event_undoThrowButtonActionPerformed
@@ -520,19 +644,24 @@ public class dart extends javax.swing.JFrame {
     private javax.swing.JPanel changingLightsBoardPanel;
     private java.awt.Button confirmNowButton;
     private javax.swing.JLabel dartBoardPicture;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private java.awt.Label label1;
+    private java.awt.Label label2;
     private java.awt.Label label5;
     private javax.swing.JLabel playerNameBox;
     private java.awt.Label playerNameBoxValue;
     private javax.swing.JLabel playingTeamBox;
     private java.awt.Label playingTeamBoxValue;
-    private java.awt.Label requiredScoreBox;
     private java.awt.Label roundBox;
     private javax.swing.JLabel roundScoreBox;
     private java.awt.Label roundScoreBoxValue;
     private java.awt.Label roundValueBox;
+    private java.awt.Label startingScoreBoxValue;
     private java.awt.Label teamABox;
     private java.awt.Label teamAName;
     private java.awt.Label teamBBox;

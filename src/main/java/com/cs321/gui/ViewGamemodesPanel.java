@@ -8,7 +8,8 @@ package com.cs321.gui;
  *
  * @author Hasna
  */
-public class ViewGamemodesPanel extends javax.swing.JPanel {
+public class ViewGamemodesPanel  extends javax.swing.JPanel //extends javax.swing.JFrame
+{
 
     private GUIState state;
     
@@ -438,6 +439,8 @@ public class ViewGamemodesPanel extends javax.swing.JPanel {
     private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
         // TODO add your handling code here:
         state.contentPaneCardLayout.show(state.contentPane, "CreateGamemodePanel");
+       
+        
     }//GEN-LAST:event_NewButtonActionPerformed
 
 

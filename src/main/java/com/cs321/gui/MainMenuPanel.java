@@ -4,6 +4,9 @@
  */
 package com.cs321.gui;
 
+import com.cs321.core.GameConfiguration;
+import java.awt.Container;
+
 /**
  *
  * @author Hasna
@@ -12,6 +15,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
     private GUIState state;
     
+    GameConfiguration gameMode;
     /**
      * Creates new form MainMenuPanel
      */
@@ -19,6 +23,8 @@ public class MainMenuPanel extends javax.swing.JPanel {
         initComponents();
         
         this.state = state;
+        state.contentPane.add("main", this);
+       // state.contentPaneCardLayout.show(state.contentPane.getParent(), TOOL_TIP_TEXT_KEY);
     }
 
     /**
@@ -81,6 +87,11 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
         PlayGameButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         PlayGameButton.setText("Play Game");
+        PlayGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PlayGameButtonActionPerformed(evt);
+            }
+        });
         MenuPanel.add(PlayGameButton);
         MenuPanel.add(filler6);
 
@@ -128,9 +139,20 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
     private void ViewGamemodesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewGamemodesButtonActionPerformed
         // TODO add your handling code here:
-        state.contentPaneCardLayout.show(state.contentPane, "ViewGamemodesPanel");
+       state.contentPaneCardLayout.show(state.contentPane, "ViewGamemodesPanel");
     }//GEN-LAST:event_ViewGamemodesButtonActionPerformed
 
+    private void PlayGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayGameButtonActionPerformed
+        // TODO add your handling code here:
+        dart playDart= new dart(); 
+       playDart.setVisible(true);
+     
+       //state.contentPane.
+        
+       
+
+      
+    }//GEN-LAST:event_PlayGameButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BodyPanel;
@@ -152,3 +174,4 @@ public class MainMenuPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler9;
     // End of variables declaration//GEN-END:variables
 }
+

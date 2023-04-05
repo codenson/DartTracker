@@ -1,6 +1,7 @@
 {
     "Gamemode":
     {
+        "id":"1",
         "name": "StandardMode.json",
         "dartsPerRound":3,
         "maximumRounds":-1,

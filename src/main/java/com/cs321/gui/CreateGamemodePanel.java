@@ -39,7 +39,7 @@ public class CreateGamemodePanel extends javax.swing.JPanel {
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         ContentPanel = new javax.swing.JPanel();
         FormPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        FormLabel = new javax.swing.JLabel();
         NameLabel = new javax.swing.JLabel();
         NameTextField = new javax.swing.JTextField();
         DartsPerRoundLabel = new javax.swing.JLabel();
@@ -104,22 +104,25 @@ public class CreateGamemodePanel extends javax.swing.JPanel {
         FormPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         FormPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("jLabel1");
+        FormLabel.setText("Leave blanks empty for default values");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        FormPanel.add(jLabel1, gridBagConstraints);
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        FormPanel.add(FormLabel, gridBagConstraints);
 
         NameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         NameLabel.setText("Name:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         FormPanel.add(NameLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -356,6 +359,7 @@ public class CreateGamemodePanel extends javax.swing.JPanel {
     private javax.swing.JTextField DartsPerRoundTextField;
     private javax.swing.JCheckBox ExactZeroWinCheckBox;
     private javax.swing.JPanel FooterPanel;
+    private javax.swing.JLabel FormLabel;
     private javax.swing.JPanel FormPanel;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel MaximumRoundsLabel;
@@ -384,6 +388,5 @@ public class CreateGamemodePanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

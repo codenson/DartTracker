@@ -144,8 +144,10 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
     private void PlayGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayGameButtonActionPerformed
         // TODO add your handling code here:
-        dart playDart= new dart(); 
-       playDart.setVisible(true);
+//        dart playDart= new dart(); 
+//       playDart.setVisible(true);
+
+        state.contentPaneCardLayout.show(state.contentPane, "Dart");
      
        //state.contentPane.
         

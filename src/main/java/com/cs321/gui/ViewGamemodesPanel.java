@@ -139,6 +139,11 @@ public class ViewGamemodesPanel extends javax.swing.JPanel {
 
         NewButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         NewButton.setText("New");
+        NewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewButtonActionPerformed(evt);
+            }
+        });
         ExplorerMenu.add(NewButton);
         ExplorerMenu.add(filler8);
 
@@ -429,6 +434,11 @@ public class ViewGamemodesPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         state.contentPaneCardLayout.show(state.contentPane, "MainMenuPanel");
     }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
+
+    private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
+        // TODO add your handling code here:
+        state.contentPaneCardLayout.show(state.contentPane, "CreateGamemodePanel");
+    }//GEN-LAST:event_NewButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

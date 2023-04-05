@@ -283,7 +283,7 @@ public class dart extends javax.swing.JFrame {
         throwBoxValue.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         throwBoxValue.setText("1/3");
 
-        QuitToMainMenuButton.setBackground(new java.awt.Color(255, 255, 255));
+        QuitToMainMenuButton.setBackground(new java.awt.Color(204, 255, 204));
         QuitToMainMenuButton.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         QuitToMainMenuButton.setLabel("Quit to Main Menu");
         QuitToMainMenuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -292,7 +292,7 @@ public class dart extends javax.swing.JFrame {
             }
         });
 
-        confirmNowButton.setBackground(new java.awt.Color(255, 255, 255));
+        confirmNowButton.setBackground(new java.awt.Color(204, 255, 204));
         confirmNowButton.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         confirmNowButton.setLabel("Confirm Throw");
         confirmNowButton.addActionListener(new java.awt.event.ActionListener() {
@@ -301,7 +301,7 @@ public class dart extends javax.swing.JFrame {
             }
         });
 
-        undoThrowButton.setBackground(new java.awt.Color(255, 255, 255));
+        undoThrowButton.setBackground(new java.awt.Color(204, 255, 204));
         undoThrowButton.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         undoThrowButton.setLabel("Undo Throw");
         undoThrowButton.addActionListener(new java.awt.event.ActionListener() {

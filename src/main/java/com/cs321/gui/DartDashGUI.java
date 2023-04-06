@@ -4,6 +4,11 @@
  */
 package com.cs321.gui;
 
+import java.awt.CardLayout;
+
+import com.cs321.core.GameConfiguration;
+import com.cs321.gui.GUIState.PanelName;
+
 /**
  *
  * @author Hasna
@@ -16,17 +21,19 @@ public class DartDashGUI extends javax.swing.JFrame {
     public DartDashGUI() {
         initComponents();
         
-        java.awt.Container contentPane = getContentPane();
-        java.awt.CardLayout contentPaneCardLayout = (java.awt.CardLayout)getContentPane().getLayout();
-        
         GUIState state = new GUIState();
-        state.contentPane = contentPane;
-        state.contentPaneCardLayout = contentPaneCardLayout;
-        
-        contentPane.add(new MainMenuPanel(state), "MainMenuPanel");
-        contentPane.add(new ViewGamemodesPanel(state), "ViewGamemodesPanel");
-        contentPane.add(new CreateGamemodePanel(state), "CreateGamemodePanel");
-        contentPane.add(new dart().getContentPane(), "Dart");
+        state.contentPane = getContentPane();
+        state.contentPaneCardLayout = (CardLayout)getContentPane().getLayout();
+        state.gameConfigurations.add(new GameConfiguration());
+
+        state.panels.put(PanelName.MainMenuPanel, new MainMenuPanel(state));
+        state.panels.put(PanelName.ViewGamemodesPanel, new ViewGamemodesPanel(state));
+        state.panels.put(PanelName.CreateGamemodePanel, new CreateGamemodePanel(state));
+
+        state.contentPane.add(state.panels.get(PanelName.MainMenuPanel), PanelName.MainMenuPanel.toString());
+        state.contentPane.add(state.panels.get(PanelName.ViewGamemodesPanel), PanelName.ViewGamemodesPanel.toString());
+        state.contentPane.add(state.panels.get(PanelName.CreateGamemodePanel), PanelName.CreateGamemodePanel.toString());
+        state.contentPane.add(new dart().getContentPane(), PanelName.Dart.toString());
     }
 
     /**

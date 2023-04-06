@@ -4,12 +4,16 @@
  */
 package com.cs321.gui;
 
+import javax.swing.DefaultListModel;
+
+import com.cs321.core.GameConfiguration;
+import com.cs321.gui.GUIState.PanelName;
+
 /**
  *
  * @author Hasna
  */
-public class ViewGamemodesPanel  extends javax.swing.JPanel //extends javax.swing.JFrame
-{
+public class ViewGamemodesPanel  extends UpdateableJPanel {
 
     private GUIState state;
     
@@ -20,6 +24,17 @@ public class ViewGamemodesPanel  extends javax.swing.JPanel //extends javax.swin
         initComponents();
         
         this.state = state;
+    }
+    
+    /**
+     * Updates the components to reflect the current state
+     */
+    public void updateComponents() {
+        DefaultListModel<String> defaultListModel = new DefaultListModel<>();
+        for (GameConfiguration gameConfiguration : state.gameConfigurations) {
+            defaultListModel.addElement(gameConfiguration.getName());
+        }
+        ExplorerList.setModel(defaultListModel);
     }
 
     /**
@@ -433,14 +448,13 @@ public class ViewGamemodesPanel  extends javax.swing.JPanel //extends javax.swin
 
     private void QuitToMainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitToMainMenuButtonActionPerformed
         // TODO add your handling code here:
-        state.contentPaneCardLayout.show(state.contentPane, "MainMenuPanel");
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.MainMenuPanel.toString());
     }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
 
     private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
         // TODO add your handling code here:
-        state.contentPaneCardLayout.show(state.contentPane, "CreateGamemodePanel");
-       
-        
+        state.panels.get(PanelName.CreateGamemodePanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.CreateGamemodePanel.toString());
     }//GEN-LAST:event_NewButtonActionPerformed
 
 

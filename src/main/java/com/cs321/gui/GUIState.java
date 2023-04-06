@@ -2,10 +2,41 @@ package com.cs321.gui;
 
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.cs321.core.GameConfiguration;
+
+/**
+ * Holds the state of the GUI
+ * 
+ * @author Hasnain Raza
+ */
 public class GUIState {
+
+    /**
+     * Enum for the names of the panels
+     */
+    public static enum PanelName {
+        MainMenuPanel, ViewGamemodesPanel, CreateGamemodePanel, Dart
+    }
     
+    // The content pane of the JFrame
     public Container contentPane;
+    // The CardLayout of the content pane
     public CardLayout contentPaneCardLayout;
+
+    // The list of game configurations
+    public ArrayList<GameConfiguration> gameConfigurations;
+    // The map of panels
+    public HashMap<PanelName, UpdateableJPanel> panels;
+
+    /**
+     * Creates a new GUIState
+     */
+    public GUIState() {
+        gameConfigurations = new ArrayList<GameConfiguration>();
+        panels = new HashMap<PanelName, UpdateableJPanel>();
+    }
 
 }

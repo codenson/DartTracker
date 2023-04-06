@@ -5,13 +5,15 @@
 package com.cs321.gui;
 
 import com.cs321.core.GameConfiguration;
+import com.cs321.gui.GUIState.PanelName;
+
 import java.awt.Container;
 
 /**
  *
  * @author Hasna
  */
-public class MainMenuPanel extends javax.swing.JPanel {
+public class MainMenuPanel extends UpdateableJPanel {
 
     private GUIState state;
     
@@ -25,6 +27,13 @@ public class MainMenuPanel extends javax.swing.JPanel {
         this.state = state;
         state.contentPane.add("main", this);
        // state.contentPaneCardLayout.show(state.contentPane.getParent(), TOOL_TIP_TEXT_KEY);
+    }
+    
+    /**
+     * Updates the components to reflect the current state
+     */
+    public void updateComponents() {
+        
     }
 
     /**
@@ -139,7 +148,8 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
     private void ViewGamemodesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewGamemodesButtonActionPerformed
         // TODO add your handling code here:
-       state.contentPaneCardLayout.show(state.contentPane, "ViewGamemodesPanel");
+        state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
     }//GEN-LAST:event_ViewGamemodesButtonActionPerformed
 
     private void PlayGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayGameButtonActionPerformed
@@ -147,7 +157,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
 //        dart playDart= new dart(); 
 //       playDart.setVisible(true);
 
-        state.contentPaneCardLayout.show(state.contentPane, "Dart");
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.Dart.toString());
      
        //state.contentPane.
         

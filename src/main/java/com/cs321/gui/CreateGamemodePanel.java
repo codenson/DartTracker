@@ -4,11 +4,17 @@
  */
 package com.cs321.gui;
 
+import com.cs321.core.GameConfiguration;
+import com.cs321.core.GameConfiguration.GameConfigurationBuilder;
+import com.cs321.gui.GUIState.PanelName;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Hasna
  */
-public class CreateGamemodePanel extends javax.swing.JPanel {
+public class CreateGamemodePanel extends UpdateableJPanel {
 
     private GUIState state;
     
@@ -19,6 +25,28 @@ public class CreateGamemodePanel extends javax.swing.JPanel {
         initComponents();
         
         this.state = state;
+    }
+    
+    /**
+     * Updates the components to reflect the current state
+     */
+    public void updateComponents() {
+        clearForm();
+    }
+
+    /**
+     * Clears the form
+     */
+    private void clearForm() {
+        NameTextField.setText("");
+        DartsPerRoundTextField.setText("");
+        MaximumRoundsTextField.setText("");
+        StartingScoreTextField.setText("");
+        OffboardPenaltyTextField.setText("");
+        ScoreListTextField.setText("");
+        MultipliersTextField.setText("");
+        ExactZeroWinCheckBox.setSelected(false);
+        SubtractPointsCheckBox.setSelected(false);
     }
 
     /**
@@ -284,6 +312,11 @@ public class CreateGamemodePanel extends javax.swing.JPanel {
 
         CreateButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         CreateButton.setText("Create");
+        CreateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateButtonActionPerformed(evt);
+            }
+        });
         MenuPanel.add(CreateButton);
         MenuPanel.add(filler9);
 
@@ -332,21 +365,146 @@ public class CreateGamemodePanel extends javax.swing.JPanel {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         // TODO add your handling code here:
-        state.contentPaneCardLayout.show(state.contentPane, "ViewGamemodesPanel");
+        state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
         // TODO add your handling code here:
-        NameTextField.setText("");
-        DartsPerRoundTextField.setText("");
-        MaximumRoundsTextField.setText("");
-        StartingScoreTextField.setText("");
-        OffboardPenaltyTextField.setText("");
-        ScoreListTextField.setText("");
-        MultipliersTextField.setText("");
-        ExactZeroWinCheckBox.setSelected(false);
-        SubtractPointsCheckBox.setSelected(false);
+        clearForm();
     }//GEN-LAST:event_ClearButtonActionPerformed
+
+    private void CreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateButtonActionPerformed
+        // TODO add your handling code here:
+        String nameText = NameTextField.getText().trim();
+        String dartsPerRoundText = DartsPerRoundTextField.getText().trim();
+        String maximumRoundsText = MaximumRoundsTextField.getText().trim();
+        String startingScoreText = StartingScoreTextField.getText().trim();
+        String offboardPenaltyText = OffboardPenaltyTextField.getText().trim();
+        String scoreListText = ScoreListTextField.getText().trim();
+        String multipliersText = MultipliersTextField.getText().trim();
+        boolean exactZeroWin = ExactZeroWinCheckBox.isSelected();
+        boolean subtractPoints = SubtractPointsCheckBox.isSelected();
+        
+        GameConfigurationBuilder gameConfigurationBuilder = new GameConfigurationBuilder();
+        
+        // Parse name
+        if (nameText.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Name can not be empty or whitespace", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        gameConfigurationBuilder.withName(nameText);
+        
+        // Parse darts per round
+        if (!dartsPerRoundText.isEmpty()) {
+            int dartsPerRound;
+
+            try {
+                dartsPerRound = Integer.parseInt(dartsPerRoundText);
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Darts per round must be an integer", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            gameConfigurationBuilder.withDartsPerRound(dartsPerRound);
+        }
+
+        // Parse maximum rounds
+        if (!maximumRoundsText.isEmpty()) {
+            int maximumRounds;
+
+            try {
+                maximumRounds = Integer.parseInt(maximumRoundsText);
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Maximum rounds must be an integer", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            gameConfigurationBuilder.withMaximumRounds(maximumRounds);
+        }
+
+        // Parse starting score
+        if (!startingScoreText.isEmpty()) {
+            int startingScore;
+
+            try {
+                startingScore = Integer.parseInt(startingScoreText);
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Starting score must be an integer", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            gameConfigurationBuilder.withStartingScore(startingScore);
+        }
+
+        // Parse offboard penalty
+        if (!offboardPenaltyText.isEmpty()) {
+            int offboardPenalty;
+
+            try {
+                offboardPenalty = Integer.parseInt(offboardPenaltyText);
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Offboard penalty must be an integer", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            gameConfigurationBuilder.withOffboardPenalty(offboardPenalty);
+        }
+
+        // Parse score list
+        if (!scoreListText.isEmpty()) {
+            String[] scoreListSplit = scoreListText.split(",");
+
+            if (scoreListSplit.length != 21) {
+                JOptionPane.showMessageDialog(null, "Score list must contain 21 integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int[] scoreList = new int[21];
+
+            for (int i = 0; i < 21; i++) {
+                try {
+                    scoreList[i] = Integer.parseInt(scoreListSplit[i].trim());
+                } catch(NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Score list must contain 21 integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+
+            gameConfigurationBuilder.withScoreList(scoreList);
+        }
+
+        // Parse multipliers
+        if (!multipliersText.isEmpty()) {
+            String[] multipliersSplit = multipliersText.split(",");
+
+            if (multipliersSplit.length != 3) {
+                JOptionPane.showMessageDialog(null, "Multipliers must contain 3 numbers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            float[] multipliers = new float[3];
+
+            for (int i = 0; i < 3; i++) {
+                try {
+                    multipliers[i] = Float.parseFloat(multipliersSplit[i].trim());
+                } catch(NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Multipliers must contain 3 numbers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+        }
+
+        gameConfigurationBuilder.withExactZeroWin(exactZeroWin);
+        gameConfigurationBuilder.withSubtractPoints(subtractPoints);
+
+        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to create this game configuration?", "Create Game Configuration", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (confirmation == JOptionPane.YES_OPTION) {
+            state.gameConfigurations.add(gameConfigurationBuilder.build());
+            state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
+            state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
+        }
+
+    }//GEN-LAST:event_CreateButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

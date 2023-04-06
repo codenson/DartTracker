@@ -5,6 +5,8 @@
 package com.cs321.gui;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 import com.cs321.core.GameConfiguration;
 import com.cs321.gui.GUIState.PanelName;
@@ -35,6 +37,45 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
             defaultListModel.addElement(gameConfiguration.getName());
         }
         ExplorerList.setModel(defaultListModel);
+    }
+
+    /**
+     * Clears the content panel
+     */
+    private void clearContentPanel() {
+        CurrentIDLabel.setText("----");
+        CurrentNameLabel.setText("----");
+        CurrentDartsPerRoundLabel.setText("----");
+        CurrentMaximumRoundsLabel.setText("----");
+        CurrentStartingScoreLabel.setText("----");
+        CurrentOffboardPenaltyLabel.setText("----");
+        CurrentScoreListLabel.setText("----");
+        CurrentMultipliersLabel.setText("----");
+        CurrentExactZeroWinLabel.setText("----");
+        CurrentSubtractPointsLabel.setText("----");
+    }
+
+    /**
+     * Displays the game configuration in the content panel
+     * 
+     * @param gameConfiguration the game configuration to display
+     */
+    private void displayGameConfiguration(GameConfiguration gameConfiguration) {
+        if (gameConfiguration == null) {
+            clearContentPanel();
+            return;
+        }
+
+        CurrentIDLabel.setText(gameConfiguration.getId());
+        CurrentNameLabel.setText(gameConfiguration.getName());
+        CurrentDartsPerRoundLabel.setText(String.valueOf(gameConfiguration.getDartsPerRound()));
+        CurrentMaximumRoundsLabel.setText(String.valueOf(gameConfiguration.getMaximumRounds()));
+        CurrentStartingScoreLabel.setText(String.valueOf(gameConfiguration.getStartingScore()));
+        CurrentOffboardPenaltyLabel.setText(String.valueOf(gameConfiguration.getOffboardPenalty()));
+        CurrentScoreListLabel.setText(gameConfiguration.getScoreList().toString());
+        CurrentMultipliersLabel.setText(gameConfiguration.getMultipliers().toString());
+        CurrentExactZeroWinLabel.setText(String.valueOf(gameConfiguration.isExactZeroWin()));
+        CurrentSubtractPointsLabel.setText(String.valueOf(gameConfiguration.isSubtractPoints()));
     }
 
     /**
@@ -140,6 +181,11 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
 
         ExplorerList.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         ExplorerList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ExplorerList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ExplorerListValueChanged(evt);
+            }
+        });
         ExplorerScrollPane.setViewportView(ExplorerList);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -207,7 +253,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         PropertiesHolderPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         PropertiesHolderPanel.setLayout(new java.awt.GridBagLayout());
 
-        PropertiesScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         PropertiesScrollPane.setMinimumSize(new java.awt.Dimension(1, 1));
         PropertiesScrollPane.setPreferredSize(new java.awt.Dimension(1, 1));
 
@@ -456,6 +501,19 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         state.panels.get(PanelName.CreateGamemodePanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.CreateGamemodePanel.toString());
     }//GEN-LAST:event_NewButtonActionPerformed
+
+    private void ExplorerListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ExplorerListValueChanged
+        // TODO add your handling code here:
+        JList<String> list = (JList<String>) evt.getSource();
+        int index = list.getSelectedIndex();
+        if (index == -1) {
+            clearContentPanel();
+            return;
+        }
+
+        GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
+        displayGameConfiguration(gameConfiguration);
+    }//GEN-LAST:event_ExplorerListValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -497,7 +497,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gameConfigurationBuilder.withExactZeroWin(exactZeroWin);
         gameConfigurationBuilder.withSubtractPoints(subtractPoints);
 
-        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to create this game configuration?", "Create Game Configuration", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to create this gamemode?", "Create Gamemode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (confirmation == JOptionPane.YES_OPTION) {
             state.gameConfigurations.add(gameConfigurationBuilder.build());
             state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();

@@ -168,6 +168,9 @@
                         </Property>
                         <Property name="selectionMode" type="int" value="0"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="ExplorerListValueChanged"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
@@ -300,7 +303,6 @@
               <SubComponents>
                 <Container class="javax.swing.JScrollPane" name="PropertiesScrollPane">
                   <Properties>
-                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[1, 1]"/>
                     </Property>

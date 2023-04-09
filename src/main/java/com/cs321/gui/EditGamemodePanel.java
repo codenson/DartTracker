@@ -4,52 +4,73 @@
  */
 package com.cs321.gui;
 
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
+
 import com.cs321.core.GameConfiguration;
 import com.cs321.core.GameConfiguration.GameConfigurationBuilder;
 import com.cs321.gui.GUIState.PanelName;
 import com.cs321.io.IOUtils;
 
-import java.io.IOException;
-
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Hasna
  */
-public class CreateGamemodePanel extends UpdateableJPanel {
+public class EditGamemodePanel extends UpdateableJPanel {
 
     private GUIState state;
-    
+
     /**
-     * Creates new form CreateGamemode
+     * Creates new form EditGamemodePanel
      */
-    public CreateGamemodePanel(GUIState state) {
+    public EditGamemodePanel(GUIState state) {
         initComponents();
-        
+
         this.state = state;
     }
-    
+
     /**
      * Updates the components to reflect the current state
      */
     public void updateComponents() {
-        clearForm();
+        fillForm();
     }
 
     /**
-     * Clears the form
+     * Fills the form with the current game configuration
      */
-    private void clearForm() {
-        NameTextField.setText("");
-        DartsPerRoundTextField.setText("");
-        MaximumRoundsTextField.setText("");
-        StartingScoreTextField.setText("");
-        OffboardPenaltyTextField.setText("");
-        ScoreListTextField.setText("");
-        MultipliersTextField.setText("");
-        ExactZeroWinCheckBox.setSelected(false);
-        SubtractPointsCheckBox.setSelected(false);
+    private void fillForm() {
+        GameConfiguration gameConfiguration = state.gameConfigurations.get(state.toEditGameConfigurationIndex);
+
+        NameTextField.setText(gameConfiguration.getName());
+        DartsPerRoundTextField.setText(Integer.toString(gameConfiguration.getDartsPerRound()));
+        MaximumRoundsTextField.setText(Integer.toString(gameConfiguration.getMaximumRounds()));
+        StartingScoreTextField.setText(Integer.toString(gameConfiguration.getStartingScore()));
+        OffboardPenaltyTextField.setText(Integer.toString(gameConfiguration.getOffboardPenalty()));
+
+        StringBuilder scoreListBuilder = new StringBuilder();
+        for (int score : gameConfiguration.getScoreList()) {
+            scoreListBuilder.append(score);
+            scoreListBuilder.append(",");
+        }
+        if (scoreListBuilder.length() > 0) {
+            scoreListBuilder.delete(scoreListBuilder.length() - 1, scoreListBuilder.length());
+        }
+        ScoreListTextField.setText(scoreListBuilder.toString());
+
+        StringBuilder multipliersBuilder = new StringBuilder();
+        for (float multiplier : gameConfiguration.getMultipliers()) {
+            multipliersBuilder.append(multiplier);
+            multipliersBuilder.append(",");
+        }
+        if (multipliersBuilder.length() > 0) {
+            multipliersBuilder.delete(multipliersBuilder.length() - 1, multipliersBuilder.length());
+        }
+        MultipliersTextField.setText(multipliersBuilder.toString());
+
+        ExactZeroWinCheckBox.setSelected(gameConfiguration.isExactZeroWin());
+        SubtractPointsCheckBox.setSelected(gameConfiguration.isSubtractPoints());
     }
 
     /**
@@ -91,9 +112,9 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         SubtractPointsCheckBox = new javax.swing.JCheckBox();
         MenuPanel = new javax.swing.JPanel();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        ClearButton = new javax.swing.JButton();
+        RestoreButton = new javax.swing.JButton();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
-        CreateButton = new javax.swing.JButton();
+        SaveButton = new javax.swing.JButton();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         FooterPanel = new javax.swing.JPanel();
@@ -112,7 +133,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         HeaderPanel.add(filler1);
 
         TitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        TitleLabel.setText("Create Gamemode");
+        TitleLabel.setText("Edit Gamemode");
         HeaderPanel.add(TitleLabel);
         HeaderPanel.add(filler2);
 
@@ -303,24 +324,24 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         MenuPanel.setLayout(new javax.swing.BoxLayout(MenuPanel, javax.swing.BoxLayout.LINE_AXIS));
         MenuPanel.add(filler7);
 
-        ClearButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        ClearButton.setText("Clear");
-        ClearButton.addActionListener(new java.awt.event.ActionListener() {
+        RestoreButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        RestoreButton.setText("Restore");
+        RestoreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClearButtonActionPerformed(evt);
+                RestoreButtonActionPerformed(evt);
             }
         });
-        MenuPanel.add(ClearButton);
+        MenuPanel.add(RestoreButton);
         MenuPanel.add(filler8);
 
-        CreateButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        CreateButton.setText("Create");
-        CreateButton.addActionListener(new java.awt.event.ActionListener() {
+        SaveButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        SaveButton.setText("Save");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateButtonActionPerformed(evt);
+                SaveButtonActionPerformed(evt);
             }
         });
-        MenuPanel.add(CreateButton);
+        MenuPanel.add(SaveButton);
         MenuPanel.add(filler9);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -366,18 +387,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         add(FooterPanel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        // TODO add your handling code here:
-        state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
-        state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
-    }//GEN-LAST:event_BackButtonActionPerformed
-
-    private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
-        // TODO add your handling code here:
-        clearForm();
-    }//GEN-LAST:event_ClearButtonActionPerformed
-
-    private void CreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateButtonActionPerformed
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         // TODO add your handling code here:
         String nameText = NameTextField.getText().trim();
         String dartsPerRoundText = DartsPerRoundTextField.getText().trim();
@@ -388,7 +398,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         String multipliersText = MultipliersTextField.getText().trim();
         boolean exactZeroWin = ExactZeroWinCheckBox.isSelected();
         boolean subtractPoints = SubtractPointsCheckBox.isSelected();
-        
+
         GameConfigurationBuilder gameConfigurationBuilder = new GameConfigurationBuilder();
         
         // Parse name
@@ -500,29 +510,45 @@ public class CreateGamemodePanel extends UpdateableJPanel {
 
         gameConfigurationBuilder.withExactZeroWin(exactZeroWin);
         gameConfigurationBuilder.withSubtractPoints(subtractPoints);
-
-        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to create this gamemode?", "Create Gamemode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to overwrite this gamemode?", "Save Gamemode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (confirmation == JOptionPane.YES_OPTION) {
             GameConfiguration gameConfiguration = gameConfigurationBuilder.build();
-            state.gameConfigurations.add(gameConfiguration);
+            
+            try {
+                IOUtils.deleteGameConfiguration(state.gameConfigurations.get(state.toEditGameConfigurationIndex));
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Could not delete old gamemode file", "Save Gamemode Error", JOptionPane.ERROR_MESSAGE);
+            }
+
             try {
                 IOUtils.saveGameConfiguration(gameConfiguration);
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Failed to save gamemode", "Save Gamemode Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Could not save gamemode file", "Save Gamemode Error", JOptionPane.ERROR_MESSAGE);
             }
+
+            state.gameConfigurations.remove(state.toEditGameConfigurationIndex);
+            state.gameConfigurations.add(state.toEditGameConfigurationIndex, gameConfiguration);
+
             state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
             state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
         }
+    }//GEN-LAST:event_SaveButtonActionPerformed
 
-    }//GEN-LAST:event_CreateButtonActionPerformed
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        // TODO add your handling code here:
+        state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
+    }//GEN-LAST:event_BackButtonActionPerformed
 
+    private void RestoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreButtonActionPerformed
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_RestoreButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
     private javax.swing.JPanel BodyPanel;
-    private javax.swing.JButton ClearButton;
     private javax.swing.JPanel ContentPanel;
-    private javax.swing.JButton CreateButton;
     private javax.swing.JLabel DartsPerRoundLabel;
     private javax.swing.JTextField DartsPerRoundTextField;
     private javax.swing.JCheckBox ExactZeroWinCheckBox;
@@ -540,6 +566,8 @@ public class CreateGamemodePanel extends UpdateableJPanel {
     private javax.swing.JTextField NameTextField;
     private javax.swing.JLabel OffboardPenaltyLabel;
     private javax.swing.JTextField OffboardPenaltyTextField;
+    private javax.swing.JButton RestoreButton;
+    private javax.swing.JButton SaveButton;
     private javax.swing.JLabel ScoreListHelpLabel;
     private javax.swing.JLabel ScoreListLabel;
     private javax.swing.JTextField ScoreListTextField;

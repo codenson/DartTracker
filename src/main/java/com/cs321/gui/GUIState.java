@@ -18,7 +18,8 @@ public class GUIState {
      * Enum for the names of the panels
      */
     public static enum PanelName {
-        MainMenuPanel, ViewGamemodesPanel, CreateGamemodePanel, Dart
+        MainMenuPanel, ViewGamemodesPanel, CreateGamemodePanel, EditGamemodePanel,
+        Dart
     }
     
     // The content pane of the JFrame
@@ -30,6 +31,9 @@ public class GUIState {
     public ArrayList<GameConfiguration> gameConfigurations;
     // The map of panels
     public HashMap<PanelName, UpdateableJPanel> panels;
+
+    // The index of the game configuration to edit
+    public int toEditGameConfigurationIndex;
 
     /**
      * Creates a new GUIState

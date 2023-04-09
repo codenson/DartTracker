@@ -471,6 +471,11 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
 
         EditButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         EditButton.setText("Edit");
+        EditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditButtonActionPerformed(evt);
+            }
+        });
         PropertiesMenu.add(EditButton);
         PropertiesMenu.add(filler11);
 
@@ -632,6 +637,21 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
             }
         }
     }//GEN-LAST:event_ExportButtonActionPerformed
+
+    private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
+        // TODO add your handling code here:
+
+        int index = ExplorerList.getSelectedIndex();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "No game configuration selected", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        state.toEditGameConfigurationIndex = index;
+
+        state.panels.get(PanelName.EditGamemodePanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.EditGamemodePanel.toString());
+    }//GEN-LAST:event_EditButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

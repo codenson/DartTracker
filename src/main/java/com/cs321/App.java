@@ -1,7 +1,6 @@
 package com.cs321;
 
 import com.cs321.gui.DartDashGUI;
-import com.cs321.io.IOUtils;
 
 /**
  * @author James Luna, Hasnain Raza, Marouane Guerouji
@@ -13,8 +12,6 @@ public class App
 {
     public static void main(String[] args)
     {
-        IOUtils.init();
-
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {

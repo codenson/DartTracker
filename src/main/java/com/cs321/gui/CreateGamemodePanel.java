@@ -7,6 +7,9 @@ package com.cs321.gui;
 import com.cs321.core.GameConfiguration;
 import com.cs321.core.GameConfiguration.GameConfigurationBuilder;
 import com.cs321.gui.GUIState.PanelName;
+import com.cs321.io.IOUtils;
+
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -499,7 +502,13 @@ public class CreateGamemodePanel extends UpdateableJPanel {
 
         int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to create this gamemode?", "Create Gamemode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (confirmation == JOptionPane.YES_OPTION) {
-            state.gameConfigurations.add(gameConfigurationBuilder.build());
+            GameConfiguration gameConfiguration = gameConfigurationBuilder.build();
+            state.gameConfigurations.add(gameConfiguration);
+            try {
+                IOUtils.saveGameConfiguration(gameConfiguration);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Failed to save gamemode", "Save Gamemode Error", JOptionPane.ERROR_MESSAGE);
+            }
             state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
             state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
         }

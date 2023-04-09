@@ -5,9 +5,13 @@
 package com.cs321.gui;
 
 import java.awt.CardLayout;
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
 
 import com.cs321.core.GameConfiguration;
 import com.cs321.gui.GUIState.PanelName;
+import com.cs321.io.IOUtils;
 
 /**
  *
@@ -24,7 +28,6 @@ public class DartDashGUI extends javax.swing.JFrame {
         GUIState state = new GUIState();
         state.contentPane = getContentPane();
         state.contentPaneCardLayout = (CardLayout)getContentPane().getLayout();
-        state.gameConfigurations.add(new GameConfiguration());
 
         state.panels.put(PanelName.MainMenuPanel, new MainMenuPanel(state));
         state.panels.put(PanelName.ViewGamemodesPanel, new ViewGamemodesPanel(state));
@@ -34,6 +37,46 @@ public class DartDashGUI extends javax.swing.JFrame {
         state.contentPane.add(state.panels.get(PanelName.ViewGamemodesPanel), PanelName.ViewGamemodesPanel.toString());
         state.contentPane.add(state.panels.get(PanelName.CreateGamemodePanel), PanelName.CreateGamemodePanel.toString());
         state.contentPane.add(new dart().getContentPane(), PanelName.Dart.toString());
+
+        if (!initIOUtils() || !loadGameConfigurations(state)) {
+            state.gameConfigurations.add(new GameConfiguration());   
+        }
+    }
+
+    /**
+     * Initializes the IOUtils.
+     * 
+     * @return true if the IOUtils was initialized successfully, false otherwise
+     */
+    private boolean initIOUtils() {
+        try {
+            IOUtils.init();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error initializing save folders and files: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Loads all the game configurations.
+     * 
+     * @param state the GUIState
+     * @return true if the game configurations were loaded successfully, false otherwise
+     */
+    private boolean loadGameConfigurations(GUIState state) {
+        try {
+            for (GameConfiguration gameConfiguration : IOUtils.loadAllGameConfigurations()) {
+                state.gameConfigurations.add(gameConfiguration);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error loading gamemodes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            state.gameConfigurations.add(new GameConfiguration());
+            return false;
+        }
+
+        return true;
     }
 
     /**

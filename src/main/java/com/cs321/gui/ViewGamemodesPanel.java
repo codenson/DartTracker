@@ -79,8 +79,27 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         CurrentMaximumRoundsLabel.setText(String.valueOf(gameConfiguration.getMaximumRounds()));
         CurrentStartingScoreLabel.setText(String.valueOf(gameConfiguration.getStartingScore()));
         CurrentOffboardPenaltyLabel.setText(String.valueOf(gameConfiguration.getOffboardPenalty()));
-        CurrentScoreListLabel.setText(gameConfiguration.getScoreList().toString());
-        CurrentMultipliersLabel.setText(gameConfiguration.getMultipliers().toString());
+
+        StringBuilder scoreListBuilder = new StringBuilder();
+        for (int score : gameConfiguration.getScoreList()) {
+            scoreListBuilder.append(score);
+            scoreListBuilder.append(",");
+        }
+        if (scoreListBuilder.length() > 0) {
+            scoreListBuilder.delete(scoreListBuilder.length() - 1, scoreListBuilder.length());
+        }
+        CurrentScoreListLabel.setText(scoreListBuilder.toString());
+
+        StringBuilder multipliersBuilder = new StringBuilder();
+        for (float multiplier : gameConfiguration.getMultipliers()) {
+            multipliersBuilder.append(multiplier);
+            multipliersBuilder.append(",");
+        }
+        if (multipliersBuilder.length() > 0) {
+            multipliersBuilder.delete(multipliersBuilder.length() - 1, multipliersBuilder.length());
+        }
+        CurrentMultipliersLabel.setText(multipliersBuilder.toString());
+
         CurrentExactZeroWinLabel.setText(String.valueOf(gameConfiguration.isExactZeroWin()));
         CurrentSubtractPointsLabel.setText(String.valueOf(gameConfiguration.isSubtractPoints()));
     }

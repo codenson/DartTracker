@@ -4,12 +4,18 @@
  */
 package com.cs321.gui;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 import com.cs321.core.GameConfiguration;
 import com.cs321.gui.GUIState.PanelName;
+import com.cs321.io.IOUtils;
 
 /**
  *
@@ -88,6 +94,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        GameConfigurationChooser = new javax.swing.JFileChooser();
         HeaderPanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         TitleLabel = new javax.swing.JLabel();
@@ -141,6 +148,10 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         QuitToMainMenuButton = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+
+        GameConfigurationChooser.setDialogTitle("Choose a Gamemode");
+        GameConfigurationChooser.setMinimumSize(new java.awt.Dimension(640, 480));
+        GameConfigurationChooser.setPreferredSize(new java.awt.Dimension(640, 480));
 
         setMinimumSize(new java.awt.Dimension(1, 1));
         setPreferredSize(new java.awt.Dimension(1, 1));
@@ -212,6 +223,11 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         ImportButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         ImportButton.setText("Import");
         ImportButton.setToolTipText("");
+        ImportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImportButtonActionPerformed(evt);
+            }
+        });
         ExplorerMenu.add(ImportButton);
         ExplorerMenu.add(filler9);
 
@@ -439,6 +455,11 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
 
         DeleteButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         DeleteButton.setText("Delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
         PropertiesMenu.add(DeleteButton);
         PropertiesMenu.add(filler13);
 
@@ -504,8 +525,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
 
     private void ExplorerListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ExplorerListValueChanged
         // TODO add your handling code here:
-        JList<String> list = (JList<String>) evt.getSource();
-        int index = list.getSelectedIndex();
+        int index = ExplorerList.getSelectedIndex();
         if (index == -1) {
             clearContentPanel();
             return;
@@ -514,6 +534,50 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
         displayGameConfiguration(gameConfiguration);
     }//GEN-LAST:event_ExplorerListValueChanged
+
+    private void ImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportButtonActionPerformed
+        // TODO add your handling code here:
+        int result = GameConfigurationChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = GameConfigurationChooser.getSelectedFile();
+            GameConfiguration gameConfiguration = null;
+
+            try {
+                gameConfiguration = IOUtils.loadGameConfiguration(file);
+                state.gameConfigurations.add(gameConfiguration);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error loading game configuration: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            try {
+                if (gameConfiguration != null) {
+                    IOUtils.saveGameConfiguration(gameConfiguration);
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error saving game configuration: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            updateComponents();
+        }
+    }//GEN-LAST:event_ImportButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        // TODO add your handling code here:
+        int index = ExplorerList.getSelectedIndex();
+        if (index == -1) {
+            return;
+        }
+
+        GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
+        state.gameConfigurations.remove(index);
+        try {
+            IOUtils.deleteGameConfiguration(gameConfiguration);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error deleting game configuration: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        updateComponents();
+    }//GEN-LAST:event_DeleteButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -540,6 +604,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private javax.swing.JScrollPane ExplorerScrollPane;
     private javax.swing.JButton ExportButton;
     private javax.swing.JPanel FooterPanel;
+    private javax.swing.JFileChooser GameConfigurationChooser;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel IDLabel;
     private javax.swing.JButton ImportButton;

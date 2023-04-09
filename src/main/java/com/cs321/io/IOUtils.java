@@ -1,5 +1,6 @@
 package com.cs321.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,8 +26,8 @@ public class IOUtils {
      * Also saves the default game configuration.
      */
     public static void init() throws IOException {
-        Files.createDirectories(Paths.get(getDartDashPath()));
-        Files.createDirectories(Paths.get(getGameConfigurationsPath()));
+        Files.createDirectories(getDartDashPath());
+        Files.createDirectories(getGameConfigurationsPath());
 
         if (loadGameConfiguration("Default") == null) {
             saveGameConfiguration(new GameConfiguration());
@@ -40,9 +41,9 @@ public class IOUtils {
      * @throws IOException If an error occurs while saving the gamemode.
      */
     public static void saveGameConfiguration(GameConfiguration gameConfiguration) throws IOException {
-        String gamemodePath = getGameConfigurationPath(gameConfiguration.getId(), gameConfiguration.getName());
+        Path gameConfigurationPath = getGameConfigurationPath(gameConfiguration.getId(), gameConfiguration.getName());
         GameConfigurationDTO gameConfigurationDTO = getGameConfigurationDTOFromGameConfiguration(gameConfiguration);
-        objectMapper.writeValue(Paths.get(gamemodePath).toFile(), gameConfigurationDTO);
+        objectMapper.writeValue(gameConfigurationPath.toFile(), gameConfigurationDTO);
     }
 
     /**
@@ -54,7 +55,7 @@ public class IOUtils {
     public static GameConfiguration loadGameConfiguration(String name) throws IOException {
         GameConfiguration gameConfiguration = null;
 
-        Optional<Path> result = Files.list(Paths.get(getGameConfigurationsPath())).filter(path -> 
+        Optional<Path> result = Files.list(getGameConfigurationsPath()).filter(path -> 
             path.getFileName().toString().startsWith(name)).findFirst();
 
         if (result.isPresent()) {
@@ -66,6 +67,27 @@ public class IOUtils {
     }
 
     /**
+     * Load game configuration by file.
+     * 
+     * @return The GameConfiguration.
+     * @throws IOException If an error occurs while loading the game configuration.
+     */
+    public static GameConfiguration loadGameConfiguration(File file) throws IOException {
+        GameConfigurationDTO gameConfigurationDTO = objectMapper.readValue(file, GameConfigurationDTO.class);
+        return getGameConfigurationFromGameConfigurationDTO(gameConfigurationDTO);
+    }
+
+    /**
+     * Load game configuration by path.
+     * 
+     * @return The GameConfiguration.
+     * @throws IOException If an error occurs while loading the game configuration.
+     */
+    public static GameConfiguration loadGameConfiguration(Path path) throws IOException {
+        return loadGameConfiguration(path.toFile());
+    }
+
+    /**
      * Loads all the game configurations from the GameConfigurations directory.
      * 
      * @return An array of GameConfigurations.
@@ -74,7 +96,7 @@ public class IOUtils {
     public static GameConfiguration[] loadAllGameConfigurations() throws IOException {
         ArrayList<GameConfiguration> gameConfigurations = new ArrayList<>();
 
-        Files.list(Paths.get(getGameConfigurationsPath())).forEach(path -> {
+        Files.list(getGameConfigurationsPath()).forEach(path -> {
             try {
                 GameConfigurationDTO gameConfigurationDTO = objectMapper.readValue(path.toFile(), GameConfigurationDTO.class);
                 gameConfigurations.add(getGameConfigurationFromGameConfigurationDTO(gameConfigurationDTO));
@@ -87,14 +109,25 @@ public class IOUtils {
     }
 
     /**
+     * Deletes the game configuration file.
+     * 
+     * @param gameConfiguration The GameConfiguration to delete.
+     * @throws IOException If an error occurs while deleting the game configuration.
+     */
+    public static void deleteGameConfiguration(GameConfiguration gameConfiguration) throws IOException {
+        Path gameConfigurationPath = getGameConfigurationPath(gameConfiguration.getId(), gameConfiguration.getName());
+        Files.deleteIfExists(gameConfigurationPath);
+    }
+
+    /**
      * Gets the path to the DartDash directory.
      * 
      * @return The path to the DartDash directory.
      */
-    private static String getDartDashPath() {
+    private static Path getDartDashPath() {
         StringBuilder dartDashPath = new StringBuilder(System.getProperty("user.home"));
         dartDashPath.append("\\Saved Games\\DartDash");
-        return dartDashPath.toString();
+        return Paths.get(dartDashPath.toString());
     }
 
     /**
@@ -102,10 +135,10 @@ public class IOUtils {
      * 
      * @return The path to the GameConfigurations directory.
      */
-    private static String getGameConfigurationsPath() {
-        StringBuilder gamemodesPath = new StringBuilder(getDartDashPath());
-        gamemodesPath.append("\\GameConfigurations");
-        return gamemodesPath.toString();
+    private static Path getGameConfigurationsPath() {
+        StringBuilder gameConfigurationsPath = new StringBuilder(getDartDashPath().toString());
+        gameConfigurationsPath.append("\\GameConfigurations");
+        return Paths.get(gameConfigurationsPath.toString());
     }
 
     /**
@@ -115,14 +148,14 @@ public class IOUtils {
      * @param name The name of the game configuration.
      * @return The path to the game configuration file.
      */
-    private static String getGameConfigurationPath(String id, String name) {
-        StringBuilder gamemodePath = new StringBuilder(getGameConfigurationsPath());
-        gamemodePath.append("\\");
-        gamemodePath.append(name);
-        gamemodePath.append("_");
-        gamemodePath.append(id);
-        gamemodePath.append(".json");
-        return gamemodePath.toString();
+    private static Path getGameConfigurationPath(String id, String name) {
+        StringBuilder gameConfigurationPath = new StringBuilder(getGameConfigurationsPath().toString());
+        gameConfigurationPath.append("\\");
+        gameConfigurationPath.append(name);
+        gameConfigurationPath.append("_");
+        gameConfigurationPath.append(id);
+        gameConfigurationPath.append(".json");
+        return Paths.get(gameConfigurationPath.toString());
     }
 
     /**

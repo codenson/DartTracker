@@ -37,13 +37,35 @@ public class IOUtils {
     /**
      * Saves the game configuration to a file.
      * 
+     * @param gameConfiguration
+     * @param file
+     * @throws IOException
+     */
+    public static void saveGameConfiguration(GameConfiguration gameConfiguration, File file) throws IOException {
+        GameConfigurationDTO gameConfigurationDTO = getGameConfigurationDTOFromGameConfiguration(gameConfiguration);
+        objectMapper.writeValue(file, gameConfigurationDTO);
+    }
+
+    /**
+     * Saves the game configuration to a path.
+     * 
+     * @param gameConfiguration
+     * @param path
+     * @throws IOException
+     */
+    public static void saveGameConfiguration(GameConfiguration gameConfiguration, Path path) throws IOException {
+        saveGameConfiguration(gameConfiguration, path.toFile());
+    }
+
+    /**
+     * Saves the game configuration to default location.
+     * 
      * @param gameConfiguration The GameConfiguration to save.
      * @throws IOException If an error occurs while saving the gamemode.
      */
     public static void saveGameConfiguration(GameConfiguration gameConfiguration) throws IOException {
-        Path gameConfigurationPath = getGameConfigurationPath(gameConfiguration.getId(), gameConfiguration.getName());
-        GameConfigurationDTO gameConfigurationDTO = getGameConfigurationDTOFromGameConfiguration(gameConfiguration);
-        objectMapper.writeValue(gameConfigurationPath.toFile(), gameConfigurationDTO);
+        Path gameConfigurationPath = getGameConfigurationPath(gameConfiguration);
+        saveGameConfiguration(gameConfiguration, gameConfigurationPath);
     }
 
     /**
@@ -115,8 +137,18 @@ public class IOUtils {
      * @throws IOException If an error occurs while deleting the game configuration.
      */
     public static void deleteGameConfiguration(GameConfiguration gameConfiguration) throws IOException {
-        Path gameConfigurationPath = getGameConfigurationPath(gameConfiguration.getId(), gameConfiguration.getName());
+        Path gameConfigurationPath = getGameConfigurationPath(gameConfiguration);
         Files.deleteIfExists(gameConfigurationPath);
+    }
+
+    /**
+     * Gets the game configuration save filename.
+     * 
+     * @param gameConfiguration The GameConfiguration to get the save filename for.
+     * @return The game configuration save filename.
+     */
+    public static String getGameConfigurationSaveFilename(GameConfiguration gameConfiguration) {
+        return gameConfiguration.getName() + "_" + gameConfiguration.getId() + ".json";
     }
 
     /**
@@ -144,17 +176,13 @@ public class IOUtils {
     /**
      * Gets the path to the game configuration file.
      * 
-     * @param id The ID of the game configuration.
-     * @param name The name of the game configuration.
+     * @param gameConfiguration The GameConfiguration to get the path for.
      * @return The path to the game configuration file.
      */
-    private static Path getGameConfigurationPath(String id, String name) {
+    private static Path getGameConfigurationPath(GameConfiguration gameConfiguration) {
         StringBuilder gameConfigurationPath = new StringBuilder(getGameConfigurationsPath().toString());
         gameConfigurationPath.append("\\");
-        gameConfigurationPath.append(name);
-        gameConfigurationPath.append("_");
-        gameConfigurationPath.append(id);
-        gameConfigurationPath.append(".json");
+        gameConfigurationPath.append(getGameConfigurationSaveFilename(gameConfiguration));
         return Paths.get(gameConfigurationPath.toString());
     }
 

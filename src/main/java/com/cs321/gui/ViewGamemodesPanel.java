@@ -6,6 +6,7 @@ package com.cs321.gui;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -94,7 +95,8 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        GameConfigurationChooser = new javax.swing.JFileChooser();
+        ImportGameConfigurationChooser = new javax.swing.JFileChooser();
+        ExportFolderChooser = new javax.swing.JFileChooser();
         HeaderPanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         TitleLabel = new javax.swing.JLabel();
@@ -149,9 +151,14 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         QuitToMainMenuButton = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
-        GameConfigurationChooser.setDialogTitle("Choose a Gamemode");
-        GameConfigurationChooser.setMinimumSize(new java.awt.Dimension(640, 480));
-        GameConfigurationChooser.setPreferredSize(new java.awt.Dimension(640, 480));
+        ImportGameConfigurationChooser.setDialogTitle("Choose a Gamemode");
+        ImportGameConfigurationChooser.setMinimumSize(new java.awt.Dimension(640, 480));
+        ImportGameConfigurationChooser.setPreferredSize(new java.awt.Dimension(640, 480));
+
+        ExportFolderChooser.setDialogTitle("Choose a Folder");
+        ExportFolderChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        ExportFolderChooser.setMinimumSize(new java.awt.Dimension(640, 480));
+        ExportFolderChooser.setPreferredSize(new java.awt.Dimension(640, 480));
 
         setMinimumSize(new java.awt.Dimension(1, 1));
         setPreferredSize(new java.awt.Dimension(1, 1));
@@ -450,6 +457,11 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
 
         ExportButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         ExportButton.setText("Export");
+        ExportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportButtonActionPerformed(evt);
+            }
+        });
         PropertiesMenu.add(ExportButton);
         PropertiesMenu.add(filler12);
 
@@ -537,9 +549,9 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
 
     private void ImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportButtonActionPerformed
         // TODO add your handling code here:
-        int result = GameConfigurationChooser.showOpenDialog(this);
+        int result = ImportGameConfigurationChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
-            File file = GameConfigurationChooser.getSelectedFile();
+            File file = ImportGameConfigurationChooser.getSelectedFile();
             GameConfiguration gameConfiguration = null;
 
             try {
@@ -579,6 +591,29 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         updateComponents();
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
+    private void ExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportButtonActionPerformed
+        // TODO add your handling code here:
+        int index = ExplorerList.getSelectedIndex();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "No game configuration selected", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
+
+        int result = ExportFolderChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            Path path = ExportFolderChooser.getSelectedFile().toPath();
+            File file = path.resolve(IOUtils.getGameConfigurationSaveFilename(gameConfiguration)).toFile();
+
+            try {
+                IOUtils.saveGameConfiguration(gameConfiguration, file);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error exporting game configuration: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_ExportButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BodyPanel;
@@ -603,11 +638,12 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private javax.swing.JPanel ExplorerMenu;
     private javax.swing.JScrollPane ExplorerScrollPane;
     private javax.swing.JButton ExportButton;
+    private javax.swing.JFileChooser ExportFolderChooser;
     private javax.swing.JPanel FooterPanel;
-    private javax.swing.JFileChooser GameConfigurationChooser;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel IDLabel;
     private javax.swing.JButton ImportButton;
+    private javax.swing.JFileChooser ImportGameConfigurationChooser;
     private javax.swing.JLabel MaximumRoundsLabel;
     private javax.swing.JLabel MultipliersLabel;
     private javax.swing.JLabel NameLabel;

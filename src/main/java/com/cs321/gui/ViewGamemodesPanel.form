@@ -2,9 +2,21 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.JFileChooser" name="GameConfigurationChooser">
+    <Component class="javax.swing.JFileChooser" name="ImportGameConfigurationChooser">
       <Properties>
         <Property name="dialogTitle" type="java.lang.String" value="Choose a Gamemode"/>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[640, 480]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[640, 480]"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFileChooser" name="ExportFolderChooser">
+      <Properties>
+        <Property name="dialogTitle" type="java.lang.String" value="Choose a Folder"/>
+        <Property name="fileSelectionMode" type="int" value="1"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[640, 480]"/>
         </Property>
@@ -632,6 +644,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Export"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExportButtonActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.Box$Filler" name="filler12">
                       <Properties>

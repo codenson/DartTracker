@@ -19,7 +19,7 @@ public class GUIState {
      */
     public static enum PanelName {
         MainMenuPanel, ViewGamemodesPanel, CreateGamemodePanel, EditGamemodePanel,
-        Dart
+        Dart_2
     }
     
     // The content pane of the JFrame

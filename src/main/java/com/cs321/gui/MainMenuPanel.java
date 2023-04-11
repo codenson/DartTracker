@@ -158,21 +158,8 @@ public class MainMenuPanel extends UpdateableJPanel {
 
     private void PlayGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayGameButtonActionPerformed
         // TODO add your handling code here:
-       // dart playDart= new dart(); 
-        //playDart.setVisible(true);
-        
-
-        //state.contentPaneCardLayout.show(state.contentPane, PanelName.Dart.toString());
-        
-   //  NewJPanel
-           //  state.contentPaneCardLayout.show(state.contentPane, PanelName.NewJPanel.toString());
-       //state.contentPane.
-       
-        state.panels.get(PanelName.Dart_2).updateComponents();
-        state.contentPaneCardLayout.show(state.contentPane, PanelName.Dart_2.toString());
-       // pack();
-
-      
+        state.panels.get(PanelName.ChooseGametypePanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ChooseGametypePanel.toString());  
     }//GEN-LAST:event_PlayGameButtonActionPerformed
 
     private void ViewPlayersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPlayersButtonActionPerformed

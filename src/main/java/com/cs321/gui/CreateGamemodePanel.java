@@ -368,18 +368,15 @@ public class CreateGamemodePanel extends UpdateableJPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        // TODO add your handling code here:
         state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
-        // TODO add your handling code here:
         clearForm();
     }//GEN-LAST:event_ClearButtonActionPerformed
 
     private void CreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateButtonActionPerformed
-        // TODO add your handling code here:
         String nameText = NameTextField.getText().trim();
         String dartsPerRoundText = DartsPerRoundTextField.getText().trim();
         String maximumRoundsText = MaximumRoundsTextField.getText().trim();

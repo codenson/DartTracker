@@ -373,7 +373,6 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ExplorerListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ExplorerListValueChanged
-        // TODO add your handling code here:
         int index = ExplorerList.getSelectedIndex();
         if (index == -1) {
             clearContentPanel();
@@ -387,7 +386,6 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     }//GEN-LAST:event_ExplorerListValueChanged
 
     private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
-        // TODO add your handling code here:
         String name = JOptionPane.showInputDialog("Enter a name for the new player");
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Name can not be empty or whitespace", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
@@ -400,12 +398,10 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     }//GEN-LAST:event_NewButtonActionPerformed
 
     private void ImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportButtonActionPerformed
-        // TODO add your handling code here:
         
     }//GEN-LAST:event_ImportButtonActionPerformed
 
     private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
-        // TODO add your handling code here:
         int index = ExplorerList.getSelectedIndex();
         Player player = state.players.get(index);
 
@@ -420,12 +416,10 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     }//GEN-LAST:event_EditButtonActionPerformed
 
     private void ExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportButtonActionPerformed
-        // TODO add your handling code here:
 
     }//GEN-LAST:event_ExportButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-        // TODO add your handling code here:
         int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this player?", "Delete Player", JOptionPane.YES_NO_OPTION);
         if (confirmation != JOptionPane.YES_OPTION) {
             return;
@@ -438,7 +432,6 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void QuitToMainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitToMainMenuButtonActionPerformed
-        // TODO add your handling code here:
         state.panels.get(PanelName.MainMenuPanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.MainMenuPanel.toString());
     }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed

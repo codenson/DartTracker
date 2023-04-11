@@ -146,24 +146,20 @@ public class MainMenuPanel extends UpdateableJPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void QuitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitButtonActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_QuitButtonActionPerformed
 
     private void ViewGamemodesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewGamemodesButtonActionPerformed
-        // TODO add your handling code here:
         state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
     }//GEN-LAST:event_ViewGamemodesButtonActionPerformed
 
     private void PlayGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayGameButtonActionPerformed
-        // TODO add your handling code here:
         state.panels.get(PanelName.ChooseGametypePanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.ChooseGametypePanel.toString());  
     }//GEN-LAST:event_PlayGameButtonActionPerformed
 
     private void ViewPlayersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPlayersButtonActionPerformed
-        // TODO add your handling code here:
         state.panels.get(PanelName.ViewPlayersPanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewPlayersPanel.toString());
     }//GEN-LAST:event_ViewPlayersButtonActionPerformed

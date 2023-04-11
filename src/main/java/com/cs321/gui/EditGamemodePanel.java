@@ -389,7 +389,6 @@ public class EditGamemodePanel extends UpdateableJPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
-        // TODO add your handling code here:
         String nameText = NameTextField.getText().trim();
         String dartsPerRoundText = DartsPerRoundTextField.getText().trim();
         String maximumRoundsText = MaximumRoundsTextField.getText().trim();
@@ -538,13 +537,11 @@ public class EditGamemodePanel extends UpdateableJPanel {
     }//GEN-LAST:event_SaveButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        // TODO add your handling code here:
         state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void RestoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreButtonActionPerformed
-        // TODO add your handling code here:
         fillForm();
     }//GEN-LAST:event_RestoreButtonActionPerformed
 

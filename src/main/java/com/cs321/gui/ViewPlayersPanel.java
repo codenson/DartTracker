@@ -36,6 +36,13 @@ public class ViewPlayersPanel extends UpdateableJPanel {
             defaultListModel.addElement(player.getName());
         }
         ExplorerList.setModel(defaultListModel);
+
+        int index = ExplorerList.getSelectedIndex();
+        if (index == -1) {
+            disablePropertiesMenu();
+        } else {
+            enablePropertiesMenu();
+        }
     }
 
     /**
@@ -54,6 +61,24 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     private void displayPlayer(Player player) {
         CurrentIDLabel.setText(player.getId());
         CurrentNameLabel.setText(player.getName());
+    }
+
+    /**
+     * Enables the properties menu
+     */
+    private void enablePropertiesMenu() {
+        EditButton.setEnabled(true);
+        ExportButton.setEnabled(true);
+        DeleteButton.setEnabled(true);
+    }
+
+    /**
+     * Disables the properties menu
+     */
+    private void disablePropertiesMenu() {
+        EditButton.setEnabled(false);
+        ExportButton.setEnabled(false);
+        DeleteButton.setEnabled(false);
     }
 
     /**
@@ -351,9 +376,11 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         int index = ExplorerList.getSelectedIndex();
         if (index == -1) {
             clearContentPanel();
+            disablePropertiesMenu();
             return;
         }
 
+        enablePropertiesMenu();
         Player player = state.players.get(index);
         displayPlayer(player);
     }//GEN-LAST:event_ExplorerListValueChanged

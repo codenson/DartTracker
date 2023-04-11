@@ -43,6 +43,13 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
             defaultListModel.addElement(gameConfiguration.getName());
         }
         ExplorerList.setModel(defaultListModel);
+
+        int index = ExplorerList.getSelectedIndex();
+        if (index == -1) {
+            disablePropertiesMenu();
+        } else {
+            enablePropertiesMenu();
+        }
     }
 
     /**
@@ -101,6 +108,24 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
 
         CurrentExactZeroWinLabel.setText(String.valueOf(gameConfiguration.isExactZeroWin()));
         CurrentSubtractPointsLabel.setText(String.valueOf(gameConfiguration.isSubtractPoints()));
+    }
+
+    /**
+     * Enables the properties menu
+     */
+    private void enablePropertiesMenu() {
+        EditButton.setEnabled(true);
+        ExportButton.setEnabled(true);
+        DeleteButton.setEnabled(true);
+    }
+
+    /**
+     * Disables the properties menu
+     */
+    private void disablePropertiesMenu() {
+        EditButton.setEnabled(false);
+        ExportButton.setEnabled(false);
+        DeleteButton.setEnabled(false);
     }
 
     /**
@@ -563,9 +588,11 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         int index = ExplorerList.getSelectedIndex();
         if (index == -1) {
             clearContentPanel();
+            disablePropertiesMenu();
             return;
         }
 
+        enablePropertiesMenu();
         GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
         displayGameConfiguration(gameConfiguration);
     }//GEN-LAST:event_ExplorerListValueChanged

@@ -625,11 +625,12 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         // TODO add your handling code here:
-        int index = ExplorerList.getSelectedIndex();
-        if (index == -1) {
+        int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this game configuration?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (confirmation != JOptionPane.YES_OPTION) {
             return;
         }
 
+        int index = ExplorerList.getSelectedIndex();
         GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
         state.gameConfigurations.remove(index);
         try {
@@ -644,11 +645,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private void ExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportButtonActionPerformed
         // TODO add your handling code here:
         int index = ExplorerList.getSelectedIndex();
-        if (index == -1) {
-            JOptionPane.showMessageDialog(this, "No game configuration selected", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
 
         int result = ExportFolderChooser.showSaveDialog(this);
@@ -668,11 +664,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         // TODO add your handling code here:
 
         int index = ExplorerList.getSelectedIndex();
-        if (index == -1) {
-            JOptionPane.showMessageDialog(this, "No game configuration selected", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         state.toEditGameConfigurationIndex = index;
 
         state.panels.get(PanelName.EditGamemodePanel).updateComponents();

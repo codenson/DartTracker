@@ -47,9 +47,6 @@ public class GUIState {
         panels = new HashMap<PanelName, UpdateableJPanel>();
         toEditGameConfigurationIndex = -1;
         players = new ArrayList<Player>();
-
-        Player test_plr = new Player("Test Player");
-        players.add(test_plr); 
     }
 
 }

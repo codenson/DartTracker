@@ -4,43 +4,36 @@
  */
 package com.cs321.gui;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
-import com.cs321.core.GameConfiguration;
+import com.cs321.core.Player;
 import com.cs321.gui.GUIState.PanelName;
-import com.cs321.io.IOUtils;
 
 /**
  *
  * @author Hasna
  */
-public class ViewGamemodesPanel  extends UpdateableJPanel {
+public class ViewPlayersPanel extends UpdateableJPanel {
 
     private GUIState state;
-    
+
     /**
-     * Creates new form ViewGamemodesPanel
+     * Creates new form ViewPlayersPanel
      */
-    public ViewGamemodesPanel(GUIState state) {
+    public ViewPlayersPanel(GUIState state) {
         initComponents();
-        
+
         this.state = state;
     }
-    
+
     /**
      * Updates the components to reflect the current state
      */
     @Override
     public void updateComponents() {
         DefaultListModel<String> defaultListModel = new DefaultListModel<>();
-        for (GameConfiguration gameConfiguration : state.gameConfigurations) {
-            defaultListModel.addElement(gameConfiguration.getName());
+        for (Player player : state.players) {
+            defaultListModel.addElement(player.getName());
         }
         ExplorerList.setModel(defaultListModel);
     }
@@ -51,56 +44,16 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private void clearContentPanel() {
         CurrentIDLabel.setText("----");
         CurrentNameLabel.setText("----");
-        CurrentDartsPerRoundLabel.setText("----");
-        CurrentMaximumRoundsLabel.setText("----");
-        CurrentStartingScoreLabel.setText("----");
-        CurrentOffboardPenaltyLabel.setText("----");
-        CurrentScoreListLabel.setText("----");
-        CurrentMultipliersLabel.setText("----");
-        CurrentExactZeroWinLabel.setText("----");
-        CurrentSubtractPointsLabel.setText("----");
     }
 
     /**
-     * Displays the game configuration in the content panel
-     * 
-     * @param gameConfiguration the game configuration to display
+     * Displays the player in the content panel
+     *
+     * @param player
      */
-    private void displayGameConfiguration(GameConfiguration gameConfiguration) {
-        if (gameConfiguration == null) {
-            clearContentPanel();
-            return;
-        }
-
-        CurrentIDLabel.setText(gameConfiguration.getId());
-        CurrentNameLabel.setText(gameConfiguration.getName());
-        CurrentDartsPerRoundLabel.setText(String.valueOf(gameConfiguration.getDartsPerRound()));
-        CurrentMaximumRoundsLabel.setText(String.valueOf(gameConfiguration.getMaximumRounds()));
-        CurrentStartingScoreLabel.setText(String.valueOf(gameConfiguration.getStartingScore()));
-        CurrentOffboardPenaltyLabel.setText(String.valueOf(gameConfiguration.getOffboardPenalty()));
-
-        StringBuilder scoreListBuilder = new StringBuilder();
-        for (int score : gameConfiguration.getScoreList()) {
-            scoreListBuilder.append(score);
-            scoreListBuilder.append(",");
-        }
-        if (scoreListBuilder.length() > 0) {
-            scoreListBuilder.delete(scoreListBuilder.length() - 1, scoreListBuilder.length());
-        }
-        CurrentScoreListLabel.setText(scoreListBuilder.toString());
-
-        StringBuilder multipliersBuilder = new StringBuilder();
-        for (float multiplier : gameConfiguration.getMultipliers()) {
-            multipliersBuilder.append(multiplier);
-            multipliersBuilder.append(",");
-        }
-        if (multipliersBuilder.length() > 0) {
-            multipliersBuilder.delete(multipliersBuilder.length() - 1, multipliersBuilder.length());
-        }
-        CurrentMultipliersLabel.setText(multipliersBuilder.toString());
-
-        CurrentExactZeroWinLabel.setText(String.valueOf(gameConfiguration.isExactZeroWin()));
-        CurrentSubtractPointsLabel.setText(String.valueOf(gameConfiguration.isSubtractPoints()));
+    private void displayPlayer(Player player) {
+        CurrentIDLabel.setText(player.getId());
+        CurrentNameLabel.setText(player.getName());
     }
 
     /**
@@ -113,8 +66,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        ImportGameConfigurationChooser = new javax.swing.JFileChooser();
-        ExportFolderChooser = new javax.swing.JFileChooser();
         HeaderPanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         TitleLabel = new javax.swing.JLabel();
@@ -139,22 +90,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         CurrentIDLabel = new javax.swing.JLabel();
         NameLabel = new javax.swing.JLabel();
         CurrentNameLabel = new javax.swing.JLabel();
-        DartsPerRoundLabel = new javax.swing.JLabel();
-        CurrentDartsPerRoundLabel = new javax.swing.JLabel();
-        MaximumRoundsLabel = new javax.swing.JLabel();
-        CurrentMaximumRoundsLabel = new javax.swing.JLabel();
-        StartingScoreLabel = new javax.swing.JLabel();
-        CurrentStartingScoreLabel = new javax.swing.JLabel();
-        OffboardPenaltyLabel = new javax.swing.JLabel();
-        CurrentOffboardPenaltyLabel = new javax.swing.JLabel();
-        ScoreListLabel = new javax.swing.JLabel();
-        CurrentScoreListLabel = new javax.swing.JLabel();
-        MultipliersLabel = new javax.swing.JLabel();
-        CurrentMultipliersLabel = new javax.swing.JLabel();
-        ExactZeroWinLabel = new javax.swing.JLabel();
-        CurrentExactZeroWinLabel = new javax.swing.JLabel();
-        SubtractPointsLabel = new javax.swing.JLabel();
-        CurrentSubtractPointsLabel = new javax.swing.JLabel();
         PropertiesMenu = new javax.swing.JPanel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         EditButton = new javax.swing.JButton();
@@ -169,16 +104,8 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         QuitToMainMenuButton = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
-        ImportGameConfigurationChooser.setDialogTitle("Choose a Gamemode");
-        ImportGameConfigurationChooser.setMinimumSize(new java.awt.Dimension(640, 480));
-        ImportGameConfigurationChooser.setPreferredSize(new java.awt.Dimension(640, 480));
-
-        ExportFolderChooser.setDialogTitle("Choose a Folder");
-        ExportFolderChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-        ExportFolderChooser.setMinimumSize(new java.awt.Dimension(640, 480));
-        ExportFolderChooser.setPreferredSize(new java.awt.Dimension(640, 480));
-
         setMinimumSize(new java.awt.Dimension(1, 1));
+        setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(1, 1));
         setLayout(new java.awt.GridBagLayout());
 
@@ -188,7 +115,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         HeaderPanel.add(filler1);
 
         TitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        TitleLabel.setText("View Gamemodes");
+        TitleLabel.setText("View Players");
         HeaderPanel.add(TitleLabel);
         HeaderPanel.add(filler2);
 
@@ -327,134 +254,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         PropertiesPanel.add(CurrentNameLabel, gridBagConstraints);
 
-        DartsPerRoundLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        DartsPerRoundLabel.setText("Darts Per Round:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
-        PropertiesPanel.add(DartsPerRoundLabel, gridBagConstraints);
-
-        CurrentDartsPerRoundLabel.setText("----");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        PropertiesPanel.add(CurrentDartsPerRoundLabel, gridBagConstraints);
-
-        MaximumRoundsLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        MaximumRoundsLabel.setText("Maximum Rounds:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
-        PropertiesPanel.add(MaximumRoundsLabel, gridBagConstraints);
-
-        CurrentMaximumRoundsLabel.setText("----");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        PropertiesPanel.add(CurrentMaximumRoundsLabel, gridBagConstraints);
-
-        StartingScoreLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        StartingScoreLabel.setText("Starting Score:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
-        PropertiesPanel.add(StartingScoreLabel, gridBagConstraints);
-
-        CurrentStartingScoreLabel.setText("----");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        PropertiesPanel.add(CurrentStartingScoreLabel, gridBagConstraints);
-
-        OffboardPenaltyLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        OffboardPenaltyLabel.setText("Offboard Penalty:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
-        PropertiesPanel.add(OffboardPenaltyLabel, gridBagConstraints);
-
-        CurrentOffboardPenaltyLabel.setText("----");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        PropertiesPanel.add(CurrentOffboardPenaltyLabel, gridBagConstraints);
-
-        ScoreListLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        ScoreListLabel.setText("Score List:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
-        PropertiesPanel.add(ScoreListLabel, gridBagConstraints);
-
-        CurrentScoreListLabel.setText("----");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        PropertiesPanel.add(CurrentScoreListLabel, gridBagConstraints);
-
-        MultipliersLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        MultipliersLabel.setText("Multipliers:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
-        PropertiesPanel.add(MultipliersLabel, gridBagConstraints);
-
-        CurrentMultipliersLabel.setText("----");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        PropertiesPanel.add(CurrentMultipliersLabel, gridBagConstraints);
-
-        ExactZeroWinLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        ExactZeroWinLabel.setText("Exact Zero Win:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
-        PropertiesPanel.add(ExactZeroWinLabel, gridBagConstraints);
-
-        CurrentExactZeroWinLabel.setText("----");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        PropertiesPanel.add(CurrentExactZeroWinLabel, gridBagConstraints);
-
-        SubtractPointsLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        SubtractPointsLabel.setText("Subtract Points:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
-        PropertiesPanel.add(SubtractPointsLabel, gridBagConstraints);
-
-        CurrentSubtractPointsLabel.setText("----");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        PropertiesPanel.add(CurrentSubtractPointsLabel, gridBagConstraints);
-
         PropertiesScrollPane.setViewportView(PropertiesPanel);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -547,17 +346,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         add(FooterPanel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void QuitToMainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitToMainMenuButtonActionPerformed
-        // TODO add your handling code here:
-        state.contentPaneCardLayout.show(state.contentPane, PanelName.MainMenuPanel.toString());
-    }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
-
-    private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
-        // TODO add your handling code here:
-        state.panels.get(PanelName.CreateGamemodePanel).updateComponents();
-        state.contentPaneCardLayout.show(state.contentPane, PanelName.CreateGamemodePanel.toString());
-    }//GEN-LAST:event_NewButtonActionPerformed
-
     private void ExplorerListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ExplorerListValueChanged
         // TODO add your handling code here:
         int index = ExplorerList.getSelectedIndex();
@@ -566,135 +354,66 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
             return;
         }
 
-        GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
-        displayGameConfiguration(gameConfiguration);
+        Player player = state.players.get(index);
+        displayPlayer(player);
     }//GEN-LAST:event_ExplorerListValueChanged
+
+    private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_NewButtonActionPerformed
 
     private void ImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportButtonActionPerformed
         // TODO add your handling code here:
-        int result = ImportGameConfigurationChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File file = ImportGameConfigurationChooser.getSelectedFile();
-            GameConfiguration gameConfiguration = null;
-
-            try {
-                gameConfiguration = IOUtils.loadGameConfiguration(file);
-                state.gameConfigurations.add(gameConfiguration);
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error loading game configuration: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-            try {
-                if (gameConfiguration != null) {
-                    IOUtils.saveGameConfiguration(gameConfiguration);
-                }
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error saving game configuration: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-            updateComponents();
-        }
+        
     }//GEN-LAST:event_ImportButtonActionPerformed
-
-    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-        // TODO add your handling code here:
-        int index = ExplorerList.getSelectedIndex();
-        if (index == -1) {
-            return;
-        }
-
-        GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
-        state.gameConfigurations.remove(index);
-        try {
-            IOUtils.deleteGameConfiguration(gameConfiguration);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error deleting game configuration: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        updateComponents();
-    }//GEN-LAST:event_DeleteButtonActionPerformed
-
-    private void ExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportButtonActionPerformed
-        // TODO add your handling code here:
-        int index = ExplorerList.getSelectedIndex();
-        if (index == -1) {
-            JOptionPane.showMessageDialog(this, "No game configuration selected", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        GameConfiguration gameConfiguration = state.gameConfigurations.get(index);
-
-        int result = ExportFolderChooser.showSaveDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            Path path = ExportFolderChooser.getSelectedFile().toPath();
-            File file = path.resolve(IOUtils.getGameConfigurationSaveFilename(gameConfiguration)).toFile();
-
-            try {
-                IOUtils.saveGameConfiguration(gameConfiguration, file);
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error exporting game configuration: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_ExportButtonActionPerformed
 
     private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
         // TODO add your handling code here:
-
-        int index = ExplorerList.getSelectedIndex();
-        if (index == -1) {
-            JOptionPane.showMessageDialog(this, "No game configuration selected", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        state.toEditGameConfigurationIndex = index;
-
-        state.panels.get(PanelName.EditGamemodePanel).updateComponents();
-        state.contentPaneCardLayout.show(state.contentPane, PanelName.EditGamemodePanel.toString());
+        
     }//GEN-LAST:event_EditButtonActionPerformed
+
+    private void ExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportButtonActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_ExportButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_DeleteButtonActionPerformed
+
+    private void QuitToMainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitToMainMenuButtonActionPerformed
+        // TODO add your handling code here:
+        state.panels.get(PanelName.MainMenuPanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.MainMenuPanel.toString());
+    }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BodyPanel;
     private javax.swing.JPanel ContentPanel;
     private javax.swing.JPanel ContentSpacerPanel;
-    private javax.swing.JLabel CurrentDartsPerRoundLabel;
-    private javax.swing.JLabel CurrentExactZeroWinLabel;
     private javax.swing.JLabel CurrentIDLabel;
-    private javax.swing.JLabel CurrentMaximumRoundsLabel;
-    private javax.swing.JLabel CurrentMultipliersLabel;
     private javax.swing.JLabel CurrentNameLabel;
-    private javax.swing.JLabel CurrentOffboardPenaltyLabel;
-    private javax.swing.JLabel CurrentScoreListLabel;
-    private javax.swing.JLabel CurrentStartingScoreLabel;
-    private javax.swing.JLabel CurrentSubtractPointsLabel;
-    private javax.swing.JLabel DartsPerRoundLabel;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton EditButton;
-    private javax.swing.JLabel ExactZeroWinLabel;
     private javax.swing.JPanel ExplorerHolderPanel;
     private javax.swing.JList<String> ExplorerList;
     private javax.swing.JPanel ExplorerMenu;
     private javax.swing.JScrollPane ExplorerScrollPane;
     private javax.swing.JButton ExportButton;
-    private javax.swing.JFileChooser ExportFolderChooser;
     private javax.swing.JPanel FooterPanel;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel IDLabel;
     private javax.swing.JButton ImportButton;
-    private javax.swing.JFileChooser ImportGameConfigurationChooser;
-    private javax.swing.JLabel MaximumRoundsLabel;
-    private javax.swing.JLabel MultipliersLabel;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JButton NewButton;
-    private javax.swing.JLabel OffboardPenaltyLabel;
     private javax.swing.JPanel PropertiesHolderPanel;
     private javax.swing.JPanel PropertiesMenu;
     private javax.swing.JPanel PropertiesPanel;
     private javax.swing.JScrollPane PropertiesScrollPane;
     private javax.swing.JButton QuitToMainMenuButton;
-    private javax.swing.JLabel ScoreListLabel;
-    private javax.swing.JLabel StartingScoreLabel;
-    private javax.swing.JLabel SubtractPointsLabel;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;

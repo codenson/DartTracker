@@ -7,8 +7,6 @@ package com.cs321.gui;
 import com.cs321.core.GameConfiguration;
 import com.cs321.gui.GUIState.PanelName;
 
-import java.awt.Container;
-
 /**
  *
  * @author Hasna
@@ -32,6 +30,7 @@ public class MainMenuPanel extends UpdateableJPanel {
     /**
      * Updates the components to reflect the current state
      */
+    @Override
     public void updateComponents() {
         
     }
@@ -106,6 +105,11 @@ public class MainMenuPanel extends UpdateableJPanel {
 
         ViewPlayersButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         ViewPlayersButton.setText("View Players");
+        ViewPlayersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewPlayersButtonActionPerformed(evt);
+            }
+        });
         MenuPanel.add(ViewPlayersButton);
         MenuPanel.add(filler7);
 
@@ -170,6 +174,12 @@ public class MainMenuPanel extends UpdateableJPanel {
 
       
     }//GEN-LAST:event_PlayGameButtonActionPerformed
+
+    private void ViewPlayersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPlayersButtonActionPerformed
+        // TODO add your handling code here:
+        state.panels.get(PanelName.ViewPlayersPanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewPlayersPanel.toString());
+    }//GEN-LAST:event_ViewPlayersButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BodyPanel;

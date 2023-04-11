@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.cs321.core.GameConfiguration;
+import com.cs321.core.Player;
 
 /**
  * Holds the state of the GUI
@@ -19,7 +20,7 @@ public class GUIState {
      */
     public static enum PanelName {
         MainMenuPanel, ViewGamemodesPanel, CreateGamemodePanel, EditGamemodePanel,
-        Dart_2
+        ViewPlayersPanel, Dart_2
     }
     
     // The content pane of the JFrame
@@ -35,12 +36,20 @@ public class GUIState {
     // The index of the game configuration to edit
     public int toEditGameConfigurationIndex;
 
+    // The list of players
+    public ArrayList<Player> players;
+
     /**
      * Creates a new GUIState
      */
     public GUIState() {
         gameConfigurations = new ArrayList<GameConfiguration>();
         panels = new HashMap<PanelName, UpdateableJPanel>();
+        toEditGameConfigurationIndex = -1;
+        players = new ArrayList<Player>();
+
+        Player test_plr = new Player("Test Player");
+        players.add(test_plr); 
     }
 
 }

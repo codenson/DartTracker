@@ -33,6 +33,7 @@ public class EditGamemodePanel extends UpdateableJPanel {
     /**
      * Updates the components to reflect the current state
      */
+    @Override
     public void updateComponents() {
         fillForm();
     }
@@ -512,22 +513,24 @@ public class EditGamemodePanel extends UpdateableJPanel {
         gameConfigurationBuilder.withSubtractPoints(subtractPoints);
         int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to overwrite this gamemode?", "Save Gamemode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (confirmation == JOptionPane.YES_OPTION) {
-            GameConfiguration gameConfiguration = gameConfigurationBuilder.build();
+            GameConfiguration oldGameConfiguration = state.gameConfigurations.get(state.toEditGameConfigurationIndex);
+            GameConfiguration newGameConfiguration = gameConfigurationBuilder.build();
+            newGameConfiguration.setId(oldGameConfiguration.getId());
             
             try {
-                IOUtils.deleteGameConfiguration(state.gameConfigurations.get(state.toEditGameConfigurationIndex));
+                IOUtils.deleteGameConfiguration(oldGameConfiguration);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Could not delete old gamemode file", "Save Gamemode Error", JOptionPane.ERROR_MESSAGE);
             }
 
             try {
-                IOUtils.saveGameConfiguration(gameConfiguration);
+                IOUtils.saveGameConfiguration(newGameConfiguration);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Could not save gamemode file", "Save Gamemode Error", JOptionPane.ERROR_MESSAGE);
             }
 
             state.gameConfigurations.remove(state.toEditGameConfigurationIndex);
-            state.gameConfigurations.add(state.toEditGameConfigurationIndex, gameConfiguration);
+            state.gameConfigurations.add(state.toEditGameConfigurationIndex, newGameConfiguration);
 
             state.panels.get(PanelName.ViewGamemodesPanel).updateComponents();
             state.contentPaneCardLayout.show(state.contentPane, PanelName.ViewGamemodesPanel.toString());

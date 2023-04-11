@@ -76,6 +76,9 @@ public class ChooseGametypePanel extends UpdateableJPanel {
 
     /**
      * Generates a button for the Free For All panel
+     * 
+     * @param playerIndex The index of the player to get the name from
+     * @return The button
      */
     private JButton generateFreeForAllButton(int playerIndex) {
         JButton button = new JButton("Add Player");
@@ -88,6 +91,9 @@ public class ChooseGametypePanel extends UpdateableJPanel {
 
     /**
      * Generates an action listener for the Free For All panel
+     * 
+     * @param playerIndex The index of the player to edit
+     * @return The action listener
      */
     private ActionListener generateFreeForAllActionListener(final int playerIndex) {
         return new ActionListener() {
@@ -112,6 +118,9 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         };
     }
 
+    /**
+     * Regenerates the Teams panel
+     */
     private void regenerateTeamsPanel() {
         TeamsBodyPanel.removeAll();
 
@@ -133,6 +142,11 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         TeamsBodyPanel.repaint();
     }
 
+    /**
+     * Generates and adds buttons for the Teams panel
+     * 
+     * @param teamIndex The index of the team to generate buttons for
+     */
     private void addTeamButtons(int teamIndex) {
         // If the team doesn't exist, add 2 buttons
         if (teams.size() <= teamIndex) {
@@ -159,6 +173,13 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         }
     }
 
+    /**
+     * Generates a button for the Teams panel
+     * 
+     * @param teamIndex The index of the team to generate buttons for
+     * @param playerIndex The index of the player to get the name from
+     * @return The button
+     */
     private JButton generateTeamButton(int teamIndex, int playerIndex) {
         JButton button = new JButton("Add Player");
         button.addActionListener(generateTeamActionListener(teamIndex, playerIndex));
@@ -176,6 +197,13 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         return button;
     }
 
+    /**
+     * Generates an action listener for the Teams panel
+     * 
+     * @param teamIndex The index of the team to edit
+     * @param playerIndex The index of the player to edit
+     * @return The action listener
+     */
     private ActionListener generateTeamActionListener(final int teamIndex, final int playerIndex) {
         return new ActionListener() {
 
@@ -220,6 +248,11 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         };
     }
 
+    /**
+     * Generates a label for the Teams panel
+     * 
+     * @return The label
+     */
     private JLabel generateTeamVsLabel() {
         JLabel label = new JLabel("vs");
         label.setFont(getFont().deriveFont(Font.BOLD, 24));

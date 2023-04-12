@@ -41,9 +41,9 @@ public class IOUtils {
     /**
      * Saves the GameConfiguration to a file.
      * 
-     * @param gameConfiguration
-     * @param file
-     * @throws IOException
+     * @param gameConfiguration The GameConfiguration to save.
+     * @param file The file to save the GameConfiguration to.
+     * @throws IOException If an error occurs while saving the GameConfiguration.
      */
     public static void saveGameConfiguration(GameConfiguration gameConfiguration, File file) throws IOException {
         GameConfigurationDTO gameConfigurationDTO = getGameConfigurationDTOFromGameConfiguration(gameConfiguration);
@@ -52,9 +52,9 @@ public class IOUtils {
     /**
      * Saves the Player to a file.
      * 
-     * @param player
-     * @param file
-     * @throws IOException
+     * @param player The Player to save.
+     * @param file The file to save the Player to.
+     * @throws IOException If an error occurs while saving the Player.
      */
     public static void savePlayer(Player player, File file) throws IOException {
         PlayerDTO playerDTO = getPlayerDTOFromPlayer(player);
@@ -64,9 +64,9 @@ public class IOUtils {
     /**
      * Saves the GameConfiguration to a path.
      * 
-     * @param gameConfiguration
-     * @param path
-     * @throws IOException
+     * @param gameConfiguration The GameConfiguration to save.
+     * @param path The path to save the GameConfiguration to.
+     * @throws IOException If an error occurs while saving the GameConfiguration.
      */
     public static void saveGameConfiguration(GameConfiguration gameConfiguration, Path path) throws IOException {
         saveGameConfiguration(gameConfiguration, path.toFile());
@@ -75,9 +75,9 @@ public class IOUtils {
     /**
      * Saves the Player to a path.
      * 
-     * @param player
-     * @param path
-     * @throws IOException
+     * @param player The Player to save.
+     * @param path The path to save the Player to.
+     * @throws IOException If an error occurs while saving the Player.
      */
     public static void savePlayer(Player player, Path path) throws IOException {
         savePlayer(player, path.toFile());
@@ -136,7 +136,7 @@ public class IOUtils {
     public static Player loadPlayer(String name) throws IOException {
         Player player = null;
 
-        Optional<Path> result = Files.list(getPlayerPath()).filter(path -> 
+        Optional<Path> result = Files.list(getPlayersPath()).filter(path -> 
             path.getFileName().toString().startsWith(name)).findFirst();
 
         if (result.isPresent()) {
@@ -162,6 +162,7 @@ public class IOUtils {
     /**
      * Load player by file.
      * 
+     * @param file The file to load the Player from.
      * @return The Player.
      * @throws IOException If an error occurs while loading the Player.
      */
@@ -173,6 +174,7 @@ public class IOUtils {
     /**
      * Load game configuration by path.
      * 
+     * @param path The path to load the GameConfiguration from.
      * @return The GameConfiguration.
      * @throws IOException If an error occurs while loading the game configuration.
      */
@@ -183,6 +185,7 @@ public class IOUtils {
     /**
      * Load player by path.
      * 
+     * @param path The path to load the Player from.
      * @return The Player.
      * @throws IOException If an error occurs while loading the Player.
      */
@@ -220,7 +223,7 @@ public class IOUtils {
     public static Player[] loadAllPlayers() throws IOException {
         ArrayList<Player> players = new ArrayList<>();
 
-        Files.list(getPlayerPath()).forEach(path -> {
+        Files.list(getPlayersPath()).forEach(path -> {
             try {
                 PlayerDTO playerDTO = objectMapper.readValue(path.toFile(), PlayerDTO.class);
                 players.add(getPlayerFromPlayerDTO(playerDTO));
@@ -251,7 +254,7 @@ public class IOUtils {
      */
     public static void deletePlayer(Player player) throws IOException {
         Path playerPath = getPlayerPath(player);
-        Files.deleteIfExists(player);
+        Files.deleteIfExists(playerPath);
     }
 
     /**
@@ -376,6 +379,12 @@ public class IOUtils {
         return gameConfiguration;
     }
 
+    /**
+     * Converts a Player to a PlayerDTO.
+     * 
+     * @param player The Player to convert.
+     * @return The PlayerDTO.
+     */
     private static PlayerDTO getPlayerDTOFromPlayer(Player player) {
         PlayerDTO playerDTO = new PlayerDTO();
         playerDTO.id = player.getId();
@@ -387,24 +396,50 @@ public class IOUtils {
             gameStatsDTO[index] = getGameStatsDTOFromGameStats(gameStats[index]);
         }
         playerDTO.gameStats = gameStatsDTO;
+
+        return playerDTO;
     }
 
+    /**
+     * Converts a PlayerDTO to a Player.
+     * 
+     * @param playerDTO The PlayerDTO to convert.
+     * @return The Player.
+     */
     private static Player getPlayerFromPlayerDTO(PlayerDTO playerDTO) {
-        Player player = new Player(playerDTO.id,playerDTO.name,getGameStatsFromGameStatsDTO(playerDTO.gameStats));
+        GameStatsDTO[] gameStatsDTO = playerDTO.gameStats;
+        GameStats[] gameStats = new GameStats[gameStatsDTO.length];
+        for (int index = 0; index < gameStatsDTO.length; index++) {
+            gameStats[index] = getGameStatsFromGameStatsDTO(gameStatsDTO[index]);
+        }
 
+        return new Player(playerDTO.id, playerDTO.name, gameStats);
     }
 
+    /**
+     * Converts a GameStats to a GameStatsDTO.
+     * 
+     * @param gameStats The GameStats to convert.
+     * @return The GameStatsDTO.
+     */
     private static GameStatsDTO getGameStatsDTOFromGameStats(GameStats gameStats) {
         GameStatsDTO gameStatsDTO = new GameStatsDTO();
-        gameStatsDTO.roundsPlayed=gameStats.getRoundsPlayed();
-        gameStatsDTO.teamScores=gameStats.getTeamScores();
-        gameStatsDTO.gamemodeId=gameStats.getGamemodeId();
-        gameStatsDTO.playerWon=gameStats.isPlayerWon();
+        gameStatsDTO.roundsPlayed = gameStats.getRoundsPlayed();
+        gameStatsDTO.teamScores = gameStats.getTeamScores();
+        gameStatsDTO.gamemodeId = gameStats.getGamemodeId();
+        gameStatsDTO.playerWon = gameStats.isPlayerWon();
+
+        return gameStatsDTO;
     }
 
+    /**
+     * Converts a GameStatsDTO to a GameStats.
+     * 
+     * @param gameStatsDTO The GameStatsDTO to convert.
+     * @return The GameStats.
+     */
     private static GameStats getGameStatsFromGameStatsDTO(GameStatsDTO gameStatsDTO) {
-        GameStats gameStats = new GameStats(gameStatsDTO.roundsPlayed, gameStatsDTO.teamScores, gameStatsDTO.gamemodeId, gameStatsDTO.playerWon);
-
+        return new GameStats(gameStatsDTO.roundsPlayed, gameStatsDTO.teamScores, gameStatsDTO.gamemodeId, gameStatsDTO.playerWon);
     }
     
 }

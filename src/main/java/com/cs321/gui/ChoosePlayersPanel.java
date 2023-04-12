@@ -4,9 +4,12 @@
  */
 package com.cs321.gui;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import com.cs321.core.Player;
@@ -100,6 +103,8 @@ public class ChoosePlayersPanel extends UpdateableJPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        ImportPlayerChooser = new javax.swing.JFileChooser();
+        ExportFolderChooser = new javax.swing.JFileChooser();
         HeaderPanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         TitleLabel = new javax.swing.JLabel();
@@ -141,6 +146,11 @@ public class ChoosePlayersPanel extends UpdateableJPanel {
         filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         ChooseButton = new javax.swing.JButton();
         filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+
+        ImportPlayerChooser.setDialogTitle("Choose a Player");
+
+        ExportFolderChooser.setDialogTitle("Choose a Folder");
+        ExportFolderChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         setMinimumSize(new java.awt.Dimension(1, 1));
         setPreferredSize(new java.awt.Dimension(1, 1));
@@ -438,7 +448,28 @@ public class ChoosePlayersPanel extends UpdateableJPanel {
     }//GEN-LAST:event_NewButtonActionPerformed
 
     private void ImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportButtonActionPerformed
+        int result = ImportPlayerChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = ImportPlayerChooser.getSelectedFile();
+            Player player = null;
 
+            try {
+                player = IOUtils.loadPlayer(file);
+                state.players.add(player);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error loading player: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            try {
+                if (player != null) {
+                    IOUtils.savePlayer(player);
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error saving player: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            updateComponents();
+        }
     }//GEN-LAST:event_ImportButtonActionPerformed
 
     private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
@@ -466,7 +497,20 @@ public class ChoosePlayersPanel extends UpdateableJPanel {
     }//GEN-LAST:event_EditButtonActionPerformed
 
     private void ExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportButtonActionPerformed
+        int index = ExplorerList.getSelectedIndex();
+        Player player = state.getPlayersToChoose()[index];
 
+        int result = ExportFolderChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            Path path = ExportFolderChooser.getSelectedFile().toPath();
+            File file = path.resolve(IOUtils.getPlayerSaveFilename(player)).toFile();
+
+            try {
+                IOUtils.savePlayer(player, file);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error exporting player: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_ExportButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
@@ -522,10 +566,12 @@ public class ChoosePlayersPanel extends UpdateableJPanel {
     private javax.swing.JPanel ExplorerMenu;
     private javax.swing.JScrollPane ExplorerScrollPane;
     private javax.swing.JButton ExportButton;
+    private javax.swing.JFileChooser ExportFolderChooser;
     private javax.swing.JPanel FooterPanel;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel IDLabel;
     private javax.swing.JButton ImportButton;
+    private javax.swing.JFileChooser ImportPlayerChooser;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JButton NewButton;
     private javax.swing.JPanel PropertiesHolderPanel;

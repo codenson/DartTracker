@@ -162,7 +162,7 @@ public class GameManager {
     /**
      * Progress the current round by adding the score to the current round. The round is finished if
      * the number of throws is equal to the number of darts per round. If the score is overshot, the
-     * round is not added to the rounds manager.
+     * round is added to the rounds manager if exact zero win is not enabled.
      * 
      * @param score The next score for the current round.
      */
@@ -181,11 +181,27 @@ public class GameManager {
         boolean scoreOvershot = teamTotalScore > gameConfiguration.getStartingScore();
 
         if (throwsDone) {
-            if (!scoreOvershot) {
+            if (!scoreOvershot || !gameConfiguration.isExactZeroWin()) {
                 roundsManager.addRound(currentRound);
             }
             currentRound = null;
         }
+    }
+
+    /**
+     * Progress the current round by adding the score to the current round. The round is finished if
+     * the number of throws is equal to the number of darts per round. If the score is overshot, the
+     * round is added to the rounds manager if exact zero win is not enabled.
+     * 
+     * Uses normalized coordinates to determine the score.
+     * 
+     * @param nx The normalized x coordinate.
+     * @param ny The normalized y coordinate.
+     */
+    public void progressRound(float nx, float ny) {
+        // TODO: Implement this.
+        // Step 1: Determine the score.
+        // Step 2: Call progressRound(int score).
     }
 
     /**

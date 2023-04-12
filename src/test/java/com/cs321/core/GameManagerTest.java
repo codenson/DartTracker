@@ -515,6 +515,93 @@ public class GameManagerTest {
     }
 
     /**
+     * progressRound does not add a new round if the score overshot and exact
+     * zero win is enabled.
+     */
+    @Test
+    public void progressRoundOvershotWithExactZeroWin() {
+        String playername1 = "p1";
+        String playername2 = "p2";
+        String playername3 = "p3";
+        String playername4 = "p4";
+        Player player1 = new Player(playername1);
+        Player player2 = new Player(playername2);
+        Player player3 = new Player(playername3);
+        Player player4 = new Player(playername4);
+
+        String teamname1 = "tA";
+        String teamname2 = "tB";
+        Player[] players1 = new Player[] { player1, player2 };
+        Player[] players2 = new Player[] { player3, player4 };
+        Team team1 = new Team(teamname1, players1);
+        Team team2 = new Team(teamname2, players2);
+
+        GameConfiguration gameConfiguration = new GameConfigurationBuilder()
+            .withDartsPerRound(1)
+            .withStartingScore(10)
+            .build();
+        TeamsManager teamsManager = new TeamsManager(new Team[] { team1, team2 });
+        TurnManager turnManager = new TurnManagerBuilder()
+            .withPlayer(player1, team1, 2)
+            .withPlayer(player2, team1, 4)
+            .withPlayer(player3, team2, 6)
+            .withPlayer(player4, team2, 8)
+            .build();
+        RoundsManager roundsManager = new RoundsManager();
+
+        GameManager gameManager = new GameManager(gameConfiguration, teamsManager,
+            turnManager, roundsManager);
+
+        gameManager.beginRound();
+        gameManager.progressRound(11);
+        assertEquals(0, gameManager.getRoundsManager().getRounds().length);
+    }
+
+    /**
+     * progressRound adds a new round if the score overshot and exact zero win is
+     * disabled.
+     */
+    @Test
+    public void progressRoundOvershotWithNoExactZeroWin() {
+        String playername1 = "p1";
+        String playername2 = "p2";
+        String playername3 = "p3";
+        String playername4 = "p4";
+        Player player1 = new Player(playername1);
+        Player player2 = new Player(playername2);
+        Player player3 = new Player(playername3);
+        Player player4 = new Player(playername4);
+
+        String teamname1 = "tA";
+        String teamname2 = "tB";
+        Player[] players1 = new Player[] { player1, player2 };
+        Player[] players2 = new Player[] { player3, player4 };
+        Team team1 = new Team(teamname1, players1);
+        Team team2 = new Team(teamname2, players2);
+
+        GameConfiguration gameConfiguration = new GameConfigurationBuilder()
+            .withDartsPerRound(1)
+            .withStartingScore(10)
+            .withExactZeroWin(false)
+            .build();
+        TeamsManager teamsManager = new TeamsManager(new Team[] { team1, team2 });
+        TurnManager turnManager = new TurnManagerBuilder()
+            .withPlayer(player1, team1, 2)
+            .withPlayer(player2, team1, 4)
+            .withPlayer(player3, team2, 6)
+            .withPlayer(player4, team2, 8)
+            .build();
+        RoundsManager roundsManager = new RoundsManager();
+
+        GameManager gameManager = new GameManager(gameConfiguration, teamsManager,
+            turnManager, roundsManager);
+
+        gameManager.beginRound();
+        gameManager.progressRound(11);
+        assertEquals(1, gameManager.getRoundsManager().getRounds().length);
+    }
+
+    /**
      * Run a standard game to completion.
      * 
      * The game is taken from the following spreadsheet:

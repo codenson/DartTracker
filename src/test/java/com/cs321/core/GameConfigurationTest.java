@@ -16,7 +16,7 @@ public class GameConfigurationTest {
         GameConfiguration config = new GameConfiguration();
 
         int[] defaultScoreList = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50};
-        float[] defaultMultiplers = new float[] {2.0f, 3.0f};
+        float[] defaultMultiplers = new float[] {2.0f, 3.0f, 0.5f};
 
         assertEquals("Default", config.getName());
         assertEquals(3, config.getDartsPerRound());
@@ -37,7 +37,7 @@ public class GameConfigurationTest {
         GameConfiguration config = new GameConfigurationBuilder().build();
 
         int[] defaultScoreList = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50};
-        float[] defaultMultiplers = new float[] {2.0f, 3.0f};
+        float[] defaultMultiplers = new float[] {2.0f, 3.0f, 0.5f};
 
         assertEquals("Default", config.getName());
         assertEquals(3, config.getDartsPerRound());

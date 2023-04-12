@@ -4,11 +4,14 @@
  */
 package com.cs321.gui;
 
+import java.io.IOException;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 import com.cs321.core.Player;
 import com.cs321.gui.GUIState.PanelName;
+import com.cs321.io.IOUtils;
 
 /**
  *
@@ -394,6 +397,11 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         }
 
         Player player = new Player(name);
+        try {
+            IOUtils.savePlayer(player);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to save player", "Save Error", JOptionPane.ERROR_MESSAGE);
+        }
         state.players.add(player);
         updateComponents();
     }//GEN-LAST:event_NewButtonActionPerformed
@@ -412,7 +420,17 @@ public class ViewPlayersPanel extends UpdateableJPanel {
             return;
         }
 
+        try {
+            IOUtils.deletePlayer(player);
+        }   catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to delete player", "Delete Error", JOptionPane.ERROR_MESSAGE);
+        }
         player.setName(name);
+        try {
+            IOUtils.savePlayer(player);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to save player", "Save Error", JOptionPane.ERROR_MESSAGE);
+        }
         updateComponents();
     }//GEN-LAST:event_EditButtonActionPerformed
 
@@ -427,7 +445,13 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         }
 
         int index = ExplorerList.getSelectedIndex();
+        Player player = state.players.get(index);
         state.players.remove(index);
+        try {
+            IOUtils.deletePlayer(player);
+        }   catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to delete player", "Delete Error", JOptionPane.ERROR_MESSAGE);
+        }
 
         updateComponents();
     }//GEN-LAST:event_DeleteButtonActionPerformed

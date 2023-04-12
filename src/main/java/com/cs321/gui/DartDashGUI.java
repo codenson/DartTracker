@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 import com.cs321.core.GameConfiguration;
+import com.cs321.core.Player;
 import com.cs321.gui.GUIState.PanelName;
 import com.cs321.io.IOUtils;
 
@@ -47,8 +48,11 @@ public class DartDashGUI extends javax.swing.JFrame {
         state.contentPane.add(state.panels.get(PanelName.ChoosePlayersPanel), PanelName.ChoosePlayersPanel.toString());
         state.contentPane.add(state.panels.get(PanelName.Dart_2),PanelName.Dart_2.toString());
 
-        if (!initIOUtils() || !loadGameConfigurations(state)) {
-            state.gameConfigurations.add(new GameConfiguration());   
+        if (initIOUtils()) {
+            if (!loadGameConfigurations(state)) {
+                state.gameConfigurations.add(new GameConfiguration());
+            }
+            loadPlayers(state);
         }
     }
 
@@ -81,7 +85,25 @@ public class DartDashGUI extends javax.swing.JFrame {
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error loading gamemodes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            state.gameConfigurations.add(new GameConfiguration());
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Loads all the players.
+     * 
+     * @param state the GUIState
+     * @return true if the players were loaded successfully, false otherwise
+     */
+    private boolean loadPlayers(GUIState state) {
+        try {
+            for (Player player : IOUtils.loadAllPlayers()) {
+                state.players.add(player);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error loading players: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 

@@ -14,15 +14,15 @@ import com.cs321.gui.GUIState.PanelName;
  *
  * @author Hasna
  */
-public class ViewPlayersPanel extends UpdateableJPanel {
+public class ChoosePlayersPanel extends UpdateableJPanel {
 
     // The global GUI state
     private GUIState state;
 
     /**
-     * Creates new form ViewPlayersPanel
+     * Creates new form ChoosePlayersPanel
      */
-    public ViewPlayersPanel(GUIState state) {
+    public ChoosePlayersPanel(GUIState state) {
         initComponents();
 
         this.state = state;
@@ -34,7 +34,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     @Override
     public void updateComponents() {
         DefaultListModel<String> defaultListModel = new DefaultListModel<>();
-        for (Player player : state.players) {
+        for (Player player : state.getPlayersToChoose()) {
             defaultListModel.addElement(player.getName());
         }
         ExplorerList.setModel(defaultListModel);
@@ -42,8 +42,12 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         int index = ExplorerList.getSelectedIndex();
         if (index == -1) {
             disablePropertiesMenu();
+            ChooseButton.setEnabled(false);
+            RemoveButton.setEnabled(true);
         } else {
             enablePropertiesMenu();
+            ChooseButton.setEnabled(true);
+            RemoveButton.setEnabled(false);
         }
     }
 
@@ -128,11 +132,14 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         FooterPanel = new javax.swing.JPanel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
-        QuitToMainMenuButton = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        RemoveButton = new javax.swing.JButton();
+        filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
+        ChooseButton = new javax.swing.JButton();
+        filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
 
         setMinimumSize(new java.awt.Dimension(1, 1));
-        setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(1, 1));
         setLayout(new java.awt.GridBagLayout());
 
@@ -142,7 +149,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         HeaderPanel.add(filler1);
 
         TitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        TitleLabel.setText("View Players");
+        TitleLabel.setText("Choose Players");
         HeaderPanel.add(TitleLabel);
         HeaderPanel.add(filler2);
 
@@ -354,15 +361,35 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         FooterPanel.setLayout(new javax.swing.BoxLayout(FooterPanel, javax.swing.BoxLayout.X_AXIS));
         FooterPanel.add(filler3);
 
-        QuitToMainMenuButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        QuitToMainMenuButton.setText("Quit to Main Menu");
-        QuitToMainMenuButton.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        BackButton.setText("Back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QuitToMainMenuButtonActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
-        FooterPanel.add(QuitToMainMenuButton);
+        FooterPanel.add(BackButton);
         FooterPanel.add(filler4);
+
+        RemoveButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        RemoveButton.setText("Remove");
+        RemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveButtonActionPerformed(evt);
+            }
+        });
+        FooterPanel.add(RemoveButton);
+        FooterPanel.add(filler14);
+
+        ChooseButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        ChooseButton.setText("Choose");
+        ChooseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChooseButtonActionPerformed(evt);
+            }
+        });
+        FooterPanel.add(ChooseButton);
+        FooterPanel.add(filler15);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -378,11 +405,15 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         if (index == -1) {
             clearContentPanel();
             disablePropertiesMenu();
+            ChooseButton.setEnabled(false);
+            RemoveButton.setEnabled(true);
             return;
         }
 
         enablePropertiesMenu();
-        Player player = state.players.get(index);
+        ChooseButton.setEnabled(true);
+        RemoveButton.setEnabled(false);
+        Player player = state.getPlayersToChoose()[index];
         displayPlayer(player);
     }//GEN-LAST:event_ExplorerListValueChanged
 
@@ -399,12 +430,12 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     }//GEN-LAST:event_NewButtonActionPerformed
 
     private void ImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportButtonActionPerformed
-        
+
     }//GEN-LAST:event_ImportButtonActionPerformed
 
     private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
         int index = ExplorerList.getSelectedIndex();
-        Player player = state.players.get(index);
+        Player player = state.getPlayersToChoose()[index];
 
         String name = JOptionPane.showInputDialog("Enter a new name for the player", player.getName());
         if (name.isEmpty()) {
@@ -432,14 +463,30 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         updateComponents();
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
-    private void QuitToMainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitToMainMenuButtonActionPerformed
-        state.panels.get(PanelName.MainMenuPanel).updateComponents();
-        state.contentPaneCardLayout.show(state.contentPane, PanelName.MainMenuPanel.toString());
-    }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        state.panels.get(PanelName.ChooseGametypePanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ChooseGametypePanel.toString());
+    }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void ChooseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseButtonActionPerformed
+        int index = ExplorerList.getSelectedIndex();
+        Player player = state.getPlayersToChoose()[index];
+        state.addChosenPlayer(player);
+        state.panels.get(PanelName.ChooseGametypePanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ChooseGametypePanel.toString());
+    }//GEN-LAST:event_ChooseButtonActionPerformed
+
+    private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
+        state.addChosenPlayer(state.removeChosenPlayerSentinel);
+        state.panels.get(PanelName.ChooseGametypePanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ChooseGametypePanel.toString());
+    }//GEN-LAST:event_RemoveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackButton;
     private javax.swing.JPanel BodyPanel;
+    private javax.swing.JButton ChooseButton;
     private javax.swing.JPanel ContentPanel;
     private javax.swing.JPanel ContentSpacerPanel;
     private javax.swing.JLabel CurrentIDLabel;
@@ -461,13 +508,15 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     private javax.swing.JPanel PropertiesMenu;
     private javax.swing.JPanel PropertiesPanel;
     private javax.swing.JScrollPane PropertiesScrollPane;
-    private javax.swing.JButton QuitToMainMenuButton;
+    private javax.swing.JButton RemoveButton;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler11;
     private javax.swing.Box.Filler filler12;
     private javax.swing.Box.Filler filler13;
+    private javax.swing.Box.Filler filler14;
+    private javax.swing.Box.Filler filler15;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;

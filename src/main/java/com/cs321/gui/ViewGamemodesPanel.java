@@ -22,6 +22,7 @@ import com.cs321.io.IOUtils;
  */
 public class ViewGamemodesPanel  extends UpdateableJPanel {
 
+    // The global GUI state
     private GUIState state;
     
     /**

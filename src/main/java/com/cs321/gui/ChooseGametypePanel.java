@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import com.cs321.core.Player;
+import com.cs321.gui.GUIState.Gametype;
 import com.cs321.gui.GUIState.PanelName;
 
 /**
@@ -22,15 +22,8 @@ import com.cs321.gui.GUIState.PanelName;
  */
 public class ChooseGametypePanel extends UpdateableJPanel {
 
-    private static enum Tab {
-        FreeForAll, Teams
-    }
-
+    // The global GUI state
     private GUIState state;
-
-    private Tab currentTab = Tab.FreeForAll;
-    private ArrayList<Player> players = new ArrayList<>();
-    private ArrayList<ArrayList<Player>> teams = new ArrayList<>();
 
     /**
      * Creates new form ChooseGametypePanel
@@ -46,6 +39,7 @@ public class ChooseGametypePanel extends UpdateableJPanel {
      */
     @Override
     public void updateComponents() {
+        GametypesTabbedPanel.setSelectedIndex(state.chosenGametype.ordinal());
         regenerateFreeForAllPanel();
         regenerateTeamsPanel();
     }
@@ -57,17 +51,17 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         FreeForAllBodyPanel.removeAll();
 
         // If there are less than 2 players, add 2 buttons
-        if (players.size() < 2) {
+        if (state.chooseGametypePlayers.size() < 2) {
             FreeForAllBodyPanel.add(generateFreeForAllButton(0));
             FreeForAllBodyPanel.add(new JLabel("vs"));
             FreeForAllBodyPanel.add(generateFreeForAllButton(1));
         // Otherwise, add a button for each player and one more
         } else {
-            for (int playerIndex = 0; playerIndex < players.size(); playerIndex++) {
+            for (int playerIndex = 0; playerIndex < state.chooseGametypePlayers.size(); playerIndex++) {
                 FreeForAllBodyPanel.add(generateFreeForAllButton(playerIndex));
                 FreeForAllBodyPanel.add(new JLabel("vs"));
             }
-            FreeForAllBodyPanel.add(generateFreeForAllButton(players.size()));
+            FreeForAllBodyPanel.add(generateFreeForAllButton(state.chooseGametypePlayers.size()));
         }
 
         FreeForAllBodyPanel.revalidate();
@@ -82,8 +76,8 @@ public class ChooseGametypePanel extends UpdateableJPanel {
      */
     private JButton generateFreeForAllButton(int playerIndex) {
         JButton button = new JButton("Add Player");
-        if (players.size() > playerIndex) {
-            button.setText(players.get(playerIndex).getName());
+        if (state.chooseGametypePlayers.size() > playerIndex) {
+            button.setText(state.chooseGametypePlayers.get(playerIndex).getName());
         }
         button.addActionListener(generateFreeForAllActionListener(playerIndex));
         return button;
@@ -100,19 +94,24 @@ public class ChooseGametypePanel extends UpdateableJPanel {
 
             @Override
             public void actionPerformed(ActionEvent evt) {
-                String playerName = JOptionPane.showInputDialog("Enter player name");
-                if (playerName.isEmpty()) {
-                    if (players.size() > playerIndex) {
-                        players.remove(playerIndex);
-                    }
-                } else {
-                    if (players.size() > playerIndex) {
-                        players.set(playerIndex, new Player(playerName));
-                    } else {
-                        players.add(new Player(playerName));
-                    }
-                }
-                regenerateFreeForAllPanel();
+                state.chooseTeamIndex = -1;
+                state.choosePlayerIndex = playerIndex;
+                state.panels.get(PanelName.ChoosePlayersPanel).updateComponents();
+                state.contentPaneCardLayout.show(state.contentPane, PanelName.ChoosePlayersPanel.toString());
+
+                // String playerName = JOptionPane.showInputDialog("Enter player name");
+                // if (playerName.isEmpty()) {
+                //     if (state.chooseGametypePlayers.size() > playerIndex) {
+                //         state.chooseGametypePlayers.remove(playerIndex);
+                //     }
+                // } else {
+                //     if (state.chooseGametypePlayers.size() > playerIndex) {
+                //         state.chooseGametypePlayers.set(playerIndex, new Player(playerName));
+                //     } else {
+                //         state.chooseGametypePlayers.add(new Player(playerName));
+                //     }
+                // }
+                // regenerateFreeForAllPanel();
             }
 
         };
@@ -125,17 +124,17 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         TeamsBodyPanel.removeAll();
 
         // If there are less than 2 teams, add 2 team buttons
-        if (teams.size() < 2) {
+        if (state.chooseGametypeTeams.size() < 2) {
             addTeamButtons(0);
             TeamsBodyPanel.add(generateTeamVsLabel());
             addTeamButtons(1);
         // Otherwise, add team buttons for each team and one more
         } else {
-            for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
+            for (int teamIndex = 0; teamIndex < state.chooseGametypeTeams.size(); teamIndex++) {
                 addTeamButtons(teamIndex);
                 TeamsBodyPanel.add(generateTeamVsLabel());
             }
-            addTeamButtons(teams.size());
+            addTeamButtons(state.chooseGametypeTeams.size());
         }
 
         TeamsBodyPanel.revalidate();
@@ -149,13 +148,13 @@ public class ChooseGametypePanel extends UpdateableJPanel {
      */
     private void addTeamButtons(int teamIndex) {
         // If the team doesn't exist, add 2 buttons
-        if (teams.size() <= teamIndex) {
-            TeamsBodyPanel.add(generateTeamButton(teams.size(), 0));
+        if (state.chooseGametypeTeams.size() <= teamIndex) {
+            TeamsBodyPanel.add(generateTeamButton(state.chooseGametypeTeams.size(), 0));
             TeamsBodyPanel.add(new JLabel("and"));
-            TeamsBodyPanel.add(generateTeamButton(teams.size(), 1));
+            TeamsBodyPanel.add(generateTeamButton(state.chooseGametypeTeams.size(), 1));
         // Otherwise, follow the same logic as the Free For All panel
         } else {
-            ArrayList<Player> team = teams.get(teamIndex);
+            ArrayList<Player> team = state.chooseGametypeTeams.get(teamIndex);
 
             // If the team has less than 2 players, add 2 buttons
             if (team.size() < 2) {
@@ -185,8 +184,8 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         button.addActionListener(generateTeamActionListener(teamIndex, playerIndex));
 
         // If the team exists ...
-        if (teams.size() > teamIndex) {
-            ArrayList<Player> team = teams.get(teamIndex);
+        if (state.chooseGametypeTeams.size() > teamIndex) {
+            ArrayList<Player> team = state.chooseGametypeTeams.get(teamIndex);
 
             // ... and the player exists, set the button text to the player's name
             if (team.size() > playerIndex) {
@@ -209,40 +208,45 @@ public class ChooseGametypePanel extends UpdateableJPanel {
 
             @Override
             public void actionPerformed(ActionEvent evt) {
-                String playerName = JOptionPane.showInputDialog("Enter player name");
-                // If the player name is empty ...
-                if (playerName.isEmpty()) {
-                    // ... and the team exists ...
-                    if (teams.size() > teamIndex) {
-                        ArrayList<Player> team = teams.get(teamIndex);
-                        // ... and the player exists, remove the player
-                        if (team.size() > playerIndex) {
-                            team.remove(playerIndex);
-                        }
-                        // If the team becomes empty, remove the team
-                        if (team.isEmpty()) {
-                            teams.remove(teamIndex);
-                        }
-                    }
-                } else {
-                    // If the team exists ...
-                    if (teams.size() > teamIndex) {
-                        ArrayList<Player> team = teams.get(teamIndex);
-                        // ... and the player exists, set the player's name
-                        if (team.size() > playerIndex) {
-                            team.set(playerIndex, new Player(playerName));
-                        // ... and the player doesn't exist, add the player
-                        } else {
-                            team.add(new Player(playerName));
-                        }
-                    // If the team doesn't exist, add the team
-                    } else {
-                        ArrayList<Player> team = new ArrayList<>();
-                        team.add(new Player(playerName));
-                        teams.add(team);
-                    }
-                }
-                regenerateTeamsPanel();
+                state.chooseTeamIndex = teamIndex;
+                state.choosePlayerIndex = playerIndex;
+                state.panels.get(PanelName.ChoosePlayersPanel).updateComponents();
+                state.contentPaneCardLayout.show(state.contentPane, PanelName.ChoosePlayersPanel.toString());
+
+                // String playerName = JOptionPane.showInputDialog("Enter player name");
+                // // If the player name is empty ...
+                // if (playerName.isEmpty()) {
+                //     // ... and the team exists ...
+                //     if (state.chooseGametypeTeams.size() > teamIndex) {
+                //         ArrayList<Player> team = state.chooseGametypeTeams.get(teamIndex);
+                //         // ... and the player exists, remove the player
+                //         if (team.size() > playerIndex) {
+                //             team.remove(playerIndex);
+                //         }
+                //         // If the team becomes empty, remove the team
+                //         if (team.isEmpty()) {
+                //             state.chooseGametypeTeams.remove(teamIndex);
+                //         }
+                //     }
+                // } else {
+                //     // If the team exists ...
+                //     if (state.chooseGametypeTeams.size() > teamIndex) {
+                //         ArrayList<Player> team = state.chooseGametypeTeams.get(teamIndex);
+                //         // ... and the player exists, set the player's name
+                //         if (team.size() > playerIndex) {
+                //             team.set(playerIndex, new Player(playerName));
+                //         // ... and the player doesn't exist, add the player
+                //         } else {
+                //             team.add(new Player(playerName));
+                //         }
+                //     // If the team doesn't exist, add the team
+                //     } else {
+                //         ArrayList<Player> team = new ArrayList<>();
+                //         team.add(new Player(playerName));
+                //         state.chooseGametypeTeams.add(team);
+                //     }
+                // }
+                // regenerateTeamsPanel();
             }
 
         };
@@ -482,31 +486,40 @@ public class ChooseGametypePanel extends UpdateableJPanel {
     }//GEN-LAST:event_NextButtonActionPerformed
 
     private void FreeForAllClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FreeForAllClearButtonActionPerformed
-        players.clear();
+        state.chooseGametypePlayers.clear();
+        state.chooseGametypeTeams.clear();
         updateComponents();
     }//GEN-LAST:event_FreeForAllClearButtonActionPerformed
 
     private void GametypesTabbedPanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_GametypesTabbedPanelStateChanged
+        // Weird bug where this is called during initialization before state is set
+        if (state == null) {
+            return;
+        }
+
         int index = GametypesTabbedPanel.getSelectedIndex();
         switch (index) {
             case 0:
-                if (currentTab != Tab.FreeForAll) {
-                    players.clear();
+                if (state.chosenGametype != Gametype.FreeForAll) {
+                    state.chooseGametypePlayers.clear();
+                    state.chooseGametypeTeams.clear();
                 }
-                currentTab = Tab.FreeForAll;
+                state.chosenGametype = Gametype.FreeForAll;
                 break;
             case 1:
-                if (currentTab != Tab.Teams) {
-                    teams.clear();
+                if (state.chosenGametype != Gametype.Teams) {
+                    state.chooseGametypePlayers.clear();
+                    state.chooseGametypeTeams.clear();
                 }
-                currentTab = Tab.Teams;
+                state.chosenGametype = Gametype.Teams;
                 break;
         }
         updateComponents();
     }//GEN-LAST:event_GametypesTabbedPanelStateChanged
 
     private void TeamsClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamsClearButtonActionPerformed
-        teams.clear();
+        state.chooseGametypePlayers.clear();
+        state.chooseGametypeTeams.clear();
         updateComponents();
     }//GEN-LAST:event_TeamsClearButtonActionPerformed
 

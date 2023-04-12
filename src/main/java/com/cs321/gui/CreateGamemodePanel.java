@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class CreateGamemodePanel extends UpdateableJPanel {
 
+    // The global GUI state
     private GUIState state;
     
     /**

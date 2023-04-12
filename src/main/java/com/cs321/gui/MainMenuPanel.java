@@ -13,9 +13,9 @@ import com.cs321.gui.GUIState.PanelName;
  */
 public class MainMenuPanel extends UpdateableJPanel {
 
+    // The global GUI state
     private GUIState state;
-    
-    GameConfiguration gameMode;
+
     /**
      * Creates new form MainMenuPanel
      */

@@ -35,6 +35,7 @@ public class DartDashGUI extends javax.swing.JFrame {
         state.panels.put(PanelName.EditGamemodePanel, new EditGamemodePanel(state));
         state.panels.put(PanelName.ViewPlayersPanel, new ViewPlayersPanel(state));
         state.panels.put(PanelName.ChooseGametypePanel, new ChooseGametypePanel(state));
+        state.panels.put(PanelName.ChoosePlayersPanel, new ChoosePlayersPanel(state));
         state.panels.put(PanelName.Dart_2, new Dart_2(state));
 
         state.contentPane.add(state.panels.get(PanelName.MainMenuPanel), PanelName.MainMenuPanel.toString());
@@ -43,6 +44,7 @@ public class DartDashGUI extends javax.swing.JFrame {
         state.contentPane.add(state.panels.get(PanelName.EditGamemodePanel), PanelName.EditGamemodePanel.toString());
         state.contentPane.add(state.panels.get(PanelName.ViewPlayersPanel), PanelName.ViewPlayersPanel.toString());
         state.contentPane.add(state.panels.get(PanelName.ChooseGametypePanel), PanelName.ChooseGametypePanel.toString());
+        state.contentPane.add(state.panels.get(PanelName.ChoosePlayersPanel), PanelName.ChoosePlayersPanel.toString());
         state.contentPane.add(state.panels.get(PanelName.Dart_2),PanelName.Dart_2.toString());
 
         if (!initIOUtils() || !loadGameConfigurations(state)) {

@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import com.cs321.core.GameConfiguration;
+import com.cs321.core.GameStats;
+import com.cs321.core.Player;
+import com.cs321.core.PlayerData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -28,6 +31,7 @@ public class IOUtils {
     public static void init() throws IOException {
         Files.createDirectories(getDartDashPath());
         Files.createDirectories(getGameConfigurationsPath());
+        Files.createDirectories(getPlayersPath());
 
         if (loadGameConfiguration("Default") == null) {
             saveGameConfiguration(new GameConfiguration());
@@ -35,7 +39,7 @@ public class IOUtils {
     }
 
     /**
-     * Saves the game configuration to a file.
+     * Saves the GameConfiguration to a file.
      * 
      * @param gameConfiguration
      * @param file
@@ -45,9 +49,20 @@ public class IOUtils {
         GameConfigurationDTO gameConfigurationDTO = getGameConfigurationDTOFromGameConfiguration(gameConfiguration);
         objectMapper.writeValue(file, gameConfigurationDTO);
     }
+    /**
+     * Saves the Player to a file.
+     * 
+     * @param player
+     * @param file
+     * @throws IOException
+     */
+    public static void savePlayer(Player player, File file) throws IOException {
+        PlayerDTO playerDTO = getPlayerDTOFromPlayer(player);
+        objectMapper.writeValue(file, playerDTO);
+    }
 
     /**
-     * Saves the game configuration to a path.
+     * Saves the GameConfiguration to a path.
      * 
      * @param gameConfiguration
      * @param path
@@ -56,12 +71,23 @@ public class IOUtils {
     public static void saveGameConfiguration(GameConfiguration gameConfiguration, Path path) throws IOException {
         saveGameConfiguration(gameConfiguration, path.toFile());
     }
+    
+    /**
+     * Saves the Player to a path.
+     * 
+     * @param player
+     * @param path
+     * @throws IOException
+     */
+    public static void savePlayer(Player player, Path path) throws IOException {
+        savePlayer(player, path.toFile());
+    }
 
     /**
-     * Saves the game configuration to default location.
+     * Saves the GameConfiguration to default location.
      * 
      * @param gameConfiguration The GameConfiguration to save.
-     * @throws IOException If an error occurs while saving the gamemode.
+     * @throws IOException If an error occurs while saving the GameConfiguration.
      */
     public static void saveGameConfiguration(GameConfiguration gameConfiguration) throws IOException {
         Path gameConfigurationPath = getGameConfigurationPath(gameConfiguration);
@@ -69,10 +95,22 @@ public class IOUtils {
     }
 
     /**
-     * Load game configuration by name.
+     * Saves the Player to default location.
      * 
+     * @param player The Player to save.
+     * @throws IOException If an error occurs while saving the Player.
+     */
+    public static void savePlayer(Player player) throws IOException {
+        Path playerPath = getPlayerPath(player);
+        savePlayer(player, playerPath);
+    }
+
+    /**
+     * Load GameConfiguration by name.
+     * 
+     * @param name The name of the GameConfiguration to load.
      * @return The GameConfiguration.
-     * @throws IOException If an error occurs while loading the game configuration.
+     * @throws IOException If an error occurs while loading the GameConfiguration.
      */
     public static GameConfiguration loadGameConfiguration(String name) throws IOException {
         GameConfiguration gameConfiguration = null;
@@ -89,14 +127,47 @@ public class IOUtils {
     }
 
     /**
-     * Load game configuration by file.
+     * Load Player by name.
      * 
+     * @param name The name of the Player to load.
+     * @return The Player.
+     * @throws IOException If an error occurs while loading the Player.
+     */
+    public static Player loadPlayer(String name) throws IOException {
+        Player player = null;
+
+        Optional<Path> result = Files.list(getPlayerPath()).filter(path -> 
+            path.getFileName().toString().startsWith(name)).findFirst();
+
+        if (result.isPresent()) {
+            PlayerDTO playerDTO = objectMapper.readValue(result.get().toFile(), PlayerDTO.class);
+            player = getPlayerFromPlayerDTO(playerDTO);
+        }
+
+        return player;
+    }
+
+    /**
+     * Load GameConfiguration by file.
+     * 
+     * @param file The file to load the GameConfiguration from.
      * @return The GameConfiguration.
-     * @throws IOException If an error occurs while loading the game configuration.
+     * @throws IOException If an error occurs while loading the GameConfiguration.
      */
     public static GameConfiguration loadGameConfiguration(File file) throws IOException {
         GameConfigurationDTO gameConfigurationDTO = objectMapper.readValue(file, GameConfigurationDTO.class);
         return getGameConfigurationFromGameConfigurationDTO(gameConfigurationDTO);
+    }
+
+    /**
+     * Load player by file.
+     * 
+     * @return The Player.
+     * @throws IOException If an error occurs while loading the Player.
+     */
+    public static Player loadPlayer(File file) throws IOException {
+        PlayerDTO playerDTO = objectMapper.readValue(file, PlayerDTO.class);
+        return getPlayerFromPlayerDTO(playerDTO);
     }
 
     /**
@@ -110,10 +181,20 @@ public class IOUtils {
     }
 
     /**
-     * Loads all the game configurations from the GameConfigurations directory.
+     * Load player by path.
+     * 
+     * @return The Player.
+     * @throws IOException If an error occurs while loading the Player.
+     */
+    public static Player loadPlayer(Path path) throws IOException {
+        return loadPlayer(path.toFile());
+    }
+
+    /**
+     * Loads all the GameConfigurations from the GameConfigurations directory.
      * 
      * @return An array of GameConfigurations.
-     * @throws IOException If an error occurs while loading the game configurations.
+     * @throws IOException If an error occurs while loading the GameConfigurations.
      */
     public static GameConfiguration[] loadAllGameConfigurations() throws IOException {
         ArrayList<GameConfiguration> gameConfigurations = new ArrayList<>();
@@ -131,10 +212,31 @@ public class IOUtils {
     }
 
     /**
-     * Deletes the game configuration file.
+     * Loads all the Players from the Players directory.
+     * 
+     * @return An array of Player.
+     * @throws IOException If an error occurs while loading the Players.
+     */
+    public static Player[] loadAllPlayers() throws IOException {
+        ArrayList<Player> players = new ArrayList<>();
+
+        Files.list(getPlayerPath()).forEach(path -> {
+            try {
+                PlayerDTO playerDTO = objectMapper.readValue(path.toFile(), PlayerDTO.class);
+                players.add(getPlayerFromPlayerDTO(playerDTO));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        return players.toArray(new Player[players.size()]);
+    }
+
+    /**
+     * Deletes the GameConfigurations file.
      * 
      * @param gameConfiguration The GameConfiguration to delete.
-     * @throws IOException If an error occurs while deleting the game configuration.
+     * @throws IOException If an error occurs while deleting the GameConfigurations.
      */
     public static void deleteGameConfiguration(GameConfiguration gameConfiguration) throws IOException {
         Path gameConfigurationPath = getGameConfigurationPath(gameConfiguration);
@@ -142,13 +244,35 @@ public class IOUtils {
     }
 
     /**
-     * Gets the game configuration save filename.
+     * Deletes the Player file.
+     * 
+     * @param player The Player to delete.
+     * @throws IOException If an error occurs while deleting the Player.
+     */
+    public static void deletePlayer(Player player) throws IOException {
+        Path playerPath = getPlayerPath(player);
+        Files.deleteIfExists(player);
+    }
+
+    /**
+     * Gets the GameConfigurations save filename.
      * 
      * @param gameConfiguration The GameConfiguration to get the save filename for.
-     * @return The game configuration save filename.
+     * @return The GameConfiguration save filename.
      */
     public static String getGameConfigurationSaveFilename(GameConfiguration gameConfiguration) {
         return gameConfiguration.getName() + "_" + gameConfiguration.getId() + ".json";
+    }
+
+
+    /**
+     * Gets the Player save filename.
+     * 
+     * @param player The Player to get the save filename for.
+     * @return The Player save filename.
+     */
+    public static String getPlayerSaveFilename(Player player) {
+        return player.getName() + "_" + player.getId() + ".json";
     }
 
     /**
@@ -174,16 +298,40 @@ public class IOUtils {
     }
 
     /**
-     * Gets the path to the game configuration file.
+     * Gets the path to the Players directory.
+     * 
+     * @return The path to the Players directory.
+     */
+    private static Path getPlayersPath() {
+        StringBuilder gameConfigurationsPath = new StringBuilder(getDartDashPath().toString());
+        gameConfigurationsPath.append("\\Players");
+        return Paths.get(gameConfigurationsPath.toString());
+    }
+
+    /**
+     * Gets the path to the GameConfigurations file.
      * 
      * @param gameConfiguration The GameConfiguration to get the path for.
-     * @return The path to the game configuration file.
+     * @return The path to the GameConfigurations file.
      */
     private static Path getGameConfigurationPath(GameConfiguration gameConfiguration) {
         StringBuilder gameConfigurationPath = new StringBuilder(getGameConfigurationsPath().toString());
         gameConfigurationPath.append("\\");
         gameConfigurationPath.append(getGameConfigurationSaveFilename(gameConfiguration));
         return Paths.get(gameConfigurationPath.toString());
+    }
+
+    /**
+     * Gets the path to the Player file.
+     * 
+     * @param player The Player to get the path for.
+     * @return The path to the Player file.
+     */
+    private static Path getPlayerPath(Player player) {
+        StringBuilder playerPath = new StringBuilder(getPlayersPath().toString());
+        playerPath.append("\\");
+        playerPath.append(getPlayerSaveFilename(player));
+        return Paths.get(playerPath.toString());
     }
 
     /**
@@ -228,5 +376,36 @@ public class IOUtils {
         return gameConfiguration;
     }
 
+    private static PlayerDTO getPlayerDTOFromPlayer(Player player) {
+        PlayerDTO playerDTO = new PlayerDTO();
+        playerDTO.id = player.getId();
+        playerDTO.name = player.getName();
+
+        GameStats[] gameStats = player.getGameStats();
+        GameStatsDTO[] gameStatsDTO = new GameStatsDTO[gameStats.length];
+        for (int index = 0; index < gameStats.length; index++) {
+            gameStatsDTO[index] = getGameStatsDTOFromGameStats(gameStats[index]);
+        }
+        playerDTO.gameStats = gameStatsDTO;
+    }
+
+    private static Player getPlayerFromPlayerDTO(PlayerDTO playerDTO) {
+        Player player = new Player(playerDTO.id,playerDTO.name,getGameStatsFromGameStatsDTO(playerDTO.gameStats));
+
+    }
+
+    private static GameStatsDTO getGameStatsDTOFromGameStats(GameStats gameStats) {
+        GameStatsDTO gameStatsDTO = new GameStatsDTO();
+        gameStatsDTO.roundsPlayed=gameStats.getRoundsPlayed();
+        gameStatsDTO.teamScores=gameStats.getTeamScores();
+        gameStatsDTO.gamemodeId=gameStats.getGamemodeId();
+        gameStatsDTO.playerWon=gameStats.isPlayerWon();
+    }
+
+    private static GameStats getGameStatsFromGameStatsDTO(GameStatsDTO gameStatsDTO) {
+        GameStats gameStats = new GameStats(gameStatsDTO.roundsPlayed, gameStatsDTO.teamScores, gameStatsDTO.gamemodeId, gameStatsDTO.playerWon);
+
+    }
+    
 }
 

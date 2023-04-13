@@ -19,7 +19,8 @@ public class GUIState {
     // Enum for the panel names
     public static enum PanelName {
         MainMenuPanel, ViewGamemodesPanel, CreateGamemodePanel, EditGamemodePanel,
-        ViewPlayersPanel, ChooseGametypePanel, ChoosePlayersPanel, Dart_2
+        ViewPlayersPanel, ChooseGametypePanel, ChoosePlayersPanel, ChooseGameConfigurationPanel,
+        Dart_2
     }
     
     // The content pane of the JFrame
@@ -55,6 +56,8 @@ public class GUIState {
     public int chooseTeamIndex = -1;
     // The remove sentinel for choosing players
     public Player removeChosenPlayerSentinel = new Player("REMOVE_PLAYER_SENTINEL");
+    // The game configuration to use for the game
+    public GameConfiguration chooseGametypeGameConfiguration = null;
     /**
      * Gets the list of players to choose from
      * 

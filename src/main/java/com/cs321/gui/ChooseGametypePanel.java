@@ -98,20 +98,6 @@ public class ChooseGametypePanel extends UpdateableJPanel {
                 state.choosePlayerIndex = playerIndex;
                 state.panels.get(PanelName.ChoosePlayersPanel).updateComponents();
                 state.contentPaneCardLayout.show(state.contentPane, PanelName.ChoosePlayersPanel.toString());
-
-                // String playerName = JOptionPane.showInputDialog("Enter player name");
-                // if (playerName.isEmpty()) {
-                //     if (state.chooseGametypePlayers.size() > playerIndex) {
-                //         state.chooseGametypePlayers.remove(playerIndex);
-                //     }
-                // } else {
-                //     if (state.chooseGametypePlayers.size() > playerIndex) {
-                //         state.chooseGametypePlayers.set(playerIndex, new Player(playerName));
-                //     } else {
-                //         state.chooseGametypePlayers.add(new Player(playerName));
-                //     }
-                // }
-                // regenerateFreeForAllPanel();
             }
 
         };
@@ -212,41 +198,6 @@ public class ChooseGametypePanel extends UpdateableJPanel {
                 state.choosePlayerIndex = playerIndex;
                 state.panels.get(PanelName.ChoosePlayersPanel).updateComponents();
                 state.contentPaneCardLayout.show(state.contentPane, PanelName.ChoosePlayersPanel.toString());
-
-                // String playerName = JOptionPane.showInputDialog("Enter player name");
-                // // If the player name is empty ...
-                // if (playerName.isEmpty()) {
-                //     // ... and the team exists ...
-                //     if (state.chooseGametypeTeams.size() > teamIndex) {
-                //         ArrayList<Player> team = state.chooseGametypeTeams.get(teamIndex);
-                //         // ... and the player exists, remove the player
-                //         if (team.size() > playerIndex) {
-                //             team.remove(playerIndex);
-                //         }
-                //         // If the team becomes empty, remove the team
-                //         if (team.isEmpty()) {
-                //             state.chooseGametypeTeams.remove(teamIndex);
-                //         }
-                //     }
-                // } else {
-                //     // If the team exists ...
-                //     if (state.chooseGametypeTeams.size() > teamIndex) {
-                //         ArrayList<Player> team = state.chooseGametypeTeams.get(teamIndex);
-                //         // ... and the player exists, set the player's name
-                //         if (team.size() > playerIndex) {
-                //             team.set(playerIndex, new Player(playerName));
-                //         // ... and the player doesn't exist, add the player
-                //         } else {
-                //             team.add(new Player(playerName));
-                //         }
-                //     // If the team doesn't exist, add the team
-                //     } else {
-                //         ArrayList<Player> team = new ArrayList<>();
-                //         team.add(new Player(playerName));
-                //         state.chooseGametypeTeams.add(team);
-                //     }
-                // }
-                // regenerateTeamsPanel();
             }
 
         };
@@ -289,6 +240,8 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         FreeForAllBodyPanel = new javax.swing.JPanel();
         filler21 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20), new java.awt.Dimension(32767, 20));
         FreeForAllFooterPanel = new javax.swing.JPanel();
+        FreeForAllGameConfigurationLabel = new javax.swing.JLabel();
+        FreeForAllGameConfigurationButton = new javax.swing.JButton();
         filler22 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         FreeForAllClearButton = new javax.swing.JToggleButton();
         TeamsTabPanel = new javax.swing.JPanel();
@@ -300,6 +253,8 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         TeamsBodyPanel = new javax.swing.JPanel();
         filler24 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20), new java.awt.Dimension(32767, 20));
         TeamsFooterPanel = new javax.swing.JPanel();
+        TeamsGameConfigurationLabel = new javax.swing.JLabel();
+        TeamsGameConfigurationButton = new javax.swing.JButton();
         filler25 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         TeamsClearButton = new javax.swing.JToggleButton();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
@@ -351,6 +306,7 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         FreeForAllPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         FreeForAllPanel.setLayout(new javax.swing.BoxLayout(FreeForAllPanel, javax.swing.BoxLayout.Y_AXIS));
 
+        FreeForAllHeaderPanel.setMinimumSize(new java.awt.Dimension(37, 16));
         FreeForAllHeaderPanel.setPreferredSize(new java.awt.Dimension(37, 16));
         FreeForAllHeaderPanel.setLayout(new javax.swing.BoxLayout(FreeForAllHeaderPanel, javax.swing.BoxLayout.X_AXIS));
 
@@ -363,8 +319,15 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         FreeForAllPanel.add(FreeForAllBodyPanel);
         FreeForAllPanel.add(filler21);
 
+        FreeForAllFooterPanel.setMinimumSize(new java.awt.Dimension(37, 16));
         FreeForAllFooterPanel.setPreferredSize(new java.awt.Dimension(37, 16));
         FreeForAllFooterPanel.setLayout(new javax.swing.BoxLayout(FreeForAllFooterPanel, javax.swing.BoxLayout.X_AXIS));
+
+        FreeForAllGameConfigurationLabel.setText("GameConfiguration:    ");
+        FreeForAllFooterPanel.add(FreeForAllGameConfigurationLabel);
+
+        FreeForAllGameConfigurationButton.setText("Choose...");
+        FreeForAllFooterPanel.add(FreeForAllGameConfigurationButton);
         FreeForAllFooterPanel.add(filler22);
 
         FreeForAllClearButton.setText("Clear");
@@ -408,6 +371,12 @@ public class ChooseGametypePanel extends UpdateableJPanel {
 
         TeamsFooterPanel.setPreferredSize(new java.awt.Dimension(37, 16));
         TeamsFooterPanel.setLayout(new javax.swing.BoxLayout(TeamsFooterPanel, javax.swing.BoxLayout.X_AXIS));
+
+        TeamsGameConfigurationLabel.setText("GameConfiguration:    ");
+        TeamsFooterPanel.add(TeamsGameConfigurationLabel);
+
+        TeamsGameConfigurationButton.setText("Choose...");
+        TeamsFooterPanel.add(TeamsGameConfigurationButton);
         TeamsFooterPanel.add(filler25);
 
         TeamsClearButton.setText("Clear");
@@ -530,6 +499,8 @@ public class ChooseGametypePanel extends UpdateableJPanel {
     private javax.swing.JPanel FreeForAllBodyPanel;
     private javax.swing.JToggleButton FreeForAllClearButton;
     private javax.swing.JPanel FreeForAllFooterPanel;
+    private javax.swing.JButton FreeForAllGameConfigurationButton;
+    private javax.swing.JLabel FreeForAllGameConfigurationLabel;
     private javax.swing.JPanel FreeForAllHeaderPanel;
     private javax.swing.JPanel FreeForAllPanel;
     private javax.swing.JPanel FreeForAllTabPanel;
@@ -541,6 +512,8 @@ public class ChooseGametypePanel extends UpdateableJPanel {
     private javax.swing.JPanel TeamsBodyPanel;
     private javax.swing.JToggleButton TeamsClearButton;
     private javax.swing.JPanel TeamsFooterPanel;
+    private javax.swing.JButton TeamsGameConfigurationButton;
+    private javax.swing.JLabel TeamsGameConfigurationLabel;
     private javax.swing.JPanel TeamsHeaderPanel;
     private javax.swing.JPanel TeamsPanel;
     private javax.swing.JPanel TeamsTabPanel;

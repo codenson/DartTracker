@@ -199,10 +199,8 @@ public class GameManager {
      * @param ny The normalized y coordinate.
      */
     public void progressRound(float nx, float ny) {
-        // Step 1: Determine the score.
-        int total_score = DartboardUtils.getTotalScore(nx, ny, gameConfiguration);
-        // Step 2: Call progressRound(int score).
-        progressRound(total_score);
+        int totalScore = DartboardUtils.getTotalScore(nx, ny, gameConfiguration);
+        progressRound(totalScore);
     }
 
     /**

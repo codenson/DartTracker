@@ -1,12 +1,13 @@
 package com.cs321.core;
 
 /**
- * Provides Utility methods for calculating the score of a dartboard.
+ * Provides utility methods for calculating the score of a dartboard.
  * 
  * @author James Luna, Hasnain Raza, Marouane Guerouji
  */
 public class DartboardUtils {
 
+    // The following constants are in millimeters from https://www.dimensions.com/element/dartboard
     private static final float BullseyeRadius = 6.35f;
     private static final float BullseyeRingRadius = 16.0f;
     private static final float TripleRingInnerRadius = 99.0f;
@@ -15,6 +16,7 @@ public class DartboardUtils {
     private static final float DoubleRingOuterRadius = 170.0f;
     private static final float DartboardRadius = 225.5f;
 
+    // The following constants are normalized to the radius of the dartboard.
     private static final float BullseyeRadiusNormalized = BullseyeRadius / DartboardRadius;
     private static final float BullseyeRingRadiusNormalized = BullseyeRingRadius / DartboardRadius;
     private static final float TripleRingInnerRadiusNormalized = TripleRingInnerRadius / DartboardRadius;
@@ -23,30 +25,30 @@ public class DartboardUtils {
     private static final float DoubleRingOuterRadiusNormalized = DoubleRingOuterRadius / DartboardRadius;
     private static final float DartboardRadiusNormalized = 1.0f;
 
-    public static int size_of_bullseye;
-
     /**
-     * Gets the total score for the user with an applied
+     * Uses the normalized coordinates and the GameConfiguration to determine the
+     * total score for the dart.
      * 
      * @param nx the normalized coordinate for the x value.
      * @param ny the normalized coordinate for the y value.
-     * @param gameConfiguration the configuration for the current game.
+     * @param gameConfiguration the GameConfiguration to use.
      * @return a rounded down version of the score with an applied multiplier.
      */
     public static int getTotalScore(float nx, float ny, GameConfiguration gameConfiguration) {
-        int location_of_multiplier = coordsToMultiplier(nx, ny);
-        int location_of_score = coordsToScore(nx, ny);
+        int multiplerIndex = coordsToMultiplier(nx, ny);
+        int scoreIndex = coordsToScore(nx, ny);
+
         float multiplier = 1.0f;
         float score = gameConfiguration.getOffboardPenalty();
-        if(location_of_multiplier!=-1)
-        {
-            multiplier=gameConfiguration.getMultipliers()[location_of_multiplier];
+
+        if (multiplerIndex != -1) {
+            multiplier = gameConfiguration.getMultipliers()[multiplerIndex];
         }
-        if(location_of_score!=-1)
-        {
-            score=gameConfiguration.getScoreList()[coordsToScore(nx, ny)];
+        if (scoreIndex != -1) {
+            score = gameConfiguration.getScoreList()[scoreIndex];
         }
-        return (int)(Math.floor(score*multiplier));
+
+        return (int) (Math.floor(score * multiplier));
     }
 
     /**
@@ -54,67 +56,61 @@ public class DartboardUtils {
      * 
      * @param nx the normalized coordinate for the x value.
      * @param ny the normalized coordinate for the y value.
-     * @return an int representing an index in gameConfigurations scoreList.
+     * @return an int representing an index in GameConfiguration scoreList.
      */
-    public static int coordsToScore(float nx, float ny)
-    {
-        float mag = getMagnitudeFromCoordinates(nx, ny);
+    public static int coordsToScore(float nx, float ny) {
+        float magnitude = getMagnitudeFromCoordinates(nx, ny);
         float angle = getAngleFromCoordinates(nx, ny);
-        int pos = (int) ((angle - 9.0f) / 18.0f);
-        if(mag<BullseyeRadiusNormalized)
-        {
+        int sectionPosition = (int) ((angle - 9.0f) / 18.0f);
+
+        if (magnitude < BullseyeRingRadiusNormalized) {
             return 20;
-        }
-        else if(mag>=DartboardRadius) {
+        } else if (magnitude >= DartboardRadiusNormalized) {
             return -1;
-        }
-        else if((angle>0.0f&&angle<=9.0f)||(angle>351||angle==0))
-        {
+        } else if ((angle > 0.0f && angle <= 9.0f) || (angle > 351 || angle == 0)) {
             return 5;
         }
-        switch(pos)
-        {
-            case(0):
+
+        switch (sectionPosition) {
+            case (0):
                 return 12;
-            case(1):
+            case (1):
                 return 3;
-            case(2):
+            case (2):
                 return 17;
-            case(3):
+            case (3):
                 return 0;
-            case(4):    
+            case (4):
                 return 19;
-            case(5):                    
+            case (5):
                 return 4;
-            case(6):    
+            case (6):
                 return 11;
-            case(7):
+            case (7):
                 return 8;
-            case(8):
+            case (8):
                 return 13;
-            case(9):
+            case (9):
                 return 10;
-            case(10):
+            case (10):
                 return 7;
-            case(11):
+            case (11):
                 return 15;
-            case(12):
+            case (12):
                 return 6;
-            case(13):
+            case (13):
                 return 18;
-            case(14):
+            case (14):
                 return 2;
-            case(15):
+            case (15):
                 return 16;
-            case(16):
+            case (16):
                 return 1;
-            case(17):
+            case (17):
                 return 14;
             default:
                 return 9;
-        
         }
-        
     }
     
     /**
@@ -124,8 +120,7 @@ public class DartboardUtils {
      * @param ny the normalized coordinate for the y value.
      * @return an int representing an index in gameConfigurations multiplers, -1 for no multiplier.
      */
-    public static int coordsToMultiplier(float nx, float ny)
-    {
+    public static int coordsToMultiplier(float nx, float ny) {
         float magnitude = getMagnitudeFromCoordinates(nx, ny);
         if (magnitude > BullseyeRadiusNormalized && magnitude < BullseyeRadiusNormalized) {
             return 2;

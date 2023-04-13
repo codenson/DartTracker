@@ -241,7 +241,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         FormPanel.add(ScoreListTextField, gridBagConstraints);
 
         ScoreListHelpLabel.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreListHelpLabel.setText("21 comma separated integer values for scores going clockwise from 12 o' clock and with bullseye at the end");
+        ScoreListHelpLabel.setText("21 comma separated integer values replacing the score of its place (1st value replaces score 1 on the board)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;

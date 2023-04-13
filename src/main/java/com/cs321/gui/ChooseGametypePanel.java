@@ -42,6 +42,13 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         GametypesTabbedPanel.setSelectedIndex(state.chosenGametype.ordinal());
         regenerateFreeForAllPanel();
         regenerateTeamsPanel();
+        if (state.chooseGametypeGameConfiguration != null) {
+            FreeForAllGameConfigurationButton.setText(state.chooseGametypeGameConfiguration.getName());
+            TeamsGameConfigurationButton.setText(state.chooseGametypeGameConfiguration.getName());
+        } else {
+            FreeForAllGameConfigurationButton.setText("Choose...");
+            TeamsGameConfigurationButton.setText("Choose...");
+        }
     }
 
     /**
@@ -323,10 +330,15 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         FreeForAllFooterPanel.setPreferredSize(new java.awt.Dimension(37, 16));
         FreeForAllFooterPanel.setLayout(new javax.swing.BoxLayout(FreeForAllFooterPanel, javax.swing.BoxLayout.X_AXIS));
 
-        FreeForAllGameConfigurationLabel.setText("GameConfiguration:    ");
+        FreeForAllGameConfigurationLabel.setText("Gamemode:    ");
         FreeForAllFooterPanel.add(FreeForAllGameConfigurationLabel);
 
         FreeForAllGameConfigurationButton.setText("Choose...");
+        FreeForAllGameConfigurationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FreeForAllGameConfigurationButtonActionPerformed(evt);
+            }
+        });
         FreeForAllFooterPanel.add(FreeForAllGameConfigurationButton);
         FreeForAllFooterPanel.add(filler22);
 
@@ -372,10 +384,15 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         TeamsFooterPanel.setPreferredSize(new java.awt.Dimension(37, 16));
         TeamsFooterPanel.setLayout(new javax.swing.BoxLayout(TeamsFooterPanel, javax.swing.BoxLayout.X_AXIS));
 
-        TeamsGameConfigurationLabel.setText("GameConfiguration:    ");
+        TeamsGameConfigurationLabel.setText("Gamemode:    ");
         TeamsFooterPanel.add(TeamsGameConfigurationLabel);
 
         TeamsGameConfigurationButton.setText("Choose...");
+        TeamsGameConfigurationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TeamsGameConfigurationButtonActionPerformed(evt);
+            }
+        });
         TeamsFooterPanel.add(TeamsGameConfigurationButton);
         TeamsFooterPanel.add(filler25);
 
@@ -444,19 +461,20 @@ public class ChooseGametypePanel extends UpdateableJPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void QuitToMainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitToMainMenuButtonActionPerformed
+        state.clearChooseGametypeChoices();
         state.panels.get(PanelName.MainMenuPanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.MainMenuPanel.toString());
         
     }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
+        state.clearChooseGametypeChoices();
         state.panels.get(PanelName.Dart_2).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.Dart_2.toString());
     }//GEN-LAST:event_NextButtonActionPerformed
 
     private void FreeForAllClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FreeForAllClearButtonActionPerformed
-        state.chooseGametypePlayers.clear();
-        state.chooseGametypeTeams.clear();
+        state.clearChooseGametypeChoices();
         updateComponents();
     }//GEN-LAST:event_FreeForAllClearButtonActionPerformed
 
@@ -470,15 +488,13 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         switch (index) {
             case 0:
                 if (state.chosenGametype != Gametype.FreeForAll) {
-                    state.chooseGametypePlayers.clear();
-                    state.chooseGametypeTeams.clear();
+                    state.clearChooseGametypeChoices();
                 }
                 state.chosenGametype = Gametype.FreeForAll;
                 break;
             case 1:
                 if (state.chosenGametype != Gametype.Teams) {
-                    state.chooseGametypePlayers.clear();
-                    state.chooseGametypeTeams.clear();
+                    state.clearChooseGametypeChoices();
                 }
                 state.chosenGametype = Gametype.Teams;
                 break;
@@ -487,10 +503,19 @@ public class ChooseGametypePanel extends UpdateableJPanel {
     }//GEN-LAST:event_GametypesTabbedPanelStateChanged
 
     private void TeamsClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamsClearButtonActionPerformed
-        state.chooseGametypePlayers.clear();
-        state.chooseGametypeTeams.clear();
+        state.clearChooseGametypeChoices();
         updateComponents();
     }//GEN-LAST:event_TeamsClearButtonActionPerformed
+
+    private void FreeForAllGameConfigurationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FreeForAllGameConfigurationButtonActionPerformed
+        state.panels.get(PanelName.ChooseGameConfigurationPanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ChooseGameConfigurationPanel.toString());
+    }//GEN-LAST:event_FreeForAllGameConfigurationButtonActionPerformed
+
+    private void TeamsGameConfigurationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamsGameConfigurationButtonActionPerformed
+        state.panels.get(PanelName.ChooseGameConfigurationPanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.ChooseGameConfigurationPanel.toString());
+    }//GEN-LAST:event_TeamsGameConfigurationButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,7 +13,7 @@ import com.cs321.gui.GUIState.PanelName;
  *
  * @author Hasna
  */
-public class ChooseGameConfigurationPanel extends UpdateableJPanel {
+public class ChooseGamemodePanel extends UpdateableJPanel {
 
     // The global GUI state
     private GUIState state;
@@ -21,7 +21,7 @@ public class ChooseGameConfigurationPanel extends UpdateableJPanel {
     /**
      * Creates new form ChooseGameConfigurationPanel
      */
-    public ChooseGameConfigurationPanel(GUIState state) {
+    public ChooseGamemodePanel(GUIState state) {
         initComponents();
         
         this.state = state;
@@ -166,16 +166,17 @@ public class ChooseGameConfigurationPanel extends UpdateableJPanel {
         HeaderPanel.add(filler1);
 
         TitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        TitleLabel.setText("View Gamemodes");
+        TitleLabel.setText("Choose Gamemode");
         HeaderPanel.add(TitleLabel);
         HeaderPanel.add(filler2);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 639;
-        gridBagConstraints.ipady = 95;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         add(HeaderPanel, gridBagConstraints);
 
         BodyPanel.setMinimumSize(new java.awt.Dimension(1, 1));
@@ -227,7 +228,7 @@ public class ChooseGameConfigurationPanel extends UpdateableJPanel {
         );
         ContentSpacerPanelLayout.setVerticalGroup(
             ContentSpacerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 287, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -421,9 +422,10 @@ public class ChooseGameConfigurationPanel extends UpdateableJPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 639;
-        gridBagConstraints.ipady = 286;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 3.0;
         add(BodyPanel, gridBagConstraints);
 
         FooterPanel.setMinimumSize(new java.awt.Dimension(1, 1));
@@ -454,9 +456,10 @@ public class ChooseGameConfigurationPanel extends UpdateableJPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 639;
-        gridBagConstraints.ipady = 95;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 1, 0);
         add(FooterPanel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents

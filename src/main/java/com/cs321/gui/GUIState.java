@@ -132,6 +132,14 @@ public class GUIState {
             }
         }
     }
+    /**
+     * Clears the chosen Players and GameConfiguration
+     */
+    public void clearChooseGametypeChoices() {
+        chooseGametypePlayers.clear();
+        chooseGametypeTeams.clear();
+        chooseGametypeGameConfiguration = null;
+    }
     
 
 }

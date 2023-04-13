@@ -244,13 +244,16 @@
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="FreeForAllGameConfigurationLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="GameConfiguration:    "/>
+                            <Property name="text" type="java.lang.String" value="Gamemode:    "/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="FreeForAllGameConfigurationButton">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Choose..."/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FreeForAllGameConfigurationButtonActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.Box$Filler" name="filler22">
                           <Properties>
@@ -391,13 +394,16 @@
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="TeamsGameConfigurationLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="GameConfiguration:    "/>
+                            <Property name="text" type="java.lang.String" value="Gamemode:    "/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="TeamsGameConfigurationButton">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Choose..."/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TeamsGameConfigurationButtonActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.Box$Filler" name="filler25">
                           <Properties>

@@ -37,6 +37,7 @@ public class DartDashGUI extends javax.swing.JFrame {
         state.panels.put(PanelName.ViewPlayersPanel, new ViewPlayersPanel(state));
         state.panels.put(PanelName.ChooseGametypePanel, new ChooseGametypePanel(state));
         state.panels.put(PanelName.ChoosePlayersPanel, new ChoosePlayersPanel(state));
+        
         state.panels.put(PanelName.Dart_2, new Dart_2(state));
 
         state.contentPane.add(state.panels.get(PanelName.MainMenuPanel), PanelName.MainMenuPanel.toString());

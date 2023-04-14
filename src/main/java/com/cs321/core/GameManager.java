@@ -1,5 +1,8 @@
 package com.cs321.core;
 
+import com.cs321.gui.Dart_2;
+import com.cs321.gui.GUIState;
+
 /**
  * This class manages the game.
  * 
@@ -21,6 +24,12 @@ public class GameManager {
 
     /** The current round. */
     private Round currentRound;
+    Dart_2 dartGui ; 
+    private GUIState state;
+    
+    
+  
+  
 
     /**
      * Get the game configuration for this game.
@@ -29,6 +38,7 @@ public class GameManager {
      */
     public GameConfiguration getGameConfiguration() {
         return gameConfiguration;
+       
     }
 
     /**
@@ -112,12 +122,53 @@ public class GameManager {
      * @param roundsManager The rounds manager for this game.
      */
     public GameManager(GameConfiguration gameConfiguration, TeamsManager teamsManager,
+            
         TurnManager turnManager, RoundsManager roundsManager) {
         setGameConfiguration(gameConfiguration);
         setTeamsManager(teamsManager);
         setTurnManager(turnManager);
         setRoundsManager(roundsManager);
+        
+        this.teamsManager = teamsManager;
+        this.turnManager= turnManager;
+        this.gameConfiguration = gameConfiguration;
+        
+        dartGui = new Dart_2(state); 
+       
+        setGameGui();//inner method call
+        
+        
+         //
     }
+      private void playGame(){
+          dartGui.setGameConfigGui(gameConfiguration);
+       
+    
+    
+    
+    }
+      /**
+       * Method to initialize and update Dart_2 GUI.
+       */
+      private void setGameGui(){
+          String currentTeam = teamsManager.getPlayerTeam(turnManager.getCurrentPlayer()).getName(); 
+          
+          dartGui.teamAName.setText("");//sets team A name on GUI. 
+          dartGui.teamBName.setText("");//sets team b name on GUI. 
+          dartGui.roundValueBox.setText("");///sets round number on GUI. 
+          dartGui.playerNameBoxValue.setText(turnManager.getCurrentPlayer().getName());//sets current player,s name on GUI. 
+          dartGui.playingTeamBoxValue.setText(currentTeam);// sets current playing team on GUI.
+          dartGui.throwBoxValue.setText("");// initialize how many throws in a game.
+
+          
+         
+         teamsManager.getPlayerTeam(turnManager.getCurrentPlayer()).getName(); 
+          
+      
+      }
+      
+      
+      
 
     /**
      * Whether the game is finished or not. A game can be finished in a few ways:
@@ -275,5 +326,10 @@ public class GameManager {
         // This should never happen, its just here to make the compiler happy.
         return null;
     }
+    /**
+     * testing. 
+     * @param args 
+     */
+   
 
 }

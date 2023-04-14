@@ -1,6 +1,7 @@
 package com.cs321.gui;
 
 
+import com.cs321.core.GameConfiguration;
 import com.cs321.gui.DartDashGUI;
 import com.cs321.gui.GUIState;
 import com.cs321.gui.UpdateableJPanel;
@@ -16,12 +17,20 @@ import javax.swing.border.Border;
  Dart Gui. Empty file for dart display. 
  * @author guero
  */
-public class Dart_2  extends UpdateableJPanel {
-    int xDart= 0;
-    int yDart=0; 
-     int xMouse=0; 
-     int yMouse=0; 
+public class Dart_2 extends UpdateableJPanel {
+
+    int xDart = 0;
+    int yDart = 0;
+    int xMouse = 0;
+    int yMouse = 0;
     private GUIState state;
+    private int MaximumRounds = 0;
+    private int dartsPerRound = 3;
+    String id = null;
+    float[] multipliers;
+    int OffboardPenalty = 0;
+    int[] scoreList = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50};
+    int startingScore = 30;
 
     /**
      * Creates new form Dart
@@ -170,7 +179,7 @@ public class Dart_2  extends UpdateableJPanel {
         changingLightsBoardPanelLayout.setHorizontalGroup(
             changingLightsBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changingLightsBoardPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
                 .addComponent(dartBoardPicture)
                 .addGap(40, 40, 40))
         );
@@ -185,7 +194,7 @@ public class Dart_2  extends UpdateableJPanel {
         jLabel2.setBackground(new java.awt.Color(255, 51, 51));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel2.setText("Dart/I can move ");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dart_1_10.png"))); // NOI18N
         jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabel2MouseDragged(evt);
@@ -236,23 +245,26 @@ public class Dart_2  extends UpdateableJPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(throwBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(throwBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(102, 102, 102)
-                                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(startingScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(playerNameBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(roundScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(playingTeamBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(74, 74, 74)
-                                        .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(25, 25, 25))
+                                            .addComponent(jLabel2))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(throwBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(throwBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(102, 102, 102)
+                                                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(startingScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(23, 23, 23))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,7 +272,7 @@ public class Dart_2  extends UpdateableJPanel {
                                         .addComponent(throwScoreBox)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(throwScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(115, 115, 115))
+                                        .addGap(62, 62, 62))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(undoThrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(28, 28, 28)
@@ -277,7 +289,7 @@ public class Dart_2  extends UpdateableJPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(startingScoreBoxValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(teamABox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(teamAName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -310,9 +322,8 @@ public class Dart_2  extends UpdateableJPanel {
                                         .addComponent(playingTeamBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(playerNameBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(63, 63, 63)
+                                .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -365,8 +376,24 @@ public class Dart_2  extends UpdateableJPanel {
 //       LayoutManager layout = dartBoardPicture.getLayout();
 //       int x= layout.preferredLayoutSize(jLabel2).height;
 //       int y=    layout.preferredLayoutSize(jLabel2).width;
+
+/*int labelWidth = dartBoardPicture.getWidth();
+int labelHeight = dartBoardPicture.getHeight();
+int labelX = dartBoardPicture.getX();
+int labelY = dartBoardPicture.getY();
+double m =  10.0002; 
+
+int centerX = labelX + (labelWidth / 2);
+int centerY = labelY + (labelHeight / 2);
+
+       // System.out.println("center x : "+ labelX+);
+        
+jLabel2.setLocation(labelX, labelY);
+*/
+
 int y=dartBoardPicture.getHorizontalAlignment();
 int x = dartBoardPicture.getHorizontalAlignment();
+
 //       
 x = evt.getXOnScreen() - xMouse;
      y = evt.getYOnScreen() - yMouse;
@@ -375,7 +402,7 @@ x = evt.getXOnScreen() - xMouse;
 int newX = x ;
 int newY = y ;
     
-    jLabel2.setLocation(newX, newY);
+jLabel2.setLocation(newX, newY);
         
         
         
@@ -404,6 +431,31 @@ int newY = y ;
       
     }//GEN-LAST:event_jLabel2MousePressed
 
+    public void setGameGui(){
+    
+    teamAName.setText(id);// sets teamA name 
+    teamBName.setText(id);// sets teamB name. 
+    
+    }
+
+/**
+ * method to set up gui gameConfig. 
+ * @param gameMode 
+ */
+public void setGameConfigGui(GameConfiguration gameMode){
+   
+    
+       // this.gameMode = gameMode;
+        MaximumRounds = gameMode.getMaximumRounds();
+        dartsPerRound = gameMode.getDartsPerRound();
+        id = gameMode.getId();//string
+        multipliers = gameMode.getMultipliers();//float.
+        OffboardPenalty = gameMode.getOffboardPenalty();//int
+        scoreList = gameMode.getScoreList();//array of ints 
+        startingScore = gameMode.getStartingScore(); //int
+    
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button QuitToMainMenuButton;
@@ -414,20 +466,20 @@ int newY = y ;
     private java.awt.Label label2;
     private java.awt.Label label5;
     private javax.swing.JLabel playerNameBox;
-    private java.awt.Label playerNameBoxValue;
+    public java.awt.Label playerNameBoxValue;
     private javax.swing.JLabel playingTeamBox;
-    private java.awt.Label playingTeamBoxValue;
+    public java.awt.Label playingTeamBoxValue;
     private java.awt.Label roundBox;
     private javax.swing.JLabel roundScoreBox;
-    private java.awt.Label roundScoreBoxValue;
-    private java.awt.Label roundValueBox;
+    protected java.awt.Label roundScoreBoxValue;
+    public java.awt.Label roundValueBox;
     private java.awt.Label startingScoreBoxValue;
     private java.awt.Label teamABox;
-    private java.awt.Label teamAName;
+    public java.awt.Label teamAName;
     private java.awt.Label teamBBox;
-    private java.awt.Label teamBName;
+    public java.awt.Label teamBName;
     private java.awt.Label throwBox;
-    private java.awt.Label throwBoxValue;
+    public java.awt.Label throwBoxValue;
     private javax.swing.JLabel throwScoreBox;
     private java.awt.Label throwScoreBoxValue;
     private java.awt.Button undoThrowButton;

@@ -5,7 +5,9 @@
 package com.cs321.gui;
 
 import com.cs321.core.GameConfiguration;
+import com.cs321.core.GameManager;
 import com.cs321.gui.GUIState.PanelName;
+import java.util.ArrayList;
 
 /**
  *
@@ -157,6 +159,8 @@ public class MainMenuPanel extends UpdateableJPanel {
     private void PlayGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayGameButtonActionPerformed
         state.panels.get(PanelName.ChooseGametypePanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.ChooseGametypePanel.toString());  
+      
+       
     }//GEN-LAST:event_PlayGameButtonActionPerformed
 
     private void ViewPlayersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPlayersButtonActionPerformed

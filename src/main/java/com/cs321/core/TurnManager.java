@@ -128,6 +128,16 @@ public class TurnManager {
         }
 
         /**
+         * Add a player specifying their team to the turn manager builder. The priority score goes down by 1 for each player added.
+         * 
+         * @param player The player to add.
+         * @return The turn manager builder.
+         */
+        public TurnManagerBuilder withPlayer(Player player, Team team) {
+            return withPlayer(player, team, Integer.MAX_VALUE - playerPriorityQueue.size());
+        }
+
+        /**
          * Build the turn manager.
          * 
          * @return The turn manager.

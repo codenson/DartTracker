@@ -49,6 +49,7 @@ public class ChooseGametypePanel extends UpdateableJPanel {
             FreeForAllGameConfigurationButton.setText("Choose...");
             TeamsGameConfigurationButton.setText("Choose...");
         }
+        NextButton.setEnabled(state.canGenerateGameManager());
     }
 
     /**
@@ -468,6 +469,7 @@ public class ChooseGametypePanel extends UpdateableJPanel {
     }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
+        state.gameManager = state.generateGameManager();
         state.clearChooseGametypeChoices();
         state.panels.get(PanelName.Dart_2).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.Dart_2.toString());

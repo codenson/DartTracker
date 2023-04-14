@@ -7,7 +7,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import com.cs321.core.GameConfiguration;
+import com.cs321.core.GameManager;
 import com.cs321.core.Player;
+import com.cs321.core.RoundsManager;
+import com.cs321.core.Team;
+import com.cs321.core.TeamsManager;
+import com.cs321.core.TurnManager;
+import com.cs321.core.TurnManager.TurnManagerBuilder;
 
 /**
  * Holds the state of the GUI
@@ -22,22 +28,25 @@ public class GUIState {
         ViewPlayersPanel, ChooseGametypePanel, ChoosePlayersPanel, ChooseGameConfigurationPanel,
         Dart_2
     }
-    
     // The content pane of the JFrame
     public Container contentPane;
     // The CardLayout of the content pane
     public CardLayout contentPaneCardLayout;
-
-    // The list of game configurations
-    public ArrayList<GameConfiguration> gameConfigurations = new ArrayList<>();
     // The map of panels
     public HashMap<PanelName, UpdateableJPanel> panels = new HashMap<>();
 
+
+
+    // The list of game configurations
+    public ArrayList<GameConfiguration> gameConfigurations = new ArrayList<>();
     // The index of the game configuration to edit
     public int toEditGameConfigurationIndex = -1;
 
+
+
     // The list of players
     public ArrayList<Player> players = new ArrayList<>();
+
 
 
     // Enum for the gametype
@@ -140,6 +149,68 @@ public class GUIState {
         chooseGametypeTeams.clear();
         chooseGametypeGameConfiguration = null;
     }
+    /**
+     * Checks if the chosen players and game configuration can be used to generate a GameManager
+     * 
+     * @return true if the chosen players and game configuration can be used to generate a GameManager
+     */
+    public boolean canGenerateGameManager() {
+        if (chooseGametypeGameConfiguration == null) {
+            return false;
+        }
+
+        if (chosenGametype == Gametype.FreeForAll) {
+            return chooseGametypePlayers.size() >= 2;
+        } else if (chosenGametype == Gametype.Teams) {
+            return chooseGametypeTeams.size() >= 2;
+        }
+
+        return false;
+    }
+    /**
+     * Generate a GameManager from the chosen players and game configuration.
+     * 
+     * @return the generated GameManager
+     */
+    public GameManager generateGameManager() {
+        // Generate the GameConfiguration
+        GameConfiguration gameConfiguration = chooseGametypeGameConfiguration;
+
+        // Generate the TeamsManager
+        ArrayList<Team> teams = new ArrayList<>();
+        if (chosenGametype == Gametype.FreeForAll) {
+            for (Player player : chooseGametypePlayers) {
+                teams.add(new Team(player.getName(), new Player[] { player }));
+            }
+        } else if (chosenGametype == Gametype.Teams) {
+            for (int teamIndex = 0; teamIndex < chooseGametypeTeams.size(); teamIndex++) {
+                String teamName = "Team " + (teamIndex + 1);
+                Player[] teamPlayers = chooseGametypeTeams.get(teamIndex).toArray(new Player[0]);
+                teams.add(new Team(teamName, teamPlayers));
+            }
+        }
+        TeamsManager teamsManager = new TeamsManager(teams.toArray(new Team[0]));
+
+        // Generate the TurnManager
+        TurnManagerBuilder turnManagerBuilder = new TurnManagerBuilder();
+        for (Team team : teams) {
+            for (Player player : team.getPlayers()) {
+                turnManagerBuilder.withPlayer(player, team);
+            }
+        }
+        TurnManager turnManager = turnManagerBuilder.build();
+
+        // Generate the RoundsManager
+        RoundsManager roundsManager = new RoundsManager();
+
+        // Generate the GameManager
+        return new GameManager(gameConfiguration, teamsManager,
+        turnManager, roundsManager);
+    }
     
+
+
+    // The GameManager to use for the game
+    GameManager gameManager = null;
 
 }

@@ -4,6 +4,7 @@
  */
 package com.cs321.gui;
 
+import com.cs321.core.GameManager;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -473,6 +474,7 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         state.clearChooseGametypeChoices();
         state.panels.get(PanelName.Dart_2).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.Dart_2.toString());
+          ///GameManager m = state.generateGameManager();
     }//GEN-LAST:event_NextButtonActionPerformed
 
     private void FreeForAllClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FreeForAllClearButtonActionPerformed

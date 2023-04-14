@@ -16,7 +16,7 @@ import javax.swing.border.Border;
  Dart Gui. Empty file for dart display. 
  * @author guero
  */
-public class Dart_2  extends UpdateableJPanel {
+public class Dart_2 extends UpdateableJPanel {
     int xDart= 0;
     int yDart=0; 
      int xMouse=0; 

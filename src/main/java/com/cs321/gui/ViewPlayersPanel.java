@@ -59,6 +59,11 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     private void clearContentPanel() {
         CurrentIDLabel.setText("----");
         CurrentNameLabel.setText("----");
+        CurrentGamesPlayedLabel.setText("----");
+        CurrentWinsLabel.setText("----");
+        CurrentLossesLabel.setText("----");
+        CurrentWinRateLabel.setText("----");
+        CurrentWinLossRatioLabel.setText("----");
     }
 
     /**
@@ -69,6 +74,11 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     private void displayPlayer(Player player) {
         CurrentIDLabel.setText(player.getId());
         CurrentNameLabel.setText(player.getName());
+        CurrentGamesPlayedLabel.setText(Integer.toString(player.getGamesPlayed()));
+        CurrentWinsLabel.setText(Integer.toString(player.getWins()));
+        CurrentLossesLabel.setText(Integer.toString(player.getLosses()));
+        CurrentWinRateLabel.setText(String.format("%.2f", player.getWinRate()));
+        CurrentWinLossRatioLabel.setText(String.format("%.2f", player.getWinLossRatio()));
     }
 
     /**
@@ -125,6 +135,16 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         CurrentIDLabel = new javax.swing.JLabel();
         NameLabel = new javax.swing.JLabel();
         CurrentNameLabel = new javax.swing.JLabel();
+        GamesPlayedLabel = new javax.swing.JLabel();
+        CurrentGamesPlayedLabel = new javax.swing.JLabel();
+        WinsLabel = new javax.swing.JLabel();
+        CurrentWinsLabel = new javax.swing.JLabel();
+        LossesLabel = new javax.swing.JLabel();
+        CurrentLossesLabel = new javax.swing.JLabel();
+        WinRateLabel = new javax.swing.JLabel();
+        CurrentWinRateLabel = new javax.swing.JLabel();
+        WinLossRatioLabel = new javax.swing.JLabel();
+        CurrentWinLossRatioLabel = new javax.swing.JLabel();
         PropertiesMenu = new javax.swing.JPanel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         EditButton = new javax.swing.JButton();
@@ -293,6 +313,86 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         PropertiesPanel.add(CurrentNameLabel, gridBagConstraints);
+
+        GamesPlayedLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        GamesPlayedLabel.setText("Games Played:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        PropertiesPanel.add(GamesPlayedLabel, gridBagConstraints);
+
+        CurrentGamesPlayedLabel.setText("----");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        PropertiesPanel.add(CurrentGamesPlayedLabel, gridBagConstraints);
+
+        WinsLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        WinsLabel.setText("Wins:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        PropertiesPanel.add(WinsLabel, gridBagConstraints);
+
+        CurrentWinsLabel.setText("----");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        PropertiesPanel.add(CurrentWinsLabel, gridBagConstraints);
+
+        LossesLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        LossesLabel.setText("Losses:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        PropertiesPanel.add(LossesLabel, gridBagConstraints);
+
+        CurrentLossesLabel.setText("----");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        PropertiesPanel.add(CurrentLossesLabel, gridBagConstraints);
+
+        WinRateLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        WinRateLabel.setText("Win Rate:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        PropertiesPanel.add(WinRateLabel, gridBagConstraints);
+
+        CurrentWinRateLabel.setText("----");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        PropertiesPanel.add(CurrentWinRateLabel, gridBagConstraints);
+
+        WinLossRatioLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        WinLossRatioLabel.setText("Win Loss Ratio:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        PropertiesPanel.add(WinLossRatioLabel, gridBagConstraints);
+
+        CurrentWinLossRatioLabel.setText("----");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        PropertiesPanel.add(CurrentWinLossRatioLabel, gridBagConstraints);
 
         PropertiesScrollPane.setViewportView(PropertiesPanel);
 
@@ -510,8 +610,13 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     private javax.swing.JPanel BodyPanel;
     private javax.swing.JPanel ContentPanel;
     private javax.swing.JPanel ContentSpacerPanel;
+    private javax.swing.JLabel CurrentGamesPlayedLabel;
     private javax.swing.JLabel CurrentIDLabel;
+    private javax.swing.JLabel CurrentLossesLabel;
     private javax.swing.JLabel CurrentNameLabel;
+    private javax.swing.JLabel CurrentWinLossRatioLabel;
+    private javax.swing.JLabel CurrentWinRateLabel;
+    private javax.swing.JLabel CurrentWinsLabel;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton EditButton;
     private javax.swing.JPanel ExplorerHolderPanel;
@@ -521,10 +626,12 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     private javax.swing.JButton ExportButton;
     private javax.swing.JFileChooser ExportFolderChooser;
     private javax.swing.JPanel FooterPanel;
+    private javax.swing.JLabel GamesPlayedLabel;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel IDLabel;
     private javax.swing.JButton ImportButton;
     private javax.swing.JFileChooser ImportPlayerChooser;
+    private javax.swing.JLabel LossesLabel;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JButton NewButton;
     private javax.swing.JPanel PropertiesHolderPanel;
@@ -533,6 +640,9 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     private javax.swing.JScrollPane PropertiesScrollPane;
     private javax.swing.JButton QuitToMainMenuButton;
     private javax.swing.JLabel TitleLabel;
+    private javax.swing.JLabel WinLossRatioLabel;
+    private javax.swing.JLabel WinRateLabel;
+    private javax.swing.JLabel WinsLabel;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler11;

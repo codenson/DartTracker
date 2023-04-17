@@ -48,7 +48,31 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         MaximumRoundsTextField.setText("");
         StartingScoreTextField.setText("");
         OffboardPenaltyTextField.setText("");
-        ScoreListTextField.setText("");
+        
+        // Use default values for the score list
+        int[] scoreList = new GameConfiguration().getScoreList();
+        ScoreTextField1.setText(Integer.toString(scoreList[0]));
+        ScoreTextField2.setText(Integer.toString(scoreList[1]));
+        ScoreTextField3.setText(Integer.toString(scoreList[2]));
+        ScoreTextField4.setText(Integer.toString(scoreList[3]));
+        ScoreTextField5.setText(Integer.toString(scoreList[4]));
+        ScoreTextField6.setText(Integer.toString(scoreList[5]));
+        ScoreTextField7.setText(Integer.toString(scoreList[6]));
+        ScoreTextField8.setText(Integer.toString(scoreList[7]));
+        ScoreTextField9.setText(Integer.toString(scoreList[8]));
+        ScoreTextField10.setText(Integer.toString(scoreList[9]));
+        ScoreTextField11.setText(Integer.toString(scoreList[10]));
+        ScoreTextField12.setText(Integer.toString(scoreList[11]));
+        ScoreTextField13.setText(Integer.toString(scoreList[12]));
+        ScoreTextField14.setText(Integer.toString(scoreList[13]));
+        ScoreTextField15.setText(Integer.toString(scoreList[14]));
+        ScoreTextField16.setText(Integer.toString(scoreList[15]));
+        ScoreTextField17.setText(Integer.toString(scoreList[16]));
+        ScoreTextField18.setText(Integer.toString(scoreList[17]));
+        ScoreTextField19.setText(Integer.toString(scoreList[18]));
+        ScoreTextField20.setText(Integer.toString(scoreList[19]));
+        ScoreTextFieldBullseye.setText(Integer.toString(scoreList[20]));
+
         MultipliersTextField.setText("");
         ExactZeroWinCheckBox.setSelected(false);
         SubtractPointsCheckBox.setSelected(false);
@@ -71,6 +95,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         BodyPanel = new javax.swing.JPanel();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         ContentPanel = new javax.swing.JPanel();
+        FormScrollPane = new javax.swing.JScrollPane();
         FormPanel = new javax.swing.JPanel();
         FormLabel = new javax.swing.JLabel();
         NameLabel = new javax.swing.JLabel();
@@ -84,8 +109,32 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         OffboardPenaltyLabel = new javax.swing.JLabel();
         OffboardPenaltyTextField = new javax.swing.JTextField();
         ScoreListLabel = new javax.swing.JLabel();
-        ScoreListTextField = new javax.swing.JTextField();
-        ScoreListHelpLabel = new javax.swing.JLabel();
+        ScoreListDartboardHolderPanel = new javax.swing.JPanel();
+        filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        ScoreListDartboardPanel = new javax.swing.JPanel();
+        ScoreTextFieldBullseye = new javax.swing.JTextField();
+        ScoreTextField20 = new javax.swing.JTextField();
+        ScoreTextField19 = new javax.swing.JTextField();
+        ScoreTextField18 = new javax.swing.JTextField();
+        ScoreTextField17 = new javax.swing.JTextField();
+        ScoreTextField16 = new javax.swing.JTextField();
+        ScoreTextField15 = new javax.swing.JTextField();
+        ScoreTextField14 = new javax.swing.JTextField();
+        ScoreTextField13 = new javax.swing.JTextField();
+        ScoreTextField12 = new javax.swing.JTextField();
+        ScoreTextField11 = new javax.swing.JTextField();
+        ScoreTextField10 = new javax.swing.JTextField();
+        ScoreTextField9 = new javax.swing.JTextField();
+        ScoreTextField8 = new javax.swing.JTextField();
+        ScoreTextField7 = new javax.swing.JTextField();
+        ScoreTextField6 = new javax.swing.JTextField();
+        ScoreTextField5 = new javax.swing.JTextField();
+        ScoreTextField4 = new javax.swing.JTextField();
+        ScoreTextField3 = new javax.swing.JTextField();
+        ScoreTextField2 = new javax.swing.JTextField();
+        ScoreTextField1 = new javax.swing.JTextField();
+        ScoreListDartboardLabel = new javax.swing.JLabel();
+        filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         MultipliersTextLabel = new javax.swing.JLabel();
         MultipliersTextField = new javax.swing.JTextField();
         MultipliersHelpLabel = new javax.swing.JLabel();
@@ -133,8 +182,11 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         ContentPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         ContentPanel.setLayout(new java.awt.GridBagLayout());
 
+        FormScrollPane.setMinimumSize(new java.awt.Dimension(1, 1));
+        FormScrollPane.setPreferredSize(new java.awt.Dimension(1, 1));
+
         FormPanel.setMinimumSize(new java.awt.Dimension(1, 1));
-        FormPanel.setPreferredSize(new java.awt.Dimension(1, 1));
+        FormPanel.setPreferredSize(new java.awt.Dimension(300, 640));
         FormPanel.setLayout(new java.awt.GridBagLayout());
 
         FormLabel.setText("Leave blanks empty for default values");
@@ -225,30 +277,119 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         FormPanel.add(OffboardPenaltyTextField, gridBagConstraints);
 
         ScoreListLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        ScoreListLabel.setText("Score List:");
+        ScoreListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreListLabel.setText("Score List");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(16, 4, 4, 4);
         FormPanel.add(ScoreListLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        FormPanel.add(ScoreListTextField, gridBagConstraints);
 
-        ScoreListHelpLabel.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreListHelpLabel.setText("21 comma separated integer values replacing the score of its place (1st value replaces score 1 on the board)");
+        ScoreListDartboardHolderPanel.setLayout(new javax.swing.BoxLayout(ScoreListDartboardHolderPanel, javax.swing.BoxLayout.X_AXIS));
+        ScoreListDartboardHolderPanel.add(filler10);
+
+        ScoreListDartboardPanel.setMaximumSize(new java.awt.Dimension(300, 300));
+        ScoreListDartboardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ScoreTextFieldBullseye.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextFieldBullseye.setText("50");
+        ScoreListDartboardPanel.add(ScoreTextFieldBullseye, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 40, 40));
+
+        ScoreTextField20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField20.setText("20");
+        ScoreListDartboardPanel.add(ScoreTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 40, 40));
+
+        ScoreTextField19.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField19.setText("19");
+        ScoreListDartboardPanel.add(ScoreTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 40, 40));
+
+        ScoreTextField18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField18.setText("18");
+        ScoreListDartboardPanel.add(ScoreTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 40, 40));
+
+        ScoreTextField17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField17.setText("17");
+        ScoreListDartboardPanel.add(ScoreTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 40, 40));
+
+        ScoreTextField16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField16.setText("16");
+        ScoreListDartboardPanel.add(ScoreTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 40, 40));
+
+        ScoreTextField15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField15.setText("15");
+        ScoreListDartboardPanel.add(ScoreTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 40, 40));
+
+        ScoreTextField14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField14.setText("14");
+        ScoreListDartboardPanel.add(ScoreTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 40, 40));
+
+        ScoreTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField13.setText("13");
+        ScoreListDartboardPanel.add(ScoreTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 40, 40));
+
+        ScoreTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField12.setText("12");
+        ScoreListDartboardPanel.add(ScoreTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 40, 40));
+
+        ScoreTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField11.setText("11");
+        ScoreListDartboardPanel.add(ScoreTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 40, 40));
+
+        ScoreTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField10.setText("10");
+        ScoreListDartboardPanel.add(ScoreTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 40, 40));
+
+        ScoreTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField9.setText("9");
+        ScoreListDartboardPanel.add(ScoreTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 40, 40));
+
+        ScoreTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField8.setText("8");
+        ScoreListDartboardPanel.add(ScoreTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 40, 40));
+
+        ScoreTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField7.setText("7");
+        ScoreListDartboardPanel.add(ScoreTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 40, 40));
+
+        ScoreTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField6.setText("6");
+        ScoreListDartboardPanel.add(ScoreTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 40, 40));
+
+        ScoreTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField5.setText("5");
+        ScoreListDartboardPanel.add(ScoreTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 40, 40));
+
+        ScoreTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField4.setText("4");
+        ScoreListDartboardPanel.add(ScoreTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 40, 40));
+
+        ScoreTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField3.setText("3");
+        ScoreListDartboardPanel.add(ScoreTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 40, 40));
+
+        ScoreTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField2.setText("2");
+        ScoreListDartboardPanel.add(ScoreTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 40, 40));
+
+        ScoreTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ScoreTextField1.setText("1");
+        ScoreListDartboardPanel.add(ScoreTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 40, 40));
+
+        ScoreListDartboardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dartboard_300x300.png"))); // NOI18N
+        ScoreListDartboardPanel.add(ScoreListDartboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        ScoreListDartboardHolderPanel.add(ScoreListDartboardPanel);
+        ScoreListDartboardHolderPanel.add(filler11);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        FormPanel.add(ScoreListHelpLabel, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(8, 8, 16, 8);
+        FormPanel.add(ScoreListDartboardHolderPanel, gridBagConstraints);
 
         MultipliersTextLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         MultipliersTextLabel.setText("Multipliers:");
@@ -294,11 +435,13 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         FormPanel.add(SubtractPointsCheckBox, gridBagConstraints);
 
+        FormScrollPane.setViewportView(FormPanel);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 8.0;
-        ContentPanel.add(FormPanel, gridBagConstraints);
+        ContentPanel.add(FormScrollPane, gridBagConstraints);
 
         MenuPanel.setMinimumSize(new java.awt.Dimension(1, 1));
         MenuPanel.setPreferredSize(new java.awt.Dimension(1, 1));
@@ -383,7 +526,6 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         String maximumRoundsText = MaximumRoundsTextField.getText().trim();
         String startingScoreText = StartingScoreTextField.getText().trim();
         String offboardPenaltyText = OffboardPenaltyTextField.getText().trim();
-        String scoreListText = ScoreListTextField.getText().trim();
         String multipliersText = MultipliersTextField.getText().trim();
         boolean exactZeroWin = ExactZeroWinCheckBox.isSelected();
         boolean subtractPoints = SubtractPointsCheckBox.isSelected();
@@ -454,27 +596,198 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         }
 
         // Parse score list
-        if (!scoreListText.isEmpty()) {
-            String[] scoreListSplit = scoreListText.split(",");
+        int[] scoreList = new GameConfiguration().getScoreList();
 
-            if (scoreListSplit.length != 21) {
-                JOptionPane.showMessageDialog(null, "Score list must contain 21 integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+        if (!ScoreTextField1.getText().isEmpty()) {
+            try {
+                scoreList[0] = Integer.parseInt(ScoreTextField1.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-
-            int[] scoreList = new int[21];
-
-            for (int i = 0; i < 21; i++) {
-                try {
-                    scoreList[i] = Integer.parseInt(scoreListSplit[i].trim());
-                } catch(NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, "Score list must contain 21 integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-            }
-
-            gameConfigurationBuilder.withScoreList(scoreList);
         }
+
+        if (!ScoreTextField2.getText().isEmpty()) {
+            try {
+                scoreList[1] = Integer.parseInt(ScoreTextField2.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField3.getText().isEmpty()) {
+            try {
+                scoreList[2] = Integer.parseInt(ScoreTextField3.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField4.getText().isEmpty()) {
+            try {
+                scoreList[3] = Integer.parseInt(ScoreTextField4.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField5.getText().isEmpty()) {
+            try {
+                scoreList[4] = Integer.parseInt(ScoreTextField5.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField6.getText().isEmpty()) {
+            try {
+                scoreList[5] = Integer.parseInt(ScoreTextField6.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField7.getText().isEmpty()) {
+            try {
+                scoreList[6] = Integer.parseInt(ScoreTextField7.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField8.getText().isEmpty()) {
+            try {
+                scoreList[7] = Integer.parseInt(ScoreTextField8.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField9.getText().isEmpty()) {
+            try {
+                scoreList[8] = Integer.parseInt(ScoreTextField9.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField10.getText().isEmpty()) {
+            try {
+                scoreList[9] = Integer.parseInt(ScoreTextField10.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField11.getText().isEmpty()) {
+            try {
+                scoreList[10] = Integer.parseInt(ScoreTextField11.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField12.getText().isEmpty()) {
+            try {
+                scoreList[11] = Integer.parseInt(ScoreTextField12.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField13.getText().isEmpty()) {
+            try {
+                scoreList[12] = Integer.parseInt(ScoreTextField13.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField14.getText().isEmpty()) {
+            try {
+                scoreList[13] = Integer.parseInt(ScoreTextField14.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField15.getText().isEmpty()) {
+            try {
+                scoreList[14] = Integer.parseInt(ScoreTextField15.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField16.getText().isEmpty()) {
+            try {
+                scoreList[15] = Integer.parseInt(ScoreTextField16.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField17.getText().isEmpty()) {
+            try {
+                scoreList[16] = Integer.parseInt(ScoreTextField17.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField18.getText().isEmpty()) {
+            try {
+                scoreList[17] = Integer.parseInt(ScoreTextField18.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField19.getText().isEmpty()) {
+            try {
+                scoreList[18] = Integer.parseInt(ScoreTextField19.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextField20.getText().isEmpty()) {
+            try {
+                scoreList[19] = Integer.parseInt(ScoreTextField20.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (!ScoreTextFieldBullseye.getText().isEmpty()) {
+            try {
+                scoreList[20] = Integer.parseInt(ScoreTextFieldBullseye.getText().trim());
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Scores must be integers", "Input Format Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        gameConfigurationBuilder.withScoreList(scoreList);
 
         // Parse multipliers
         if (!multipliersText.isEmpty()) {
@@ -528,6 +841,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
     private javax.swing.JPanel FooterPanel;
     private javax.swing.JLabel FormLabel;
     private javax.swing.JPanel FormPanel;
+    private javax.swing.JScrollPane FormScrollPane;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel MaximumRoundsLabel;
     private javax.swing.JTextField MaximumRoundsTextField;
@@ -539,14 +853,38 @@ public class CreateGamemodePanel extends UpdateableJPanel {
     private javax.swing.JTextField NameTextField;
     private javax.swing.JLabel OffboardPenaltyLabel;
     private javax.swing.JTextField OffboardPenaltyTextField;
-    private javax.swing.JLabel ScoreListHelpLabel;
+    private javax.swing.JPanel ScoreListDartboardHolderPanel;
+    private javax.swing.JLabel ScoreListDartboardLabel;
+    private javax.swing.JPanel ScoreListDartboardPanel;
     private javax.swing.JLabel ScoreListLabel;
-    private javax.swing.JTextField ScoreListTextField;
+    private javax.swing.JTextField ScoreTextField1;
+    private javax.swing.JTextField ScoreTextField10;
+    private javax.swing.JTextField ScoreTextField11;
+    private javax.swing.JTextField ScoreTextField12;
+    private javax.swing.JTextField ScoreTextField13;
+    private javax.swing.JTextField ScoreTextField14;
+    private javax.swing.JTextField ScoreTextField15;
+    private javax.swing.JTextField ScoreTextField16;
+    private javax.swing.JTextField ScoreTextField17;
+    private javax.swing.JTextField ScoreTextField18;
+    private javax.swing.JTextField ScoreTextField19;
+    private javax.swing.JTextField ScoreTextField2;
+    private javax.swing.JTextField ScoreTextField20;
+    private javax.swing.JTextField ScoreTextField3;
+    private javax.swing.JTextField ScoreTextField4;
+    private javax.swing.JTextField ScoreTextField5;
+    private javax.swing.JTextField ScoreTextField6;
+    private javax.swing.JTextField ScoreTextField7;
+    private javax.swing.JTextField ScoreTextField8;
+    private javax.swing.JTextField ScoreTextField9;
+    private javax.swing.JTextField ScoreTextFieldBullseye;
     private javax.swing.JLabel StartingScoreLabel;
     private javax.swing.JTextField StartingScoreTextField;
     private javax.swing.JCheckBox SubtractPointsCheckBox;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler10;
+    private javax.swing.Box.Filler filler11;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;

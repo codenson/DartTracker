@@ -235,7 +235,7 @@ public class Dart_2 extends UpdateableJPanel {
         });
 
         dartBoardPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dartBoardPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dartBoard_1.png"))); // NOI18N
+        dartBoardPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dartboard.png"))); // NOI18N
         dartBoardPicture.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 dartBoardPictureMouseClicked(evt);

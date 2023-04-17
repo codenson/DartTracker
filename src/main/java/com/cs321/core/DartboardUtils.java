@@ -8,13 +8,22 @@ package com.cs321.core;
 public class DartboardUtils {
 
     // The following constants are in millimeters from https://www.dimensions.com/element/dartboard
-    private static final float BullseyeRadius = 6.35f;
-    private static final float BullseyeRingRadius = 16.0f;
-    private static final float TripleRingInnerRadius = 99.0f;
-    private static final float TripleRingOuterRadius = 107.0f;
-    private static final float DoubleRingInnerRadius = 162.0f;
-    private static final float DoubleRingOuterRadius = 170.0f;
-    private static final float DartboardRadius = 225.5f;
+    // private static final float BullseyeRadius = 6.35f;
+    // private static final float BullseyeRingRadius = 16.0f;
+    // private static final float TripleRingInnerRadius = 99.0f;
+    // private static final float TripleRingOuterRadius = 107.0f;
+    // private static final float DoubleRingInnerRadius = 162.0f;
+    // private static final float DoubleRingOuterRadius = 170.0f;
+    // private static final float DartboardRadius = 225.5f;
+
+    // Custom adjusted constants for the dartboard.
+    private static final float BullseyeRadius = 8.0f;
+    private static final float BullseyeRingRadius = 14.0f;
+    private static final float TripleRingInnerRadius = 86.0f;
+    private static final float TripleRingOuterRadius = 96.0f;
+    private static final float DoubleRingInnerRadius = 142.0f;
+    private static final float DoubleRingOuterRadius = 152.0f;
+    private static final float DartboardRadius = 200.0f;
 
     // The following constants are normalized to the radius of the dartboard.
     private static final float BullseyeRadiusNormalized = BullseyeRadius / DartboardRadius;
@@ -35,6 +44,10 @@ public class DartboardUtils {
      * @return a rounded down version of the score with an applied multiplier.
      */
     public static int getTotalScore(float nx, float ny, GameConfiguration gameConfiguration) {
+        // Transform the coordinates
+        nx = (nx - 0.5f) * 2.0f;
+        ny = ((1 - ny) - 0.5f) * 2.0f;
+
         int multiplerIndex = coordsToMultiplier(nx, ny);
         int scoreIndex = coordsToScore(nx, ny);
 
@@ -122,7 +135,7 @@ public class DartboardUtils {
      */
     public static int coordsToMultiplier(float nx, float ny) {
         float magnitude = getMagnitudeFromCoordinates(nx, ny);
-        if (magnitude > BullseyeRadiusNormalized && magnitude < BullseyeRadiusNormalized) {
+        if (magnitude > BullseyeRadiusNormalized && magnitude < BullseyeRingRadiusNormalized) {
             return 2;
         } else if (magnitude > TripleRingInnerRadiusNormalized && magnitude < TripleRingOuterRadiusNormalized) {
             return 1;
@@ -141,7 +154,7 @@ public class DartboardUtils {
      * @return an float representing the angel formed by where the player hit.
      */
     private static float getAngleFromCoordinates(float nx, float ny) {
-        float angle = (float) Math.atan2(ny - 0.5, nx - 0.5);
+        float angle = (float) Math.atan2(ny, nx);
         angle = (float) Math.toDegrees(angle);
 
         // https://stackoverflow.com/questions/1311049/how-to-map-atan2-to-degrees-0-360
@@ -151,13 +164,13 @@ public class DartboardUtils {
     }
 
     /**
-     * Gets the magnitude from the center to where the player hit.
+     * Gets the magnitude of the coordinates.
      * 
      * @param nx the normalized coordinate for the x value.
      * @param ny the normalized coordinate for the y value.
-     * @return a float representing the magnitude from the center to where the player hit.
+     * @return a float representing the magnitude of the coordinates.
      */
     private static float getMagnitudeFromCoordinates(float nx, float ny) {
-        return (float) Math.sqrt((nx - 0.5) * (nx - 0.5) + (ny - 0.5) * (ny - 0.5));
+        return (float) Math.sqrt(nx * nx + ny * ny);
     }
 }

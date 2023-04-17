@@ -63,7 +63,29 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         CurrentMaximumRoundsLabel.setText("----");
         CurrentStartingScoreLabel.setText("----");
         CurrentOffboardPenaltyLabel.setText("----");
-        CurrentScoreListLabel.setText("----");
+        
+        ScoreLabel1.setText("-");
+        ScoreLabel2.setText("-");
+        ScoreLabel3.setText("-");
+        ScoreLabel4.setText("-");
+        ScoreLabel5.setText("-");
+        ScoreLabel6.setText("-");
+        ScoreLabel7.setText("-");
+        ScoreLabel8.setText("-");
+        ScoreLabel9.setText("-");
+        ScoreLabel10.setText("-");
+        ScoreLabel11.setText("-");
+        ScoreLabel12.setText("-");
+        ScoreLabel13.setText("-");
+        ScoreLabel14.setText("-");
+        ScoreLabel15.setText("-");
+        ScoreLabel16.setText("-");
+        ScoreLabel17.setText("-");
+        ScoreLabel18.setText("-");
+        ScoreLabel19.setText("-");
+        ScoreLabel20.setText("-");
+        ScoreLabelBullseye.setText("-");
+
         CurrentMultipliersLabel.setText("----");
         CurrentExactZeroWinLabel.setText("----");
         CurrentSubtractPointsLabel.setText("----");
@@ -87,15 +109,28 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         CurrentStartingScoreLabel.setText(String.valueOf(gameConfiguration.getStartingScore()));
         CurrentOffboardPenaltyLabel.setText(String.valueOf(gameConfiguration.getOffboardPenalty()));
 
-        StringBuilder scoreListBuilder = new StringBuilder();
-        for (int score : gameConfiguration.getScoreList()) {
-            scoreListBuilder.append(score);
-            scoreListBuilder.append(",");
-        }
-        if (scoreListBuilder.length() > 0) {
-            scoreListBuilder.delete(scoreListBuilder.length() - 1, scoreListBuilder.length());
-        }
-        CurrentScoreListLabel.setText(scoreListBuilder.toString());
+        int[] scoreList = gameConfiguration.getScoreList();
+        ScoreLabel1.setText(String.valueOf(scoreList[0]));
+        ScoreLabel2.setText(String.valueOf(scoreList[1]));
+        ScoreLabel3.setText(String.valueOf(scoreList[2]));
+        ScoreLabel4.setText(String.valueOf(scoreList[3]));
+        ScoreLabel5.setText(String.valueOf(scoreList[4]));
+        ScoreLabel6.setText(String.valueOf(scoreList[5]));
+        ScoreLabel7.setText(String.valueOf(scoreList[6]));
+        ScoreLabel8.setText(String.valueOf(scoreList[7]));
+        ScoreLabel9.setText(String.valueOf(scoreList[8]));
+        ScoreLabel10.setText(String.valueOf(scoreList[9]));
+        ScoreLabel11.setText(String.valueOf(scoreList[10]));
+        ScoreLabel12.setText(String.valueOf(scoreList[11]));
+        ScoreLabel13.setText(String.valueOf(scoreList[12]));
+        ScoreLabel14.setText(String.valueOf(scoreList[13]));
+        ScoreLabel15.setText(String.valueOf(scoreList[14]));
+        ScoreLabel16.setText(String.valueOf(scoreList[15]));
+        ScoreLabel17.setText(String.valueOf(scoreList[16]));
+        ScoreLabel18.setText(String.valueOf(scoreList[17]));
+        ScoreLabel19.setText(String.valueOf(scoreList[18]));
+        ScoreLabel20.setText(String.valueOf(scoreList[19]));
+        ScoreLabelBullseye.setText(String.valueOf(scoreList[20]));
 
         StringBuilder multipliersBuilder = new StringBuilder();
         for (float multiplier : gameConfiguration.getMultipliers()) {
@@ -174,13 +209,38 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         OffboardPenaltyLabel = new javax.swing.JLabel();
         CurrentOffboardPenaltyLabel = new javax.swing.JLabel();
         ScoreListLabel = new javax.swing.JLabel();
-        CurrentScoreListLabel = new javax.swing.JLabel();
         MultipliersLabel = new javax.swing.JLabel();
         CurrentMultipliersLabel = new javax.swing.JLabel();
         ExactZeroWinLabel = new javax.swing.JLabel();
         CurrentExactZeroWinLabel = new javax.swing.JLabel();
         SubtractPointsLabel = new javax.swing.JLabel();
         CurrentSubtractPointsLabel = new javax.swing.JLabel();
+        ScoreListDartboardHolderPanel = new javax.swing.JPanel();
+        filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        ScoreListDartboardPanel = new javax.swing.JPanel();
+        ScoreLabelBullseye = new javax.swing.JLabel();
+        ScoreLabel20 = new javax.swing.JLabel();
+        ScoreLabel19 = new javax.swing.JLabel();
+        ScoreLabel18 = new javax.swing.JLabel();
+        ScoreLabel17 = new javax.swing.JLabel();
+        ScoreLabel16 = new javax.swing.JLabel();
+        ScoreLabel15 = new javax.swing.JLabel();
+        ScoreLabel14 = new javax.swing.JLabel();
+        ScoreLabel13 = new javax.swing.JLabel();
+        ScoreLabel12 = new javax.swing.JLabel();
+        ScoreLabel11 = new javax.swing.JLabel();
+        ScoreLabel10 = new javax.swing.JLabel();
+        ScoreLabel9 = new javax.swing.JLabel();
+        ScoreLabel8 = new javax.swing.JLabel();
+        ScoreLabel7 = new javax.swing.JLabel();
+        ScoreLabel6 = new javax.swing.JLabel();
+        ScoreLabel5 = new javax.swing.JLabel();
+        ScoreLabel4 = new javax.swing.JLabel();
+        ScoreLabel3 = new javax.swing.JLabel();
+        ScoreLabel2 = new javax.swing.JLabel();
+        ScoreLabel1 = new javax.swing.JLabel();
+        ScoreListDartboardLabel = new javax.swing.JLabel();
+        filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         PropertiesMenu = new javax.swing.JPanel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         EditButton = new javax.swing.JButton();
@@ -418,26 +478,21 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         PropertiesPanel.add(CurrentOffboardPenaltyLabel, gridBagConstraints);
 
         ScoreListLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        ScoreListLabel.setText("Score List:");
+        ScoreListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreListLabel.setText("Score List");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(8, 8, 2, 8);
         PropertiesPanel.add(ScoreListLabel, gridBagConstraints);
-
-        CurrentScoreListLabel.setText("----");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        PropertiesPanel.add(CurrentScoreListLabel, gridBagConstraints);
 
         MultipliersLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         MultipliersLabel.setText("Multipliers:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
         PropertiesPanel.add(MultipliersLabel, gridBagConstraints);
@@ -445,7 +500,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         CurrentMultipliersLabel.setText("----");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         PropertiesPanel.add(CurrentMultipliersLabel, gridBagConstraints);
 
@@ -453,7 +508,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         ExactZeroWinLabel.setText("Exact Zero Win:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
         PropertiesPanel.add(ExactZeroWinLabel, gridBagConstraints);
@@ -461,7 +516,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         CurrentExactZeroWinLabel.setText("----");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         PropertiesPanel.add(CurrentExactZeroWinLabel, gridBagConstraints);
 
@@ -469,7 +524,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         SubtractPointsLabel.setText("Subtract Points:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
         PropertiesPanel.add(SubtractPointsLabel, gridBagConstraints);
@@ -477,9 +532,178 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         CurrentSubtractPointsLabel.setText("----");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         PropertiesPanel.add(CurrentSubtractPointsLabel, gridBagConstraints);
+
+        ScoreListDartboardHolderPanel.setPreferredSize(new java.awt.Dimension(200, 200));
+        ScoreListDartboardHolderPanel.setLayout(new javax.swing.BoxLayout(ScoreListDartboardHolderPanel, javax.swing.BoxLayout.X_AXIS));
+        ScoreListDartboardHolderPanel.add(filler14);
+
+        ScoreListDartboardPanel.setMaximumSize(new java.awt.Dimension(200, 200));
+        ScoreListDartboardPanel.setMinimumSize(new java.awt.Dimension(200, 200));
+        ScoreListDartboardPanel.setPreferredSize(new java.awt.Dimension(200, 200));
+        ScoreListDartboardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ScoreLabelBullseye.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabelBullseye.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabelBullseye.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabelBullseye.setText("0");
+        ScoreLabelBullseye.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabelBullseye, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 20, 20));
+
+        ScoreLabel20.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel20.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel20.setText("0");
+        ScoreLabel20.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 20, 20));
+
+        ScoreLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel19.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel19.setText("0");
+        ScoreLabel19.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 20, 20));
+
+        ScoreLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel18.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel18.setText("0");
+        ScoreLabel18.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 20, 20));
+
+        ScoreLabel17.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel17.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel17.setText("0");
+        ScoreLabel17.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 20, 20));
+
+        ScoreLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel16.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel16.setText("0");
+        ScoreLabel16.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 20, 20));
+
+        ScoreLabel15.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel15.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel15.setText("0");
+        ScoreLabel15.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 20, 20));
+
+        ScoreLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel14.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel14.setText("0");
+        ScoreLabel14.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 20, 20));
+
+        ScoreLabel13.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel13.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel13.setText("0");
+        ScoreLabel13.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 20, 20));
+
+        ScoreLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel12.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel12.setText("0");
+        ScoreLabel12.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 20, 20));
+
+        ScoreLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel11.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel11.setText("0");
+        ScoreLabel11.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 20, 20));
+
+        ScoreLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel10.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel10.setText("0");
+        ScoreLabel10.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 20, 20));
+
+        ScoreLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel9.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel9.setText("0");
+        ScoreLabel9.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 20, 20));
+
+        ScoreLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel8.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel8.setText("0");
+        ScoreLabel8.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 20, 20));
+
+        ScoreLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel7.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel7.setText("0");
+        ScoreLabel7.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 20, 20));
+
+        ScoreLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel6.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel6.setText("0");
+        ScoreLabel6.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 20, 20));
+
+        ScoreLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel5.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel5.setText("0");
+        ScoreLabel5.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 20, 20));
+
+        ScoreLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel4.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel4.setText("0");
+        ScoreLabel4.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 20, 20));
+
+        ScoreLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel3.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel3.setText("0");
+        ScoreLabel3.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 20, 20));
+
+        ScoreLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel2.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel2.setText("0");
+        ScoreLabel2.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 20, 20));
+
+        ScoreLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel1.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel1.setText("0");
+        ScoreLabel1.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 20, 20));
+
+        ScoreListDartboardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dartboard_200x200.png"))); // NOI18N
+        ScoreListDartboardPanel.add(ScoreListDartboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        ScoreListDartboardHolderPanel.add(ScoreListDartboardPanel);
+        ScoreListDartboardHolderPanel.add(filler15);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
+        PropertiesPanel.add(ScoreListDartboardHolderPanel, gridBagConstraints);
 
         PropertiesScrollPane.setViewportView(PropertiesPanel);
 
@@ -676,7 +900,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private javax.swing.JLabel CurrentMultipliersLabel;
     private javax.swing.JLabel CurrentNameLabel;
     private javax.swing.JLabel CurrentOffboardPenaltyLabel;
-    private javax.swing.JLabel CurrentScoreListLabel;
     private javax.swing.JLabel CurrentStartingScoreLabel;
     private javax.swing.JLabel CurrentSubtractPointsLabel;
     private javax.swing.JLabel DartsPerRoundLabel;
@@ -704,6 +927,30 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private javax.swing.JPanel PropertiesPanel;
     private javax.swing.JScrollPane PropertiesScrollPane;
     private javax.swing.JButton QuitToMainMenuButton;
+    private javax.swing.JLabel ScoreLabel1;
+    private javax.swing.JLabel ScoreLabel10;
+    private javax.swing.JLabel ScoreLabel11;
+    private javax.swing.JLabel ScoreLabel12;
+    private javax.swing.JLabel ScoreLabel13;
+    private javax.swing.JLabel ScoreLabel14;
+    private javax.swing.JLabel ScoreLabel15;
+    private javax.swing.JLabel ScoreLabel16;
+    private javax.swing.JLabel ScoreLabel17;
+    private javax.swing.JLabel ScoreLabel18;
+    private javax.swing.JLabel ScoreLabel19;
+    private javax.swing.JLabel ScoreLabel2;
+    private javax.swing.JLabel ScoreLabel20;
+    private javax.swing.JLabel ScoreLabel3;
+    private javax.swing.JLabel ScoreLabel4;
+    private javax.swing.JLabel ScoreLabel5;
+    private javax.swing.JLabel ScoreLabel6;
+    private javax.swing.JLabel ScoreLabel7;
+    private javax.swing.JLabel ScoreLabel8;
+    private javax.swing.JLabel ScoreLabel9;
+    private javax.swing.JLabel ScoreLabelBullseye;
+    private javax.swing.JPanel ScoreListDartboardHolderPanel;
+    private javax.swing.JLabel ScoreListDartboardLabel;
+    private javax.swing.JPanel ScoreListDartboardPanel;
     private javax.swing.JLabel ScoreListLabel;
     private javax.swing.JLabel StartingScoreLabel;
     private javax.swing.JLabel SubtractPointsLabel;
@@ -713,6 +960,8 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
     private javax.swing.Box.Filler filler11;
     private javax.swing.Box.Filler filler12;
     private javax.swing.Box.Filler filler13;
+    private javax.swing.Box.Filler filler14;
+    private javax.swing.Box.Filler filler15;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;

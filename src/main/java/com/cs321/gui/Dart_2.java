@@ -2,6 +2,7 @@ package com.cs321.gui;
 
 import com.cs321.core.DartboardUtils;
 import static com.cs321.core.DartboardUtils.coordsToScore;
+import static com.cs321.core.DartboardUtils.getTotalScore;
 import com.cs321.core.GameConfiguration;
 import com.cs321.core.GameManager;
 import com.cs321.gui.DartDashGUI;
@@ -73,13 +74,22 @@ public class Dart_2 extends UpdateableJPanel {
     public Dart_2(GUIState state) {
         initComponents();
         this.state = state;
-        manager = state.gameManager;
+       // manager = state.gameManager;
+       
         //  state.contentPane.add("Dart_2", this);
         util = new DartboardUtils();
         dartArrowintX = dartArrow.getX();
         dartArrowintY = dartArrow.getY();
+       
 
     }
+    @Override
+   public void updateComponents(){
+
+     manager = state.gameManager;
+     manager.beginRound();
+     setGameGui();
+}
 
     protected void gameConfig() {
         GameConfiguration gameMode = manager.getGameConfiguration();
@@ -459,13 +469,23 @@ public class Dart_2 extends UpdateableJPanel {
         dartArrow.setLocation(newX, newY);
 
 //olf
-        int sam = coordsToScore(dartArrow.getAlignmentX(), dartArrow.getAlignmentY());
-        System.out.println("sam: " + sam);
+      float coorX = evt.getX()/ (float)dartBoardPicture.getWidth(); 
+       float coorY = evt.getY()/ (float)dartBoardPicture.getHeight();
+       
+        System.out.println("coorX "+ coorX + " coorY" + coorY);
+       
+         int score = getTotalScore(coorX, coorY, manager.getGameConfiguration());
+        //int sam= manager.progressRound(dartArrow.getAlignmentX(),dartArrow.getAlignmentY() ); 
+        ///int sam = coordsToScore(dartArrow.getAlignmentX(), dartArrow.getAlignmentY());
+        //System.out.println("sam: " + sam);
 
-        Random rand = new Random();
-        int score = rand.nextInt(scoreList.length - 1);
+        //Random rand = new Random();
+        //int score = rand.nextInt(scoreList.length - 1);
+        System.out.println("getx : "+ evt.getX() +"gety "+ evt.getY());
         System.out.println("score: " + score);
-        throwScore = scoreList[score];
+        //throwScore = scoreList[score];
+        throwScore= score; 
+        
 
         throwScoreBoxValue.setText(throwScore + "");
 
@@ -529,12 +549,14 @@ public class Dart_2 extends UpdateableJPanel {
     }
 
     public void setGameGui() {
+        manager.getTeamsManager().getTeams();
 
         teamAName.setText(manager.getTeamsManager().getPlayerTeam(manager.getCurrentPlayer()).getId());// sets teamA name 
         teamBName.setText("B");// sets teamB name. 
         roundValueBox.setText(teamA);// shows round number. 
-        playingTeamBox.setText(manager.getCurrentTeam().getId());///displays the current team. 
-        playerNameBoxValue.setText(manager.getCurrentPlayer().getId());////displays the current player. 
+        playingTeamBoxValue.setText(manager.getCurrentTeam().getName());///displays the current team. 
+        
+        playerNameBoxValue.setText(manager.getCurrentPlayer().getName());////displays the current player. 
         throwBoxValue.setText(teamA);//displays the throw value such as 0/3
         startingScoreBoxValue.setText(manager.getGameConfiguration().getStartingScore() + "");///displays  the starting score. 
     }

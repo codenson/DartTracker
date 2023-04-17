@@ -209,12 +209,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         OffboardPenaltyLabel = new javax.swing.JLabel();
         CurrentOffboardPenaltyLabel = new javax.swing.JLabel();
         ScoreListLabel = new javax.swing.JLabel();
-        MultipliersLabel = new javax.swing.JLabel();
-        CurrentMultipliersLabel = new javax.swing.JLabel();
-        ExactZeroWinLabel = new javax.swing.JLabel();
-        CurrentExactZeroWinLabel = new javax.swing.JLabel();
-        SubtractPointsLabel = new javax.swing.JLabel();
-        CurrentSubtractPointsLabel = new javax.swing.JLabel();
         ScoreListDartboardHolderPanel = new javax.swing.JPanel();
         filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         ScoreListDartboardPanel = new javax.swing.JPanel();
@@ -241,6 +235,12 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         ScoreLabel1 = new javax.swing.JLabel();
         ScoreListDartboardLabel = new javax.swing.JLabel();
         filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        MultipliersLabel = new javax.swing.JLabel();
+        CurrentMultipliersLabel = new javax.swing.JLabel();
+        ExactZeroWinLabel = new javax.swing.JLabel();
+        CurrentExactZeroWinLabel = new javax.swing.JLabel();
+        SubtractPointsLabel = new javax.swing.JLabel();
+        CurrentSubtractPointsLabel = new javax.swing.JLabel();
         PropertiesMenu = new javax.swing.JPanel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         EditButton = new javax.swing.JButton();
@@ -488,6 +488,175 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.insets = new java.awt.Insets(8, 8, 2, 8);
         PropertiesPanel.add(ScoreListLabel, gridBagConstraints);
 
+        ScoreListDartboardHolderPanel.setPreferredSize(new java.awt.Dimension(200, 200));
+        ScoreListDartboardHolderPanel.setLayout(new javax.swing.BoxLayout(ScoreListDartboardHolderPanel, javax.swing.BoxLayout.X_AXIS));
+        ScoreListDartboardHolderPanel.add(filler14);
+
+        ScoreListDartboardPanel.setMaximumSize(new java.awt.Dimension(200, 200));
+        ScoreListDartboardPanel.setMinimumSize(new java.awt.Dimension(200, 200));
+        ScoreListDartboardPanel.setPreferredSize(new java.awt.Dimension(200, 200));
+        ScoreListDartboardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ScoreLabelBullseye.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabelBullseye.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabelBullseye.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabelBullseye.setText("-");
+        ScoreLabelBullseye.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabelBullseye, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 20, 20));
+
+        ScoreLabel20.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel20.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel20.setText("-");
+        ScoreLabel20.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 20, 20));
+
+        ScoreLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel19.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel19.setText("-");
+        ScoreLabel19.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 20, 20));
+
+        ScoreLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel18.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel18.setText("-");
+        ScoreLabel18.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 20, 20));
+
+        ScoreLabel17.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel17.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel17.setText("-");
+        ScoreLabel17.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 20, 20));
+
+        ScoreLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel16.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel16.setText("-");
+        ScoreLabel16.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 20, 20));
+
+        ScoreLabel15.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel15.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel15.setText("-");
+        ScoreLabel15.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 20, 20));
+
+        ScoreLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel14.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel14.setText("-");
+        ScoreLabel14.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 20, 20));
+
+        ScoreLabel13.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel13.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel13.setText("-");
+        ScoreLabel13.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 20, 20));
+
+        ScoreLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel12.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel12.setText("-");
+        ScoreLabel12.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 20, 20));
+
+        ScoreLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel11.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel11.setText("-");
+        ScoreLabel11.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 20, 20));
+
+        ScoreLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel10.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel10.setText("-");
+        ScoreLabel10.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 20, 20));
+
+        ScoreLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel9.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel9.setText("-");
+        ScoreLabel9.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 20, 20));
+
+        ScoreLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel8.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel8.setText("-");
+        ScoreLabel8.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 20, 20));
+
+        ScoreLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel7.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel7.setText("-");
+        ScoreLabel7.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 20, 20));
+
+        ScoreLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel6.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel6.setText("-");
+        ScoreLabel6.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 20, 20));
+
+        ScoreLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel5.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel5.setText("-");
+        ScoreLabel5.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 20, 20));
+
+        ScoreLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel4.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel4.setText("-");
+        ScoreLabel4.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 20, 20));
+
+        ScoreLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel3.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel3.setText("-");
+        ScoreLabel3.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 20, 20));
+
+        ScoreLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel2.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel2.setText("-");
+        ScoreLabel2.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 20, 20));
+
+        ScoreLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        ScoreLabel1.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        ScoreLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScoreLabel1.setText("-");
+        ScoreLabel1.setOpaque(true);
+        ScoreListDartboardPanel.add(ScoreLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 20, 20));
+
+        ScoreListDartboardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dartboard_200x200.png"))); // NOI18N
+        ScoreListDartboardPanel.add(ScoreListDartboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        ScoreListDartboardHolderPanel.add(ScoreListDartboardPanel);
+        ScoreListDartboardHolderPanel.add(filler15);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
+        PropertiesPanel.add(ScoreListDartboardHolderPanel, gridBagConstraints);
+
         MultipliersLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         MultipliersLabel.setText("Multipliers:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -535,175 +704,6 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         PropertiesPanel.add(CurrentSubtractPointsLabel, gridBagConstraints);
-
-        ScoreListDartboardHolderPanel.setPreferredSize(new java.awt.Dimension(200, 200));
-        ScoreListDartboardHolderPanel.setLayout(new javax.swing.BoxLayout(ScoreListDartboardHolderPanel, javax.swing.BoxLayout.X_AXIS));
-        ScoreListDartboardHolderPanel.add(filler14);
-
-        ScoreListDartboardPanel.setMaximumSize(new java.awt.Dimension(200, 200));
-        ScoreListDartboardPanel.setMinimumSize(new java.awt.Dimension(200, 200));
-        ScoreListDartboardPanel.setPreferredSize(new java.awt.Dimension(200, 200));
-        ScoreListDartboardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        ScoreLabelBullseye.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabelBullseye.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabelBullseye.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabelBullseye.setText("0");
-        ScoreLabelBullseye.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabelBullseye, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 20, 20));
-
-        ScoreLabel20.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel20.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel20.setText("0");
-        ScoreLabel20.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 20, 20));
-
-        ScoreLabel19.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel19.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel19.setText("0");
-        ScoreLabel19.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 20, 20));
-
-        ScoreLabel18.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel18.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel18.setText("0");
-        ScoreLabel18.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 20, 20));
-
-        ScoreLabel17.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel17.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel17.setText("0");
-        ScoreLabel17.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 20, 20));
-
-        ScoreLabel16.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel16.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel16.setText("0");
-        ScoreLabel16.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 20, 20));
-
-        ScoreLabel15.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel15.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel15.setText("0");
-        ScoreLabel15.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 20, 20));
-
-        ScoreLabel14.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel14.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel14.setText("0");
-        ScoreLabel14.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 20, 20));
-
-        ScoreLabel13.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel13.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel13.setText("0");
-        ScoreLabel13.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 20, 20));
-
-        ScoreLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel12.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel12.setText("0");
-        ScoreLabel12.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 20, 20));
-
-        ScoreLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel11.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel11.setText("0");
-        ScoreLabel11.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 20, 20));
-
-        ScoreLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel10.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel10.setText("0");
-        ScoreLabel10.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 20, 20));
-
-        ScoreLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel9.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel9.setText("0");
-        ScoreLabel9.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 20, 20));
-
-        ScoreLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel8.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel8.setText("0");
-        ScoreLabel8.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 20, 20));
-
-        ScoreLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel7.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel7.setText("0");
-        ScoreLabel7.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 20, 20));
-
-        ScoreLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel6.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel6.setText("0");
-        ScoreLabel6.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 20, 20));
-
-        ScoreLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel5.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel5.setText("0");
-        ScoreLabel5.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 20, 20));
-
-        ScoreLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel4.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel4.setText("0");
-        ScoreLabel4.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 20, 20));
-
-        ScoreLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel3.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel3.setText("0");
-        ScoreLabel3.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 20, 20));
-
-        ScoreLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel2.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel2.setText("0");
-        ScoreLabel2.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 20, 20));
-
-        ScoreLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        ScoreLabel1.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        ScoreLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ScoreLabel1.setText("0");
-        ScoreLabel1.setOpaque(true);
-        ScoreListDartboardPanel.add(ScoreLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 20, 20));
-
-        ScoreListDartboardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dartboard_200x200.png"))); // NOI18N
-        ScoreListDartboardPanel.add(ScoreListDartboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        ScoreListDartboardHolderPanel.add(ScoreListDartboardPanel);
-        ScoreListDartboardHolderPanel.add(filler15);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
-        PropertiesPanel.add(ScoreListDartboardHolderPanel, gridBagConstraints);
 
         PropertiesScrollPane.setViewportView(PropertiesPanel);
 

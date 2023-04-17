@@ -235,7 +235,7 @@ public class Dart_2 extends UpdateableJPanel {
         });
 
         dartBoardPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dartBoardPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dartboard.png"))); // NOI18N
+        dartBoardPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dartboard_200x200.png"))); // NOI18N
         dartBoardPicture.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 dartBoardPictureMouseClicked(evt);
@@ -247,7 +247,7 @@ public class Dart_2 extends UpdateableJPanel {
         changingLightsBoardPanelLayout.setHorizontalGroup(
             changingLightsBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changingLightsBoardPanelLayout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dartBoardPicture)
                 .addGap(40, 40, 40))
         );

@@ -133,40 +133,40 @@ public class GameManager {
         this.turnManager= turnManager;
         this.gameConfiguration = gameConfiguration;
         
-        dartGui = new Dart_2(state); 
+        //dartGui = new Dart_2(state); 
        
-        setGameGui();//inner method call
+       // setGameGui();//inner method call
         
         
          //
     }
-      private void playGame(){
-          dartGui.setGameConfigGui(gameConfiguration);
-       
-    
-    
-    
-    }
-      /**
-       * Method to initialize and update Dart_2 GUI.
-       */
-      private void setGameGui(){
-          String currentTeam = teamsManager.getPlayerTeam(turnManager.getCurrentPlayer()).getName(); 
-          
-          dartGui.teamAName.setText("");//sets team A name on GUI. 
-          dartGui.teamBName.setText("");//sets team b name on GUI. 
-          dartGui.roundValueBox.setText("");///sets round number on GUI. 
-          dartGui.playerNameBoxValue.setText(turnManager.getCurrentPlayer().getName());//sets current player,s name on GUI. 
-          dartGui.playingTeamBoxValue.setText(currentTeam);// sets current playing team on GUI.
-          dartGui.throwBoxValue.setText("");// initialize how many throws in a game.
-
-          
-         
-         teamsManager.getPlayerTeam(turnManager.getCurrentPlayer()).getName(); 
-          
-      
-      }
-      
+//      private void playGame(){
+//          dartGui.setGameConfigGui(gameConfiguration);
+//       
+//    
+//    
+//    
+//    }
+//      /**
+//       * Method to initialize and update Dart_2 GUI.
+//       */
+//      private void setGameGui(){
+//          String currentTeam = teamsManager.getPlayerTeam(turnManager.getCurrentPlayer()).getName(); 
+//          
+//          dartGui.teamAName.setText("");//sets team A name on GUI. 
+//          dartGui.teamBName.setText("");//sets team b name on GUI. 
+//          dartGui.roundValueBox.setText("");///sets round number on GUI. 
+//          dartGui.playerNameBoxValue.setText(turnManager.getCurrentPlayer().getName());//sets current player,s name on GUI. 
+//          dartGui.playingTeamBoxValue.setText(currentTeam);// sets current playing team on GUI.
+//          dartGui.throwBoxValue.setText("");// initialize how many throws in a game.
+//
+//          
+//         
+//         teamsManager.getPlayerTeam(turnManager.getCurrentPlayer()).getName(); 
+//          
+//      
+//      }
+//      
       
       
 

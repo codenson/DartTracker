@@ -1,36 +1,71 @@
 package com.cs321.gui;
 
-
+import com.cs321.core.DartboardUtils;
+import static com.cs321.core.DartboardUtils.coordsToScore;
 import com.cs321.core.GameConfiguration;
+import com.cs321.core.GameManager;
 import com.cs321.gui.DartDashGUI;
 import com.cs321.gui.GUIState;
 import com.cs321.gui.UpdateableJPanel;
 import java.awt.LayoutManager;
+import java.util.HashMap;
+import java.util.Random;
 import javax.swing.border.Border;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-
 /**
- Dart Gui. Empty file for dart display. 
+ * Dart Gui. Empty file for dart display.
+ *
  * @author guero
  */
 public class Dart_2 extends UpdateableJPanel {
 
-    int xDart = 0;
-    int yDart = 0;
-    int xMouse = 0;
-    int yMouse = 0;
     private GUIState state;
+    HashMap<Integer, Integer> PlayerResults1;
+    /**
+     * Total round score.
+     */
+    private int totalRoundScore = 0;
+    /**
+     * current throw score.
+     */
+    private int throwScore = 0;
+    /**
+     * how many throws happened.
+     */
+    private int throwRounds = 0;
+    /**
+     * actual round.
+     */
+    private int round = 0; //
+    /**
+     * how many scores were confirmed.
+     */
+    private int confirmed = 0;
+    String teamA = null;
+    String teamB = null;
     private int MaximumRounds = 0;
-    private int dartsPerRound = 3;
-    String id = null;
+    /**
+     * Throws allowed per round.
+     */
+    private int dartsPerRound = 3; ///done 
     float[] multipliers;
     int OffboardPenalty = 0;
-    int[] scoreList = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50};
+    int[] scoreList = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50};//done 
     int startingScore = 30;
+    String id = null;
+    int xMouse = 0;
+    int yMouse = 0;
+    int xDart = 0;
+    int yDart = 0;
+    int dartArrowintX = 0;
+    int dartArrowintY = 0;
+    DartboardUtils util;
+
+    GameManager manager;
 
     /**
      * Creates new form Dart
@@ -38,7 +73,25 @@ public class Dart_2 extends UpdateableJPanel {
     public Dart_2(GUIState state) {
         initComponents();
         this.state = state;
-       //  state.contentPane.add("Dart_2", this);
+        manager = state.gameManager;
+        //  state.contentPane.add("Dart_2", this);
+        util = new DartboardUtils();
+        dartArrowintX = dartArrow.getX();
+        dartArrowintY = dartArrow.getY();
+
+    }
+
+    protected void gameConfig() {
+        GameConfiguration gameMode = manager.getGameConfiguration();
+        //this.gameMode = gameMode;
+        MaximumRounds = gameMode.getMaximumRounds();
+        dartsPerRound = gameMode.getDartsPerRound();
+        id = gameMode.getId();//string
+        multipliers = gameMode.getMultipliers();//float.
+        OffboardPenalty = gameMode.getOffboardPenalty();//int
+        scoreList = gameMode.getScoreList();//array of ints 
+        startingScore = gameMode.getStartingScore(); //int
+
     }
 
     /**
@@ -74,7 +127,7 @@ public class Dart_2 extends UpdateableJPanel {
         confirmNowButton = new java.awt.Button();
         changingLightsBoardPanel = new javax.swing.JPanel();
         dartBoardPicture = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        dartArrow = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1, 1));
         setPreferredSize(new java.awt.Dimension(640, 480));
@@ -151,6 +204,11 @@ public class Dart_2 extends UpdateableJPanel {
         undoThrowButton.setBackground(new java.awt.Color(204, 255, 204));
         undoThrowButton.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         undoThrowButton.setLabel("Undo Throw");
+        undoThrowButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                undoThrowButtonMouseClicked(evt);
+            }
+        });
         undoThrowButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 undoThrowButtonActionPerformed(evt);
@@ -191,21 +249,21 @@ public class Dart_2 extends UpdateableJPanel {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        jLabel2.setBackground(new java.awt.Color(255, 51, 51));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dart_1_10.png"))); // NOI18N
-        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        dartArrow.setBackground(new java.awt.Color(255, 51, 51));
+        dartArrow.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dartArrow.setForeground(new java.awt.Color(255, 51, 51));
+        dartArrow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dart_1_10.png"))); // NOI18N
+        dartArrow.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel2MouseDragged(evt);
+                dartArrowMouseDragged(evt);
             }
         });
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        dartArrow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                dartArrowMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel2MousePressed(evt);
+                dartArrowMousePressed(evt);
             }
         });
 
@@ -242,29 +300,6 @@ public class Dart_2 extends UpdateableJPanel {
                             .addComponent(playerNameBox))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(playerNameBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(roundScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(playingTeamBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(throwBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(throwBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(102, 102, 102)
-                                                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(startingScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(23, 23, 23))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,15 +307,35 @@ public class Dart_2 extends UpdateableJPanel {
                                         .addComponent(throwScoreBox)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(throwScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(62, 62, 62))
+                                        .addGap(41, 41, 41))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(undoThrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(28, 28, 28)
-                                        .addComponent(confirmNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(35, 35, 35))))))
+                                        .addComponent(confirmNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(playerNameBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(roundScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(playingTeamBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dartArrow))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(throwBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(throwBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(102, 102, 102)
+                                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(startingScoreBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(QuitToMainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +378,7 @@ public class Dart_2 extends UpdateableJPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(playerNameBoxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(63, 63, 63)
-                                .addComponent(jLabel2))
+                                .addComponent(dartArrow))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(changingLightsBoardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -343,126 +398,173 @@ public class Dart_2 extends UpdateableJPanel {
 
     private void QuitToMainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitToMainMenuButtonActionPerformed
         // TODO add your handling code here:
-       
+
         // DartDashGUI gui = new DartDashGUI();
         //.setVisible(true);
         //gui.dispose();
         //this.dispose();
         //jPanel1.setVisible(false);
         //state.contentPaneCardLayout.show(state.contentPane, "MainMenuPanel");
-
         // state.contentPaneCardLayout.show(state.contentPane, "ViewGamemodesPanel");
-       
-         state.contentPaneCardLayout.show(state.contentPane, GUIState.PanelName.MainMenuPanel.toString());
+        state.contentPaneCardLayout.show(state.contentPane, GUIState.PanelName.MainMenuPanel.toString());
     }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
 
     private void undoThrowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoThrowButtonActionPerformed
         // TODO add your handling code here:
 
-        
+
     }//GEN-LAST:event_undoThrowButtonActionPerformed
 
     private void confirmNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmNowButtonActionPerformed
         // TODO add your handling code here:
+        if (throwRounds > dartsPerRound || throwRounds < 0 || confirmed > 2 || throwScore == 0) {
+            javax.swing.JOptionPane.showMessageDialog(null, "You cannot confim this round ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        // setPanel2Color(changingLightsBoardPanel);////changes panel's color for fun. 
+        throwRounds += 1;
+        String s = throwRounds + "/" + dartsPerRound;
+        throwBoxValue.setText(s);
+        totalRoundScore += throwScore;
+        throwScore = 0;
+        throwScoreBoxValue.setText(throwScore + "");
 
-      
+        roundScoreBoxValue.setText(totalRoundScore + "");
+        confirmed += 1;
+        //confimredLast = true;
+        resetDartArrowLocation();
+
+
     }//GEN-LAST:event_confirmNowButtonActionPerformed
 
     private void dartBoardPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dartBoardPictureMouseClicked
-        // TODO add your handling code here:
-        // System.out.println("throw round : "+ throwRounds);
-        // jLabel2MouseDragged(evt);
-//        Border border = dartBoardPicture.getBorder();
-//       LayoutManager layout = dartBoardPicture.getLayout();
-//       int x= layout.preferredLayoutSize(jLabel2).height;
-//       int y=    layout.preferredLayoutSize(jLabel2).width;
 
-/*int labelWidth = dartBoardPicture.getWidth();
-int labelHeight = dartBoardPicture.getHeight();
-int labelX = dartBoardPicture.getX();
-int labelY = dartBoardPicture.getY();
-double m =  10.0002; 
+        if (throwRounds > dartsPerRound - 1) {
+            javax.swing.JOptionPane.showMessageDialog(null, "You completed all 3 Throws ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        if (throwRounds == 0) {
+            // manager.beginRound();
+        }
+        //manager.beginRound(); 
+        int y = dartBoardPicture.getHorizontalAlignment();
+        int x = dartBoardPicture.getHorizontalAlignment();
 
-int centerX = labelX + (labelWidth / 2);
-int centerY = labelY + (labelHeight / 2);
-
-       // System.out.println("center x : "+ labelX+);
-        
-jLabel2.setLocation(labelX, labelY);
-*/
-
-int y=dartBoardPicture.getHorizontalAlignment();
-int x = dartBoardPicture.getHorizontalAlignment();
-
-//       
-x = evt.getXOnScreen() - xMouse;
-     y = evt.getYOnScreen() - yMouse;
+        x = evt.getXOnScreen() - xMouse;
+        y = evt.getYOnScreen() - yMouse;
 //int newX = dartBoardPicture.getX()+x / 40;
 //int newY = dartBoardPicture.getY() + y / 40;
-int newX = x ;
-int newY = y ;
-    
-jLabel2.setLocation(newX, newY);
-        
-        
-        
+        int newX = x;
+        int newY = y;
+        dartArrow.setLocation(newX, newY);
+
+//olf
+        int sam = coordsToScore(dartArrow.getAlignmentX(), dartArrow.getAlignmentY());
+        System.out.println("sam: " + sam);
+
+        Random rand = new Random();
+        int score = rand.nextInt(scoreList.length - 1);
+        System.out.println("score: " + score);
+        throwScore = scoreList[score];
+
+        throwScoreBoxValue.setText(throwScore + "");
+
+
     }//GEN-LAST:event_dartBoardPictureMouseClicked
 
-    private void jLabel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseDragged
-  int x = evt.getXOnScreen() - xMouse;
-    int y = evt.getYOnScreen() - yMouse;
-   int newX = jLabel2.getX() +x / 40;  
-  int newY = jLabel2.getY() + y / 40;  
+    private void dartArrowMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dartArrowMouseDragged
+        int x = evt.getXOnScreen() - xMouse;
+        int y = evt.getYOnScreen() - yMouse;
+        int newX = dartArrow.getX() + x / 40;
+        int newY = dartArrow.getY() + y / 40;
 //int newX = dartBoardPicture.getX();
 //int newY = dartBoardPicture.getY()+y ;
-    
-    jLabel2.setLocation(newX, newY);
-    }//GEN-LAST:event_jLabel2MouseDragged
-               
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
 
- 
-    }//GEN-LAST:event_jLabel2MouseClicked
+        dartArrow.setLocation(newX, newY);
+    }//GEN-LAST:event_dartArrowMouseDragged
 
-    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+    private void dartArrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dartArrowMouseClicked
+
+
+    }//GEN-LAST:event_dartArrowMouseClicked
+
+    private void dartArrowMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dartArrowMousePressed
         // TODO add your handling code here:
-      xMouse = evt.getXOnScreen();
-    yMouse = evt.getYOnScreen();
-      
-    }//GEN-LAST:event_jLabel2MousePressed
+        xMouse = evt.getXOnScreen();
+        yMouse = evt.getYOnScreen();
 
-    public void setGameGui(){
-    
-    teamAName.setText(id);// sets teamA name 
-    teamBName.setText(id);// sets teamB name. 
-    
+    }//GEN-LAST:event_dartArrowMousePressed
+
+    private void undoThrowButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_undoThrowButtonMouseClicked
+        // TODO add your handling code here:
+        if ((throwRounds == 0 && throwScore == 0) || confirmed > 2 || throwScore == 0) {  ///this is debatable, since I think throws are going to be controllded by the game's manager's control flow. 
+            javax.swing.JOptionPane.showMessageDialog(null, "You cannot undo a throw ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            return;
+
+            //throwRounds=0;
+        }
+
+        // setPanel2Color(changingLightsBoardPanel);////changes panel's color for fun. 
+        throwScore = 0;
+        /*throwRounds -= 1;
+        if (throwRounds < 0){
+        throwRounds =0; 
+        }*/
+        throwScoreBoxValue.setText("0");
+
+        String s = throwRounds + "/" + dartsPerRound;
+        throwBoxValue.setText(s);
+        roundScoreBoxValue.setText(totalRoundScore + "");
+
+        resetDartArrowLocation(); ///resets dart location. 
+    }//GEN-LAST:event_undoThrowButtonMouseClicked
+
+    /**
+     * Method to reset dart to initial location.
+     */
+    private void resetDartArrowLocation() {
+        dartArrow.setLocation(dartArrowintX, dartArrowintY);/////////////
+
     }
 
-/**
- * method to set up gui gameConfig. 
- * @param gameMode 
- */
-public void setGameConfigGui(GameConfiguration gameMode){
-   
-    
-       // this.gameMode = gameMode;
-        MaximumRounds = gameMode.getMaximumRounds();
-        dartsPerRound = gameMode.getDartsPerRound();
-        id = gameMode.getId();//string
-        multipliers = gameMode.getMultipliers();//float.
-        OffboardPenalty = gameMode.getOffboardPenalty();//int
-        scoreList = gameMode.getScoreList();//array of ints 
-        startingScore = gameMode.getStartingScore(); //int
-    
+    public void setGameGui() {
+
+        teamAName.setText(manager.getTeamsManager().getPlayerTeam(manager.getCurrentPlayer()).getId());// sets teamA name 
+        teamBName.setText("B");// sets teamB name. 
+        roundValueBox.setText(teamA);// shows round number. 
+        playingTeamBox.setText(manager.getCurrentTeam().getId());///displays the current team. 
+        playerNameBoxValue.setText(manager.getCurrentPlayer().getId());////displays the current player. 
+        throwBoxValue.setText(teamA);//displays the throw value such as 0/3
+        startingScoreBoxValue.setText(manager.getGameConfiguration().getStartingScore() + "");///displays  the starting score. 
     }
-    
+
+    /**
+     * method to set up gui gameConfig.
+     *
+     * @param gameMode
+     */
+//public void setGameConfigGui(){
+//   
+//    GameConfiguration gameMode =  manager.getGameConfiguration();
+//       // this.gameMode = gameMode;
+//        MaximumRounds = gameMode.getMaximumRounds();
+//        dartsPerRound = gameMode.getDartsPerRound();
+//        id = gameMode.getId();//string
+//        multipliers = gameMode.getMultipliers();//float.
+//        OffboardPenalty = gameMode.getOffboardPenalty();//int
+//        scoreList = gameMode.getScoreList();//array of ints 
+//        startingScore = gameMode.getStartingScore(); //int
+//    
+//    }
+//    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button QuitToMainMenuButton;
     private javax.swing.JPanel changingLightsBoardPanel;
     private java.awt.Button confirmNowButton;
+    private javax.swing.JLabel dartArrow;
     private javax.swing.JLabel dartBoardPicture;
-    private javax.swing.JLabel jLabel2;
     private java.awt.Label label2;
     private java.awt.Label label5;
     private javax.swing.JLabel playerNameBox;
@@ -484,4 +586,5 @@ public void setGameConfigGui(GameConfiguration gameMode){
     private java.awt.Label throwScoreBoxValue;
     private java.awt.Button undoThrowButton;
     // End of variables declaration//GEN-END:variables
+
 }

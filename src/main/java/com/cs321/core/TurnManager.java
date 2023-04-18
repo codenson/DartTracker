@@ -29,6 +29,37 @@ public class TurnManager {
     }
 
     /**
+     * Create a new turn manager from a list of teams with default priority score.
+     * By default, the priority score is adjusted so that the first team in the list
+     * has the highest priority score and the last team in the list has the lowest
+     * priority score. Each player in a team has increasing priority score.
+     * 
+     * @param teams The list of teams.
+     */
+    public static TurnManager fromTeams(Team[] teams) {
+        TurnManagerBuilder turnManagerBuilder = new TurnManagerBuilder();
+
+        int basePriority = 1;
+        int teamPriorityBoost = 0;
+
+        for (Team team : teams) {
+            int teamSum = 0;
+
+            for (Player player : team.getPlayers()) {
+                int playerPriority = basePriority + teamPriorityBoost;
+                turnManagerBuilder.withPlayer(player, team, playerPriority);
+
+                teamSum += playerPriority;
+                basePriority++;
+            }
+
+            teamPriorityBoost += teamSum;
+        }
+
+        return turnManagerBuilder.build();
+    }
+
+    /**
      * A builder class for TurnManager.
      * 
      * @author James Luna, Hasnain Raza, Marouane Guerouji
@@ -96,15 +127,16 @@ public class TurnManager {
          * Create a new turn manager builder.
          */
         public TurnManagerBuilder() {
-            playerPriorityQueue = new PriorityQueue<PlayerPriority>((p1, p2) -> Integer.compare(p2.priority, p1.priority));
+            playerPriorityQueue = new PriorityQueue<PlayerPriority>((p1, p2) -> Integer.compare(p1.priority, p2.priority));
             teamPriorityScore = new Hashtable<Team, Integer>();
             playerTeam = new Hashtable<Player, Team>();
-            teamPriorityQueue = new PriorityQueue<TeamPriority>((t1, t2) -> Integer.compare(t2.priority, t1.priority));
+            teamPriorityQueue = new PriorityQueue<TeamPriority>((t1, t2) -> Integer.compare(t1.priority, t2.priority));
             prioritizedTeamPlayer = new Hashtable<Team, ArrayList<Player>>();
         }
 
         /**
          * Add a player specifying their team to the turn manager builder with a priority score.
+         * Lower priority score means higher priority.
          * 
          * @param player The player to add.
          * @param priority The priority score of the player.
@@ -125,16 +157,6 @@ public class TurnManager {
             playerTeam.put(player, team);
 
             return this;
-        }
-
-        /**
-         * Add a player specifying their team to the turn manager builder. The priority score goes down by 1 for each player added.
-         * 
-         * @param player The player to add.
-         * @return The turn manager builder.
-         */
-        public TurnManagerBuilder withPlayer(Player player, Team team) {
-            return withPlayer(player, team, Integer.MAX_VALUE - playerPriorityQueue.size());
         }
 
         /**

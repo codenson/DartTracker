@@ -580,7 +580,7 @@ public class ChooseGamemodePanel extends UpdateableJPanel {
         MultipliersLabel.setText("Multipliers:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
         PropertiesPanel.add(MultipliersLabel, gridBagConstraints);
@@ -588,7 +588,7 @@ public class ChooseGamemodePanel extends UpdateableJPanel {
         CurrentMultipliersLabel.setText("----");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         PropertiesPanel.add(CurrentMultipliersLabel, gridBagConstraints);
 
@@ -596,7 +596,7 @@ public class ChooseGamemodePanel extends UpdateableJPanel {
         ExactZeroWinLabel.setText("Exact Zero Win:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
         PropertiesPanel.add(ExactZeroWinLabel, gridBagConstraints);
@@ -604,7 +604,7 @@ public class ChooseGamemodePanel extends UpdateableJPanel {
         CurrentExactZeroWinLabel.setText("----");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         PropertiesPanel.add(CurrentExactZeroWinLabel, gridBagConstraints);
 
@@ -612,7 +612,7 @@ public class ChooseGamemodePanel extends UpdateableJPanel {
         SubtractPointsLabel.setText("Subtract Points:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
         PropertiesPanel.add(SubtractPointsLabel, gridBagConstraints);
@@ -620,7 +620,7 @@ public class ChooseGamemodePanel extends UpdateableJPanel {
         CurrentSubtractPointsLabel.setText("----");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         PropertiesPanel.add(CurrentSubtractPointsLabel, gridBagConstraints);
 

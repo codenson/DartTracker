@@ -214,10 +214,10 @@ public class GameManagerTest {
             .build();
         TeamsManager teamsManager = new TeamsManager(new Team[] { team1, team2 });
         TurnManager turnManager = new TurnManagerBuilder()
-            .withPlayer(player1, team1, 2)
-            .withPlayer(player2, team1, 4)
-            .withPlayer(player3, team2, 6)
-            .withPlayer(player4, team2, 8)
+            .withPlayer(player1, team1, 8)
+            .withPlayer(player2, team1, 6)
+            .withPlayer(player3, team2, 4)
+            .withPlayer(player4, team2, 2)
             .build();
         RoundsManager roundsManager = new RoundsManager();
 
@@ -628,10 +628,10 @@ public class GameManagerTest {
         GameConfiguration gameConfiguration = new GameConfiguration();
         TeamsManager teamsManager = new TeamsManager(new Team[] { team1, team2 });
         TurnManager turnManager = new TurnManagerBuilder()
-            .withPlayer(player1, team1, 1)
-            .withPlayer(player2, team1, 2)
-            .withPlayer(player3, team2, 3)
-            .withPlayer(player4, team2, 4)
+            .withPlayer(player1, team1, 4)
+            .withPlayer(player2, team1, 3)
+            .withPlayer(player3, team2, 2)
+            .withPlayer(player4, team2, 1)
             .build();
         RoundsManager roundsManager = new RoundsManager();
         

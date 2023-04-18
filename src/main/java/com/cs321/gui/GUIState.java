@@ -192,13 +192,8 @@ public class GUIState {
         TeamsManager teamsManager = new TeamsManager(teams.toArray(new Team[0]));
 
         // Generate the TurnManager
-        TurnManagerBuilder turnManagerBuilder = new TurnManagerBuilder();
-        for (Team team : teams) {
-            for (Player player : team.getPlayers()) {
-                turnManagerBuilder.withPlayer(player, team);
-            }
-        }
-        TurnManager turnManager = turnManagerBuilder.build();
+        Team[] teamsArray = teams.toArray(new Team[0]);
+        TurnManager turnManager = TurnManager.fromTeams(teamsArray);
 
         // Generate the RoundsManager
         RoundsManager roundsManager = new RoundsManager();

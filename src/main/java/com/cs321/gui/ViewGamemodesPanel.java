@@ -389,12 +389,13 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         IDLabel.setText("ID:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(16, 16, 2, 16);
         PropertiesPanel.add(IDLabel, gridBagConstraints);
 
         CurrentIDLabel.setText("----");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(16, 0, 0, 16);
         PropertiesPanel.add(CurrentIDLabel, gridBagConstraints);
 
         NameLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -403,7 +404,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(NameLabel, gridBagConstraints);
 
         CurrentNameLabel.setText("----");
@@ -411,6 +412,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentNameLabel, gridBagConstraints);
 
         DartsPerRoundLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -419,7 +421,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(DartsPerRoundLabel, gridBagConstraints);
 
         CurrentDartsPerRoundLabel.setText("----");
@@ -427,6 +429,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentDartsPerRoundLabel, gridBagConstraints);
 
         MaximumRoundsLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -435,7 +438,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(MaximumRoundsLabel, gridBagConstraints);
 
         CurrentMaximumRoundsLabel.setText("----");
@@ -443,6 +446,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentMaximumRoundsLabel, gridBagConstraints);
 
         StartingScoreLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -451,7 +455,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(StartingScoreLabel, gridBagConstraints);
 
         CurrentStartingScoreLabel.setText("----");
@@ -459,6 +463,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentStartingScoreLabel, gridBagConstraints);
 
         OffboardPenaltyLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -467,7 +472,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(OffboardPenaltyLabel, gridBagConstraints);
 
         CurrentOffboardPenaltyLabel.setText("----");
@@ -475,6 +480,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentOffboardPenaltyLabel, gridBagConstraints);
 
         ScoreListLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -485,7 +491,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 2, 8);
+        gridBagConstraints.insets = new java.awt.Insets(8, 16, 2, 16);
         PropertiesPanel.add(ScoreListLabel, gridBagConstraints);
 
         ScoreListDartboardHolderPanel.setPreferredSize(new java.awt.Dimension(200, 200));
@@ -654,7 +660,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
+        gridBagConstraints.insets = new java.awt.Insets(8, 16, 8, 16);
         PropertiesPanel.add(ScoreListDartboardHolderPanel, gridBagConstraints);
 
         MultipliersLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -663,7 +669,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(MultipliersLabel, gridBagConstraints);
 
         CurrentMultipliersLabel.setText("----");
@@ -671,6 +677,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentMultipliersLabel, gridBagConstraints);
 
         ExactZeroWinLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -679,7 +686,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(ExactZeroWinLabel, gridBagConstraints);
 
         CurrentExactZeroWinLabel.setText("----");
@@ -687,6 +694,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentExactZeroWinLabel, gridBagConstraints);
 
         SubtractPointsLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -695,7 +703,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 16, 16);
         PropertiesPanel.add(SubtractPointsLabel, gridBagConstraints);
 
         CurrentSubtractPointsLabel.setText("----");
@@ -703,6 +711,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 16, 16);
         PropertiesPanel.add(CurrentSubtractPointsLabel, gridBagConstraints);
 
         PropertiesScrollPane.setViewportView(PropertiesPanel);

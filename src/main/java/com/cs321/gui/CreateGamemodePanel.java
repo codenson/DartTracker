@@ -195,7 +195,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(16, 16, 4, 16);
         FormPanel.add(FormLabel, gridBagConstraints);
 
         NameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -204,14 +204,14 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
         FormPanel.add(NameLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 16);
         FormPanel.add(NameTextField, gridBagConstraints);
 
         DartsPerRoundLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -220,7 +220,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
         FormPanel.add(DartsPerRoundLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -242,7 +242,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 16);
         FormPanel.add(MaximumRoundsTextField, gridBagConstraints);
 
         StartingScoreLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -251,7 +251,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
         FormPanel.add(StartingScoreLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -273,7 +273,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 16);
         FormPanel.add(OffboardPenaltyTextField, gridBagConstraints);
 
         ScoreListLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -284,7 +284,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(16, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(16, 16, 4, 16);
         FormPanel.add(ScoreListLabel, gridBagConstraints);
 
         ScoreListDartboardHolderPanel.setLayout(new javax.swing.BoxLayout(ScoreListDartboardHolderPanel, javax.swing.BoxLayout.X_AXIS));
@@ -388,7 +388,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 16, 8);
+        gridBagConstraints.insets = new java.awt.Insets(8, 16, 16, 16);
         FormPanel.add(ScoreListDartboardHolderPanel, gridBagConstraints);
 
         MultipliersTextLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -397,7 +397,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
         FormPanel.add(MultipliersTextLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -414,7 +414,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 16, 16);
         FormPanel.add(MultipliersHelpLabel, gridBagConstraints);
 
         ExactZeroWinCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -432,7 +432,7 @@ public class CreateGamemodePanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 16);
         FormPanel.add(SubtractPointsCheckBox, gridBagConstraints);
 
         FormScrollPane.setViewportView(FormPanel);

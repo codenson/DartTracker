@@ -360,12 +360,13 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         IDLabel.setText("ID:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(16, 16, 2, 16);
         PropertiesPanel.add(IDLabel, gridBagConstraints);
 
         CurrentIDLabel.setText("----");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(16, 0, 0, 16);
         PropertiesPanel.add(CurrentIDLabel, gridBagConstraints);
 
         NameLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -374,7 +375,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(NameLabel, gridBagConstraints);
 
         CurrentNameLabel.setText("----");
@@ -382,6 +383,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentNameLabel, gridBagConstraints);
 
         GamesPlayedLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -390,7 +392,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(GamesPlayedLabel, gridBagConstraints);
 
         CurrentGamesPlayedLabel.setText("----");
@@ -398,6 +400,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentGamesPlayedLabel, gridBagConstraints);
 
         WinsLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -406,7 +409,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(WinsLabel, gridBagConstraints);
 
         CurrentWinsLabel.setText("----");
@@ -414,6 +417,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentWinsLabel, gridBagConstraints);
 
         LossesLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -422,7 +426,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(LossesLabel, gridBagConstraints);
 
         CurrentLossesLabel.setText("----");
@@ -430,6 +434,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentLossesLabel, gridBagConstraints);
 
         WinRateLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -438,7 +443,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(WinRateLabel, gridBagConstraints);
 
         CurrentWinRateLabel.setText("----");
@@ -446,6 +451,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentWinRateLabel, gridBagConstraints);
 
         WinLossRatioLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -454,7 +460,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 16);
+        gridBagConstraints.insets = new java.awt.Insets(2, 16, 2, 16);
         PropertiesPanel.add(WinLossRatioLabel, gridBagConstraints);
 
         CurrentWinLossRatioLabel.setText("----");
@@ -462,6 +468,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 16);
         PropertiesPanel.add(CurrentWinLossRatioLabel, gridBagConstraints);
 
         GameStatsLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -472,7 +479,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(16, 8, 8, 8);
+        gridBagConstraints.insets = new java.awt.Insets(16, 8, 8, 16);
         PropertiesPanel.add(GameStatsLabel, gridBagConstraints);
 
         GameStatsPanel.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -482,7 +489,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 16, 16, 16);
         PropertiesPanel.add(GameStatsPanel, gridBagConstraints);
 
         PropertiesScrollPane.setViewportView(PropertiesPanel);

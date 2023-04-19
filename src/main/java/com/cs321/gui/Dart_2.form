@@ -25,14 +25,14 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="teamABox" min="-2" pref="34" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="teamAName" min="-2" pref="48" max="-2" attributes="0"/>
+              <Component id="totalTeamsNumber" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="totalTeamsNumberValue" min="-2" pref="73" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="teamBBox" min="-2" max="-2" attributes="0"/>
+              <Component id="nextTeam" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="teamBName" min="-2" pref="73" max="-2" attributes="0"/>
+              <Component id="nextTeamValue" min="-2" pref="73" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -120,10 +120,10 @@
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="teamABox" alignment="1" max="32767" attributes="0"/>
-                  <Component id="teamAName" alignment="1" max="32767" attributes="0"/>
-                  <Component id="teamBBox" alignment="1" max="32767" attributes="0"/>
-                  <Component id="teamBName" alignment="1" max="32767" attributes="0"/>
+                  <Component id="totalTeamsNumber" alignment="1" max="32767" attributes="0"/>
+                  <Component id="totalTeamsNumberValue" alignment="1" max="32767" attributes="0"/>
+                  <Component id="nextTeam" alignment="1" max="32767" attributes="0"/>
+                  <Component id="nextTeamValue" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Component id="label5" min="-2" pref="23" max="-2" attributes="0"/>
@@ -187,12 +187,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="java.awt.Label" name="teamABox">
+    <Component class="java.awt.Label" name="totalTeamsNumber">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Franklin Gothic Book" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Team "/>
+        <Property name="text" type="java.lang.String" value="Total Playing Teams "/>
       </Properties>
     </Component>
     <Component class="java.awt.Label" name="label2">
@@ -206,7 +206,7 @@
         <Property name="text" type="java.lang.String" value="Required Score: "/>
       </Properties>
     </Component>
-    <Component class="java.awt.Label" name="teamAName">
+    <Component class="java.awt.Label" name="totalTeamsNumberValue">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Franklin Gothic Book" size="14" style="0"/>
@@ -217,15 +217,15 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="java.awt.Label" name="teamBBox">
+    <Component class="java.awt.Label" name="nextTeam">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Franklin Gothic Book" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Team "/>
+        <Property name="text" type="java.lang.String" value="Next Team: "/>
       </Properties>
     </Component>
-    <Component class="java.awt.Label" name="teamBName">
+    <Component class="java.awt.Label" name="nextTeamValue">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Franklin Gothic Book" size="14" style="0"/>

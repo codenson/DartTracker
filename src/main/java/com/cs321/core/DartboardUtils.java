@@ -78,7 +78,7 @@ public class DartboardUtils {
 
         if (magnitude < BullseyeRingRadiusNormalized) {
             return 20;
-        } else if (magnitude >= DartboardRadiusNormalized) {
+        } else if (magnitude >= DoubleRingOuterRadiusNormalized) {
             return -1;
         } else if ((angle > 0.0f && angle <= 9.0f) || (angle > 351 || angle == 0)) {
             return 5;

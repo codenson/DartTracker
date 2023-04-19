@@ -216,6 +216,15 @@ public class TurnManager {
     }
 
     /**
+     * Get the next turn player.
+     * 
+     * @return The next turn player.
+     */
+    public Player getNextPlayer() {
+        return turnOrder[(currentTurnIndex + 1) % turnOrder.length];
+    }
+
+    /**
      * Updates state to the next turn.
      */
     public void nextTurn() {

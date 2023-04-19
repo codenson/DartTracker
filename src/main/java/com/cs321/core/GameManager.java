@@ -286,7 +286,25 @@ public class GameManager {
             throw new IllegalStateException("Cannot get the current team when there is no current round.");
         }
 
-        return teamsManager.getPlayerTeam(currentRound.getPlayer());
+        return teamsManager.getPlayerTeam(getCurrentPlayer());
+    }
+
+    /**
+     * Get the next player.
+     * 
+     * @return The next player.
+     */
+    public Player getNextPlayer() {
+        return turnManager.getCurrentPlayer();
+    }
+
+    /**
+     * Get the next team.
+     * 
+     * @return The next team.
+     */
+    public Team getNextTeam() {
+        return teamsManager.getPlayerTeam(getNextPlayer());
     }
 
     /**

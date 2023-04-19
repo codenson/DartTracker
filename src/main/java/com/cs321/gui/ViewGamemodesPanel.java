@@ -363,7 +363,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
         ContentSpacerPanel.setLayout(ContentSpacerPanelLayout);
         ContentSpacerPanelLayout.setHorizontalGroup(
             ContentSpacerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGap(0, 86, Short.MAX_VALUE)
         );
         ContentSpacerPanelLayout.setVerticalGroup(
             ContentSpacerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -767,7 +767,7 @@ public class ViewGamemodesPanel  extends UpdateableJPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 2.0;
+        gridBagConstraints.weightx = 4.0;
         gridBagConstraints.weighty = 1.0;
         ContentPanel.add(PropertiesHolderPanel, gridBagConstraints);
 

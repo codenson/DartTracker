@@ -457,37 +457,29 @@ public class Dart_2 extends UpdateableJPanel {
         // TODO add your handling code here:s
         System.out.println("round : "+ round + " MaximimRounds "+ MaximumRounds);
        
-        if (throwRounds > dartsPerRound || throwRounds < 0 || confirmed > dartsPerRound-1 || throwScore == 0) {
-           // if (round == MaximumRounds)
-            {
-                
-                javax.swing.JOptionPane.showMessageDialog(null, "ROUND IS FINISHED!  ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-               
-           // return;
-            
-            
-//           round+=1; 
-//          // roundValueBox.setText(teamA);
-//          teamList.remove(0);///reund+=1; moves the first player. 
-//         startingScore = gameMode.getStartingScore(); //int
-//         totalRoundScore= 0; 
-//         throwRounds= 0; 
-//          setGameGui();
-          return; 
-          
-          }
-            
-          
-          
-                    
-          
+//        if (throwRounds > dartsPerRound || throwRounds < 0 || confirmed > dartsPerRound-1 || throwScore == 0) {
+//           // if (round == MaximumRounds)
+//            {
+//                
+//                javax.swing.JOptionPane.showMessageDialog(null, "ROUND IS FINISHED!  ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+//            
+//
+//          return; 
+//          
+//          }
            
-           
-            //javax.swing.JOptionPane.showMessageDialog(null, "You cannot confim this round ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            //return;
-        }
+ 
+       // }  
+    if (manager.isGameFinished()){
+           javax.swing.JOptionPane.showMessageDialog(null, "GAME OVER!  ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            }
         
         // setPanel2Color(changingLightsBoardPanel);////changes panel's color for fun. 
+        manager.progressRound(throwScore);
+        
+        
+        
         throwRounds += 1;
         String s = throwRounds + "/" + dartsPerRound;
         throwBoxValue.setText(s);
@@ -503,31 +495,33 @@ public class Dart_2 extends UpdateableJPanel {
         roundScoreBoxValue.setText(totalRoundScore + "");
         confirmed += 1;
         //confimredLast = true;
-        resetDartArrowLocation();
        
        // manager.getRoundsManager().addRound(round);
-        //round++;
+        //round++;        resetDartArrowLocation();
+
         
         // if (manager.isGameFinished())
         System.out.println("confimred : "+ confirmed + " dartsPerRound "+dartsPerRound );
         
-         if (confirmed == dartsPerRound){
+         ///if (confirmed == dartsPerRound){
+         
+         if (manager.isRoundFinished()){
 
    
           
-         int [] array=  throwScoreList.stream().mapToInt(i -> i).toArray();
-         roundFile = new Round(manager.getCurrentPlayer()); 
-         roundFile.setScores(scoreList);
-         roundFile.addScore(totalRoundScore);
+       //  int [] array=  throwScoreList.stream().mapToInt(i -> i).toArray();
+//         roundFile = new Round(manager.getCurrentPlayer()); 
+//         roundFile.setScores(scoreList);
+//         roundFile.addScore(totalRoundScore);
              ////System.out.println("mmmmmmmmmmmmmmmmmmmm\n"+ roundFile.getTotalThrows());//tetsting 
              
        
          
-         manager.getRoundsManager().addRound(roundFile);
-             System.out.println("round is finished ?: "+manager.isRoundFinished() );
+//         manager.getRoundsManager().addRound(roundFile);
+//             System.out.println("round is finished ?: "+manager.isRoundFinished() );
              
              
-         if (manager.isRoundFinished())////////this is returning false ????
+//         if (manager.isRoundFinished())////////this is returning false ????
          {
          
           manager.beginRound();
@@ -664,12 +658,6 @@ public class Dart_2 extends UpdateableJPanel {
     }
 
     public void setGameGui() {
-      // teams = manager.getTeamsManager().getTeams();
-
-      // teamList= Arrays.asList(teams);
-//       for (Team t:teamList ){
-//           System.out.println("list "+t.getName() );
-//       }
 
      
        totalTeamsNumberValue.setText(teamList.size()+"");
@@ -681,7 +669,8 @@ public class Dart_2 extends UpdateableJPanel {
        
        }
         
-        roundValueBox.setText(round+"");// shows round number. 
+        //roundValueBox.setText(round+"");// shows round number. 
+        roundValueBox.setText(manager.getRoundsManager().getTotalRounds()+"");
         playingTeamBoxValue.setText(manager.getCurrentTeam().getName());///displays the current team. 
          
         

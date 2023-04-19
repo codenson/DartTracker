@@ -319,7 +319,8 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         FreeForAllHeaderPanel.setPreferredSize(new java.awt.Dimension(37, 16));
         FreeForAllHeaderPanel.setLayout(new javax.swing.BoxLayout(FreeForAllHeaderPanel, javax.swing.BoxLayout.X_AXIS));
 
-        FreeForAllTipLabel.setText("Choosing players will add more players");
+        FreeForAllTipLabel.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        FreeForAllTipLabel.setText("Choosing players will add more players / Turns are determined by player order");
         FreeForAllHeaderPanel.add(FreeForAllTipLabel);
         FreeForAllHeaderPanel.add(filler13);
 
@@ -374,7 +375,8 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         TeamsHeaderPanel.setPreferredSize(new java.awt.Dimension(37, 16));
         TeamsHeaderPanel.setLayout(new javax.swing.BoxLayout(TeamsHeaderPanel, javax.swing.BoxLayout.X_AXIS));
 
-        TeamsTipLabel.setText("Choosing teams and players will add more teams and players");
+        TeamsTipLabel.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        TeamsTipLabel.setText("Choosing teams and players will add more teams and players / Turns are determined by team and player order");
         TeamsHeaderPanel.add(TeamsTipLabel);
         TeamsHeaderPanel.add(filler19);
 

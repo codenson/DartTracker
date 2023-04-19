@@ -5,11 +5,17 @@ import static com.cs321.core.DartboardUtils.coordsToScore;
 import static com.cs321.core.DartboardUtils.getTotalScore;
 import com.cs321.core.GameConfiguration;
 import com.cs321.core.GameManager;
+import com.cs321.core.Round;
+import com.cs321.core.Team;
 import com.cs321.gui.DartDashGUI;
 import com.cs321.gui.GUIState;
 import com.cs321.gui.UpdateableJPanel;
 import java.awt.LayoutManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import javax.swing.border.Border;
 
@@ -65,8 +71,14 @@ public class Dart_2 extends UpdateableJPanel {
     int dartArrowintX = 0;
     int dartArrowintY = 0;
     DartboardUtils util;
+    Team [] teams;
+    List <Team> teamList; 
+    Round roundFile ;
+    ArrayList <Integer> throwScoreList; 
+    
 
     GameManager manager;
+     GameConfiguration gameMode;
 
     /**
      * Creates new form Dart
@@ -74,12 +86,16 @@ public class Dart_2 extends UpdateableJPanel {
     public Dart_2(GUIState state) {
         initComponents();
         this.state = state;
+        
        // manager = state.gameManager;
        
         //  state.contentPane.add("Dart_2", this);
-        util = new DartboardUtils();
+        //util = new DartboardUtils();
+         
         dartArrowintX = dartArrow.getX();
         dartArrowintY = dartArrow.getY();
+        throwScoreList = new ArrayList(); 
+        
        
 
     }
@@ -87,12 +103,22 @@ public class Dart_2 extends UpdateableJPanel {
    public void updateComponents(){
 
      manager = state.gameManager;
-     manager.beginRound();
+      manager.beginRound();
+    
+     gameConfig();
+    // teams = manager.getTeamsManager().getTeams();
+   
+     teamList= Arrays.asList(manager.getTeamsManager().getTeams());
+     ///ArrayList<Team> list = new ArrayList<Team>(Arrays.asList(manager.getTeamsManager().getTeams()));
      setGameGui();
+      
+     
+    
+
 }
 
     protected void gameConfig() {
-        GameConfiguration gameMode = manager.getGameConfiguration();
+         gameMode = manager.getGameConfiguration();
         //this.gameMode = gameMode;
         MaximumRounds = gameMode.getMaximumRounds();
         dartsPerRound = gameMode.getDartsPerRound();
@@ -113,11 +139,11 @@ public class Dart_2 extends UpdateableJPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        teamABox = new java.awt.Label();
+        totalTeamsNumber = new java.awt.Label();
         label2 = new java.awt.Label();
-        teamAName = new java.awt.Label();
-        teamBBox = new java.awt.Label();
-        teamBName = new java.awt.Label();
+        totalTeamsNumberValue = new java.awt.Label();
+        nextTeam = new java.awt.Label();
+        nextTeamValue = new java.awt.Label();
         label5 = new java.awt.Label();
         startingScoreBoxValue = new java.awt.Label();
         roundBox = new java.awt.Label();
@@ -142,21 +168,21 @@ public class Dart_2 extends UpdateableJPanel {
         setMinimumSize(new java.awt.Dimension(1, 1));
         setPreferredSize(new java.awt.Dimension(640, 480));
 
-        teamABox.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        teamABox.setText("Team ");
+        totalTeamsNumber.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        totalTeamsNumber.setText("Total Playing Teams ");
 
         label2.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         label2.setForeground(new java.awt.Color(102, 102, 102));
         label2.setText("Required Score: ");
 
-        teamAName.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        teamAName.setText("A -34");
+        totalTeamsNumberValue.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        totalTeamsNumberValue.setText("A -34");
 
-        teamBBox.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        teamBBox.setText("Team ");
+        nextTeam.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        nextTeam.setText("Next Team: ");
 
-        teamBName.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
-        teamBName.setText("B-57");
+        nextTeamValue.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
+        nextTeamValue.setText("B-57");
 
         label5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label5.setText("__________________________________________________________________________________________________________");
@@ -282,14 +308,14 @@ public class Dart_2 extends UpdateableJPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(teamABox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(totalTeamsNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(teamAName, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(totalTeamsNumberValue, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(teamBBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nextTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(teamBName, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nextTeamValue, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(172, 172, 172))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -356,10 +382,10 @@ public class Dart_2 extends UpdateableJPanel {
                     .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(teamABox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(teamAName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(teamBBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(teamBName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(totalTeamsNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(totalTeamsNumberValue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nextTeam, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nextTeamValue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(2, 2, 2)
                 .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -423,19 +449,54 @@ public class Dart_2 extends UpdateableJPanel {
         // TODO add your handling code here:
 
 
+                        
+        
     }//GEN-LAST:event_undoThrowButtonActionPerformed
 
     private void confirmNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmNowButtonActionPerformed
-        // TODO add your handling code here:
-        if (throwRounds > dartsPerRound || throwRounds < 0 || confirmed > 2 || throwScore == 0) {
-            javax.swing.JOptionPane.showMessageDialog(null, "You cannot confim this round ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            return;
+        // TODO add your handling code here:s
+        System.out.println("round : "+ round + " MaximimRounds "+ MaximumRounds);
+       
+        if (throwRounds > dartsPerRound || throwRounds < 0 || confirmed > dartsPerRound-1 || throwScore == 0) {
+           // if (round == MaximumRounds)
+            {
+                
+                javax.swing.JOptionPane.showMessageDialog(null, "ROUND IS FINISHED!  ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+               
+           // return;
+            
+            
+//           round+=1; 
+//          // roundValueBox.setText(teamA);
+//          teamList.remove(0);///reund+=1; moves the first player. 
+//         startingScore = gameMode.getStartingScore(); //int
+//         totalRoundScore= 0; 
+//         throwRounds= 0; 
+//          setGameGui();
+          return; 
+          
+          }
+            
+          
+          
+                    
+          
+           
+           
+            //javax.swing.JOptionPane.showMessageDialog(null, "You cannot confim this round ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            //return;
         }
+        
         // setPanel2Color(changingLightsBoardPanel);////changes panel's color for fun. 
         throwRounds += 1;
         String s = throwRounds + "/" + dartsPerRound;
         throwBoxValue.setText(s);
-        totalRoundScore += throwScore;
+        startingScore -= throwScore;// updates in a decrementing way the starting score when a throw happnes. 
+        startingScoreBoxValue.setText(startingScore+"");
+        
+        totalRoundScore += throwScore;/// updates in an incrementing way the total score in a round. 
+        
+        throwScoreList.add(throwScore); ////add to the array []
         throwScore = 0;
         throwScoreBoxValue.setText(throwScore + "");
 
@@ -443,6 +504,37 @@ public class Dart_2 extends UpdateableJPanel {
         confirmed += 1;
         //confimredLast = true;
         resetDartArrowLocation();
+       
+       // manager.getRoundsManager().addRound(round);
+        //round++;
+        
+        // if (manager.isGameFinished())
+        System.out.println("confimred : "+ confirmed + " dartsPerRound "+dartsPerRound );
+        
+         if (confirmed == dartsPerRound){
+
+   
+          
+         int [] array=  throwScoreList.stream().mapToInt(i -> i).toArray();
+         roundFile = new Round(manager.getCurrentPlayer()); 
+         roundFile.setScores(scoreList);
+         roundFile.addScore(totalRoundScore);
+             ////System.out.println("mmmmmmmmmmmmmmmmmmmm\n"+ roundFile.getTotalThrows());//tetsting 
+             
+       
+         
+         manager.getRoundsManager().addRound(roundFile);
+             System.out.println("round is finished ?: "+manager.isRoundFinished() );
+             
+             
+         if (manager.isRoundFinished())////////this is returning false ????
+         {
+         
+          manager.beginRound();
+          resetRound();
+         }
+        
+        }
 
 
     }//GEN-LAST:event_confirmNowButtonActionPerformed
@@ -450,7 +542,7 @@ public class Dart_2 extends UpdateableJPanel {
     private void dartBoardPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dartBoardPictureMouseClicked
 
         if (throwRounds > dartsPerRound - 1) {
-            javax.swing.JOptionPane.showMessageDialog(null, "You completed all 3 Throws ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(null, "You completed all Throws ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (throwRounds == 0) {
@@ -517,7 +609,7 @@ public class Dart_2 extends UpdateableJPanel {
 
     private void undoThrowButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_undoThrowButtonMouseClicked
         // TODO add your handling code here:
-        if ((throwRounds == 0 && throwScore == 0) || confirmed > 2 || throwScore == 0) {  ///this is debatable, since I think throws are going to be controllded by the game's manager's control flow. 
+        if ((throwRounds == 0 && throwScore == 0) || confirmed > dartsPerRound-1 || throwScore == 0) {  ///this is debatable, since I think throws are going to be controllded by the game's manager's control flow. 
             javax.swing.JOptionPane.showMessageDialog(null, "You cannot undo a throw ", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
             return;
@@ -547,39 +639,65 @@ public class Dart_2 extends UpdateableJPanel {
         dartArrow.setLocation(dartArrowintX, dartArrowintY);/////////////
 
     }
-
-    public void setGameGui() {
-        manager.getTeamsManager().getTeams();
-
-        teamAName.setText(manager.getTeamsManager().getPlayerTeam(manager.getCurrentPlayer()).getId());// sets teamA name 
-        teamBName.setText("B");// sets teamB name. 
-        roundValueBox.setText(teamA);// shows round number. 
-        playingTeamBoxValue.setText(manager.getCurrentTeam().getName());///displays the current team. 
-        
-        playerNameBoxValue.setText(manager.getCurrentPlayer().getName());////displays the current player. 
-        throwBoxValue.setText(teamA);//displays the throw value such as 0/3
-        startingScoreBoxValue.setText(manager.getGameConfiguration().getStartingScore() + "");///displays  the starting score. 
+    
+    
+    /**
+     * methos to rest round's gui values. 
+     */
+    private void resetRound(){
+         round+=1; 
+          // roundValueBox.setText(teamA);
+//         if (teamList.size()> 0)
+//          {
+//              
+//          teamList.remove(0);///reund+=1; moves the first player. 
+//     
+//          }
+          
+         startingScore = gameMode.getStartingScore(); //int
+         totalRoundScore= 0; 
+         throwRounds= 0; 
+         confirmed = 0; 
+          setGameGui();
+    
+    
     }
 
-    /**
-     * method to set up gui gameConfig.
-     *
-     * @param gameMode
-     */
-//public void setGameConfigGui(){
-//   
-//    GameConfiguration gameMode =  manager.getGameConfiguration();
-//       // this.gameMode = gameMode;
-//        MaximumRounds = gameMode.getMaximumRounds();
-//        dartsPerRound = gameMode.getDartsPerRound();
-//        id = gameMode.getId();//string
-//        multipliers = gameMode.getMultipliers();//float.
-//        OffboardPenalty = gameMode.getOffboardPenalty();//int
-//        scoreList = gameMode.getScoreList();//array of ints 
-//        startingScore = gameMode.getStartingScore(); //int
-//    
-//    }
-//    
+    public void setGameGui() {
+      // teams = manager.getTeamsManager().getTeams();
+
+      // teamList= Arrays.asList(teams);
+//       for (Team t:teamList ){
+//           System.out.println("list "+t.getName() );
+//       }
+
+     
+       totalTeamsNumberValue.setText(teamList.size()+"");
+       if (teamList != null && teamList.size()>1)
+       {
+        nextTeamValue.setText(teamList.get(1).getName());// sets teamB name. 
+       }else {
+           nextTeamValue.setText("N/A");// sets teamB name
+       
+       }
+        
+        roundValueBox.setText(round+"");// shows round number. 
+        playingTeamBoxValue.setText(manager.getCurrentTeam().getName());///displays the current team. 
+         
+        
+        playerNameBoxValue.setText(manager.getCurrentPlayer().getName());////displays the current player. 
+        
+        roundScoreBoxValue.setText(totalRoundScore+"");/// displays total round score. 
+               
+        String s = throwRounds+"/";  
+        s+= dartsPerRound;   
+        throwBoxValue.setText(s);//displays the throw value such as 0/3
+        
+        
+        startingScoreBoxValue.setText(startingScore + "");///displays  the starting score. 
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button QuitToMainMenuButton;
@@ -589,6 +707,8 @@ public class Dart_2 extends UpdateableJPanel {
     private javax.swing.JLabel dartBoardPicture;
     private java.awt.Label label2;
     private java.awt.Label label5;
+    private java.awt.Label nextTeam;
+    public java.awt.Label nextTeamValue;
     private javax.swing.JLabel playerNameBox;
     public java.awt.Label playerNameBoxValue;
     private javax.swing.JLabel playingTeamBox;
@@ -598,14 +718,12 @@ public class Dart_2 extends UpdateableJPanel {
     protected java.awt.Label roundScoreBoxValue;
     public java.awt.Label roundValueBox;
     private java.awt.Label startingScoreBoxValue;
-    private java.awt.Label teamABox;
-    public java.awt.Label teamAName;
-    private java.awt.Label teamBBox;
-    public java.awt.Label teamBName;
     private java.awt.Label throwBox;
     public java.awt.Label throwBoxValue;
     private javax.swing.JLabel throwScoreBox;
     private java.awt.Label throwScoreBoxValue;
+    private java.awt.Label totalTeamsNumber;
+    public java.awt.Label totalTeamsNumberValue;
     private java.awt.Button undoThrowButton;
     // End of variables declaration//GEN-END:variables
 

@@ -644,6 +644,8 @@ public class PlayPanel extends UpdateableJPanel {
         if (!state.updateAndPersistPlayersData()) {
             JOptionPane.showMessageDialog(null, "There was an error while saving data", "IO Error", JOptionPane.ERROR_MESSAGE);
         }
+        state.panels.get(PanelName.GameSummaryPanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.GameSummaryPanel.toString());
     }//GEN-LAST:event_FinishGameButtonActionPerformed
 
     private void DartBoardLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DartBoardLabelMouseClicked

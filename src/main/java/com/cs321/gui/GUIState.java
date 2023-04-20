@@ -13,7 +13,6 @@ import com.cs321.core.RoundsManager;
 import com.cs321.core.Team;
 import com.cs321.core.TeamsManager;
 import com.cs321.core.TurnManager;
-import com.cs321.core.TurnManager.TurnManagerBuilder;
 
 /**
  * Holds the state of the GUI
@@ -26,7 +25,7 @@ public class GUIState {
     public static enum PanelName {
         MainMenuPanel, ViewGamemodesPanel, CreateGamemodePanel, EditGamemodePanel,
         ViewPlayersPanel, ChooseGametypePanel, ChoosePlayersPanel, ChooseGameConfigurationPanel,
-        Dart_2
+        PlayPanel, Dart_2
     }
     // The content pane of the JFrame
     public Container contentPane;

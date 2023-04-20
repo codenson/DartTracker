@@ -224,19 +224,41 @@ public class GameManager {
         if (currentRound == null) {
             throw new IllegalStateException("Cannot progress a round that has not been started.");
         }
+        
+        if (isThrowsDone()) {
+            throw new IllegalStateException("Cannot progress a round that has already been finished.");
+        }
 
         currentRound.addScore(score);
-        int teamTotalScore = roundsManager.getTeamTotalScore(getCurrentTeam()) + score;
-        boolean throwsDone = currentRound.getTotalThrows() == gameConfiguration.getDartsPerRound();
+    }
 
+    /**
+     * Finish the current round. If the score is overshot, the round is added to the rounds manager
+     * if exact zero win is not enabled. If the round is not finished, add offboard penalty scores for
+     * the remaining throws.
+     */
+    public void finishRound() {
+        if (isGameFinished()) {
+            throw new IllegalStateException("Cannot finish a round while the game is finished.");
+        }
+        if (currentRound == null) {
+            throw new IllegalStateException("Cannot finish a round that has not been started.");
+        }
+
+        // If the round is not finished, add offboard penalty scores for the remaining throws.
+        if (!isThrowsDone()) {
+            for (int count = currentRound.getTotalThrows(); count < gameConfiguration.getDartsPerRound(); count++) {
+                progressRound(gameConfiguration.getOffboardPenalty());
+            }
+        }
+
+        int teamTotalScore = roundsManager.getTeamTotalScore(getCurrentTeam()) + currentRound.getTotalScore();
         boolean scoreOvershot = teamTotalScore > gameConfiguration.getStartingScore();
 
-        if (throwsDone) {
-            if (!scoreOvershot || !gameConfiguration.isExactZeroWin()) {
-                roundsManager.addRound(currentRound);
-            }
-            currentRound = null;
+        if (!scoreOvershot || !gameConfiguration.isExactZeroWin()) {
+            roundsManager.addRound(currentRound);
         }
+        currentRound = null;
     }
 
     /**
@@ -261,6 +283,19 @@ public class GameManager {
      */
     public boolean isRoundFinished() {
         return currentRound == null;
+    }
+
+    /**
+     * Whether or not the throws are done.
+     * 
+     * @return Whether or not the throws are done.
+     */
+    public boolean isThrowsDone() {
+        if (currentRound == null) {
+            throw new IllegalStateException("Cannot check if throws are done when there is no current round.");
+        }
+
+        return currentRound.getTotalThrows() == gameConfiguration.getDartsPerRound();
     }
 
     /**

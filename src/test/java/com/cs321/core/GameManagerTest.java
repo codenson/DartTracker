@@ -350,49 +350,6 @@ public class GameManagerTest {
     }
 
     /**
-     * progressRound finishes the round after enough throws.
-     */
-    @Test
-    public void progressRoundFinishesRound() {
-        String playername1 = "p1";
-        String playername2 = "p2";
-        String playername3 = "p3";
-        String playername4 = "p4";
-        Player player1 = new Player(playername1);
-        Player player2 = new Player(playername2);
-        Player player3 = new Player(playername3);
-        Player player4 = new Player(playername4);
-
-        String teamname1 = "tA";
-        String teamname2 = "tB";
-        Player[] players1 = new Player[] { player1, player2 };
-        Player[] players2 = new Player[] { player3, player4 };
-        Team team1 = new Team(teamname1, players1);
-        Team team2 = new Team(teamname2, players2);
-
-        GameConfiguration gameConfiguration = new GameConfigurationBuilder()
-            .withDartsPerRound(3)
-            .build();
-        TeamsManager teamsManager = new TeamsManager(new Team[] { team1, team2 });
-        TurnManager turnManager = new TurnManagerBuilder()
-            .withPlayer(player1, team1, 2)
-            .withPlayer(player2, team1, 4)
-            .withPlayer(player3, team2, 6)
-            .withPlayer(player4, team2, 8)
-            .build();
-        RoundsManager roundsManager = new RoundsManager();
-
-        GameManager gameManager = new GameManager(gameConfiguration, teamsManager,
-            turnManager, roundsManager);
-
-        gameManager.beginRound();
-        gameManager.progressRound(1);
-        gameManager.progressRound(2);
-        gameManager.progressRound(3);
-        assertTrue(gameManager.getCurrentRound() == null);
-    }
-
-    /**
      * progressRound throws an exception if no round is in progress.
      */
     @Test(expected = IllegalStateException.class)
@@ -515,93 +472,6 @@ public class GameManagerTest {
     }
 
     /**
-     * progressRound does not add a new round if the score overshot and exact
-     * zero win is enabled.
-     */
-    @Test
-    public void progressRoundOvershotWithExactZeroWin() {
-        String playername1 = "p1";
-        String playername2 = "p2";
-        String playername3 = "p3";
-        String playername4 = "p4";
-        Player player1 = new Player(playername1);
-        Player player2 = new Player(playername2);
-        Player player3 = new Player(playername3);
-        Player player4 = new Player(playername4);
-
-        String teamname1 = "tA";
-        String teamname2 = "tB";
-        Player[] players1 = new Player[] { player1, player2 };
-        Player[] players2 = new Player[] { player3, player4 };
-        Team team1 = new Team(teamname1, players1);
-        Team team2 = new Team(teamname2, players2);
-
-        GameConfiguration gameConfiguration = new GameConfigurationBuilder()
-            .withDartsPerRound(1)
-            .withStartingScore(10)
-            .build();
-        TeamsManager teamsManager = new TeamsManager(new Team[] { team1, team2 });
-        TurnManager turnManager = new TurnManagerBuilder()
-            .withPlayer(player1, team1, 2)
-            .withPlayer(player2, team1, 4)
-            .withPlayer(player3, team2, 6)
-            .withPlayer(player4, team2, 8)
-            .build();
-        RoundsManager roundsManager = new RoundsManager();
-
-        GameManager gameManager = new GameManager(gameConfiguration, teamsManager,
-            turnManager, roundsManager);
-
-        gameManager.beginRound();
-        gameManager.progressRound(11);
-        assertEquals(0, gameManager.getRoundsManager().getRounds().length);
-    }
-
-    /**
-     * progressRound adds a new round if the score overshot and exact zero win is
-     * disabled.
-     */
-    @Test
-    public void progressRoundOvershotWithNoExactZeroWin() {
-        String playername1 = "p1";
-        String playername2 = "p2";
-        String playername3 = "p3";
-        String playername4 = "p4";
-        Player player1 = new Player(playername1);
-        Player player2 = new Player(playername2);
-        Player player3 = new Player(playername3);
-        Player player4 = new Player(playername4);
-
-        String teamname1 = "tA";
-        String teamname2 = "tB";
-        Player[] players1 = new Player[] { player1, player2 };
-        Player[] players2 = new Player[] { player3, player4 };
-        Team team1 = new Team(teamname1, players1);
-        Team team2 = new Team(teamname2, players2);
-
-        GameConfiguration gameConfiguration = new GameConfigurationBuilder()
-            .withDartsPerRound(1)
-            .withStartingScore(10)
-            .withExactZeroWin(false)
-            .build();
-        TeamsManager teamsManager = new TeamsManager(new Team[] { team1, team2 });
-        TurnManager turnManager = new TurnManagerBuilder()
-            .withPlayer(player1, team1, 2)
-            .withPlayer(player2, team1, 4)
-            .withPlayer(player3, team2, 6)
-            .withPlayer(player4, team2, 8)
-            .build();
-        RoundsManager roundsManager = new RoundsManager();
-
-        GameManager gameManager = new GameManager(gameConfiguration, teamsManager,
-            turnManager, roundsManager);
-
-        gameManager.beginRound();
-        gameManager.progressRound(11);
-        assertEquals(1, gameManager.getRoundsManager().getRounds().length);
-    }
-
-    /**
      * Run a standard game to completion.
      * 
      * The game is taken from the following spreadsheet:
@@ -646,6 +516,7 @@ public class GameManagerTest {
         gameManager.progressRound(0);
         gameManager.progressRound(8);
         gameManager.progressRound(10);
+        gameManager.finishRound();
         assertEquals(18, roundsManager.getTeamTotalScore(team2));
 
         gameManager.beginRound();
@@ -653,6 +524,7 @@ public class GameManagerTest {
         gameManager.progressRound(6);
         gameManager.progressRound(3);
         gameManager.progressRound(1);
+        gameManager.finishRound();
         assertEquals(10, roundsManager.getTeamTotalScore(team1));
 
         gameManager.beginRound();
@@ -660,6 +532,7 @@ public class GameManagerTest {
         gameManager.progressRound(8);
         gameManager.progressRound(9);
         gameManager.progressRound(10);
+        gameManager.finishRound();
         assertEquals(45, roundsManager.getTeamTotalScore(team2));
 
         gameManager.beginRound();
@@ -667,6 +540,7 @@ public class GameManagerTest {
         gameManager.progressRound(15);
         gameManager.progressRound(9);
         gameManager.progressRound(10);
+        gameManager.finishRound();
         assertEquals(44, roundsManager.getTeamTotalScore(team1));
 
         gameManager.beginRound();
@@ -674,6 +548,7 @@ public class GameManagerTest {
         gameManager.progressRound(19);
         gameManager.progressRound(18);
         gameManager.progressRound(13);
+        gameManager.finishRound();
         assertEquals(95, roundsManager.getTeamTotalScore(team2));
 
         gameManager.beginRound();
@@ -681,6 +556,7 @@ public class GameManagerTest {
         gameManager.progressRound(19);
         gameManager.progressRound(5);
         gameManager.progressRound(12);
+        gameManager.finishRound();
         assertEquals(80, roundsManager.getTeamTotalScore(team1));
 
         gameManager.beginRound();
@@ -688,6 +564,7 @@ public class GameManagerTest {
         gameManager.progressRound(7);
         gameManager.progressRound(13);
         gameManager.progressRound(17);
+        gameManager.finishRound();
         assertEquals(132, roundsManager.getTeamTotalScore(team2));
 
         gameManager.beginRound();
@@ -695,6 +572,7 @@ public class GameManagerTest {
         gameManager.progressRound(13);
         gameManager.progressRound(10);
         gameManager.progressRound(11);
+        gameManager.finishRound();
         assertEquals(114, roundsManager.getTeamTotalScore(team1));
 
         gameManager.beginRound();
@@ -702,6 +580,7 @@ public class GameManagerTest {
         gameManager.progressRound(10);
         gameManager.progressRound(11);
         gameManager.progressRound(20);
+        gameManager.finishRound();
         assertEquals(173, roundsManager.getTeamTotalScore(team2));
 
         gameManager.beginRound();
@@ -709,6 +588,7 @@ public class GameManagerTest {
         gameManager.progressRound(12);
         gameManager.progressRound(1);
         gameManager.progressRound(6);
+        gameManager.finishRound();
         assertEquals(133, roundsManager.getTeamTotalScore(team1));
 
         gameManager.beginRound();
@@ -716,6 +596,7 @@ public class GameManagerTest {
         gameManager.progressRound(8);
         gameManager.progressRound(11);
         gameManager.progressRound(12);
+        gameManager.finishRound();
         assertEquals(204, roundsManager.getTeamTotalScore(team2));
 
         gameManager.beginRound();
@@ -723,6 +604,7 @@ public class GameManagerTest {
         gameManager.progressRound(2);
         gameManager.progressRound(6);
         gameManager.progressRound(1);
+        gameManager.finishRound();
         assertEquals(142, roundsManager.getTeamTotalScore(team1));
 
         gameManager.beginRound();
@@ -730,6 +612,7 @@ public class GameManagerTest {
         gameManager.progressRound(20);
         gameManager.progressRound(16);
         gameManager.progressRound(1);
+        gameManager.finishRound();
         assertEquals(241, roundsManager.getTeamTotalScore(team2));
 
         gameManager.beginRound();
@@ -737,6 +620,7 @@ public class GameManagerTest {
         gameManager.progressRound(4);
         gameManager.progressRound(19);
         gameManager.progressRound(18);
+        gameManager.finishRound();
         assertEquals(183, roundsManager.getTeamTotalScore(team1));
 
         gameManager.beginRound();
@@ -744,6 +628,7 @@ public class GameManagerTest {
         gameManager.progressRound(8);
         gameManager.progressRound(15);
         gameManager.progressRound(13);
+        gameManager.finishRound();
         assertEquals(277, roundsManager.getTeamTotalScore(team2));
 
         gameManager.beginRound();
@@ -751,6 +636,7 @@ public class GameManagerTest {
         gameManager.progressRound(9);
         gameManager.progressRound(2);
         gameManager.progressRound(4);
+        gameManager.finishRound();
         assertEquals(198, roundsManager.getTeamTotalScore(team1));
 
         gameManager.beginRound();
@@ -758,6 +644,7 @@ public class GameManagerTest {
         gameManager.progressRound(4);
         gameManager.progressRound(4);
         gameManager.progressRound(16);
+        gameManager.finishRound();
         assertEquals(301, roundsManager.getTeamTotalScore(team2));
 
         assertTrue(gameManager.isGameFinished());

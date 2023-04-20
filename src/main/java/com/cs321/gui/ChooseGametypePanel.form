@@ -511,15 +511,15 @@
             <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalGlue"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="NextButton">
+        <Component class="javax.swing.JButton" name="PlayButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Next"/>
+            <Property name="text" type="java.lang.String" value="Play"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NextButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PlayButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler9">

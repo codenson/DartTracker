@@ -50,7 +50,7 @@ public class ChooseGametypePanel extends UpdateableJPanel {
             FreeForAllGameConfigurationButton.setText("Choose...");
             TeamsGameConfigurationButton.setText("Choose...");
         }
-        NextButton.setEnabled(state.canGenerateGameManager());
+        PlayButton.setEnabled(state.canGenerateGameManager());
     }
 
     /**
@@ -271,7 +271,7 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         QuitToMainMenuButton = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        NextButton = new javax.swing.JButton();
+        PlayButton = new javax.swing.JButton();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
 
         setMinimumSize(new java.awt.Dimension(1, 1));
@@ -445,14 +445,14 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         FooterPanel.add(QuitToMainMenuButton);
         FooterPanel.add(filler4);
 
-        NextButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        NextButton.setText("Next");
-        NextButton.addActionListener(new java.awt.event.ActionListener() {
+        PlayButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        PlayButton.setText("Play");
+        PlayButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NextButtonActionPerformed(evt);
+                PlayButtonActionPerformed(evt);
             }
         });
-        FooterPanel.add(NextButton);
+        FooterPanel.add(PlayButton);
         FooterPanel.add(filler9);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -468,16 +468,14 @@ public class ChooseGametypePanel extends UpdateableJPanel {
         state.clearChooseGametypeChoices();
         state.panels.get(PanelName.MainMenuPanel).updateComponents();
         state.contentPaneCardLayout.show(state.contentPane, PanelName.MainMenuPanel.toString());
-        
     }//GEN-LAST:event_QuitToMainMenuButtonActionPerformed
 
-    private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
+    private void PlayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayButtonActionPerformed
         state.gameManager = state.generateGameManager();
         state.clearChooseGametypeChoices();
-        state.panels.get(PanelName.Dart_2).updateComponents();
-        state.contentPaneCardLayout.show(state.contentPane, PanelName.Dart_2.toString());
-          ///GameManager m = state.generateGameManager();
-    }//GEN-LAST:event_NextButtonActionPerformed
+        state.panels.get(PanelName.PlayPanel).updateComponents();
+        state.contentPaneCardLayout.show(state.contentPane, PanelName.PlayPanel.toString());
+    }//GEN-LAST:event_PlayButtonActionPerformed
 
     private void FreeForAllClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FreeForAllClearButtonActionPerformed
         state.clearChooseGametypeChoices();
@@ -538,7 +536,7 @@ public class ChooseGametypePanel extends UpdateableJPanel {
     private javax.swing.JLabel FreeForAllTipLabel;
     private javax.swing.JTabbedPane GametypesTabbedPanel;
     private javax.swing.JPanel HeaderPanel;
-    private javax.swing.JButton NextButton;
+    private javax.swing.JButton PlayButton;
     private javax.swing.JButton QuitToMainMenuButton;
     private javax.swing.JPanel TeamsBodyPanel;
     private javax.swing.JToggleButton TeamsClearButton;

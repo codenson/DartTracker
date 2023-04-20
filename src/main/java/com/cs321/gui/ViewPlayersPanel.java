@@ -4,6 +4,7 @@
  */
 package com.cs321.gui;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.io.File;
 import java.io.IOException;
@@ -84,12 +85,15 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         CurrentWinRateLabel.setText(String.format("%.2f", player.getWinRate()));
         CurrentWinLossRatioLabel.setText(String.format("%.2f", player.getWinLossRatio()));
 
+        PropertiesPanel.setMinimumSize(new Dimension(232, 262 + 100 * player.getGameStats().length));
+        PropertiesPanel.setPreferredSize(new Dimension(232, 262 + 100 * player.getGameStats().length));
+
         GameStatsPanel.removeAll();
         for (GameStats gameStats : player.getGameStats()) {
             GameStatsPanel.add(generateGameStatsPropertiesPanel(gameStats));
         }
-        PropertiesPanel.revalidate();
-        PropertiesPanel.repaint();
+        GameStatsPanel.setMinimumSize(new Dimension(200, 100 * player.getGameStats().length));
+        GameStatsPanel.setPreferredSize(new Dimension(200, 100 * player.getGameStats().length));
     }
 
     /**
@@ -558,6 +562,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.insets = new java.awt.Insets(16, 8, 4, 16);
         PropertiesPanel.add(GameStatsLabel, gridBagConstraints);
 
+        GameStatsPanel.setMinimumSize(new java.awt.Dimension(200, 100));
         GameStatsPanel.setPreferredSize(new java.awt.Dimension(200, 100));
         GameStatsPanel.setLayout(new java.awt.GridLayout(0, 1));
         gridBagConstraints = new java.awt.GridBagConstraints();

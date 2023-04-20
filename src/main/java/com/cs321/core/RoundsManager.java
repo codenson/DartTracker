@@ -88,4 +88,14 @@ public class RoundsManager {
         return Arrays.stream(getTeamScores(team)).sum();
     }
 
+    /**
+     * Gets the total rounds played by the player.
+     * 
+     * @param player The player to get the total rounds played by.
+     * @return The total rounds played by the player.
+     */
+    public int getPlayerRoundsPlayed(Player player) {
+        return (int) Arrays.stream(getRounds()).filter(round -> round.getPlayer() == player).count();
+    }
+
 }

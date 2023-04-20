@@ -58,4 +58,18 @@ public class TeamsManager {
         return null;
     }
 
+    /**
+     * Get all players.
+     * 
+     * @return All players.
+     */
+    public Player[] getAllPlayers() {
+        ArrayList<Player> players = new ArrayList<>();
+        for (Team team : teams) {
+            players.addAll(Arrays.asList(team.getPlayers()));
+        }
+
+        return players.toArray(new Player[players.size()]);
+    }
+
 }

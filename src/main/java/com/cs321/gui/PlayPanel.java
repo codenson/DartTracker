@@ -681,6 +681,14 @@ public class PlayPanel extends UpdateableJPanel {
             state.gameManager.beginRound();
         }
         updateGUIElements();
+
+        if (state.gameManager.isGameFinished()) {
+            if (state.chosenGametype == Gametype.FreeForAll) {
+                JOptionPane.showMessageDialog(null, "Game finished! Winner: " + state.gameManager.getWinnerTeam().getPlayers()[0].getName(), "Game Finished", JOptionPane.INFORMATION_MESSAGE);
+            } else if (state.chosenGametype == Gametype.Teams) {
+                JOptionPane.showMessageDialog(null, "Game finished! Winner: " + state.gameManager.getWinnerTeam().getName(), "Game Finished", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_FinishRoundButtonActionPerformed
 
 

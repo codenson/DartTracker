@@ -4,14 +4,18 @@
  */
 package com.cs321.gui;
 
+import java.awt.GridBagConstraints;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
+import com.cs321.core.GameStats;
 import com.cs321.core.Player;
 import com.cs321.gui.GUIState.PanelName;
 import com.cs321.io.IOUtils;
@@ -79,6 +83,87 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         CurrentLossesLabel.setText(Integer.toString(player.getLosses()));
         CurrentWinRateLabel.setText(String.format("%.2f", player.getWinRate()));
         CurrentWinLossRatioLabel.setText(String.format("%.2f", player.getWinLossRatio()));
+
+        GameStatsPanel.removeAll();
+        for (GameStats gameStats : player.getGameStats()) {
+            GameStatsPanel.add(generateGameStatsPropertiesPanel(gameStats));
+        }
+        PropertiesPanel.revalidate();
+        PropertiesPanel.repaint();
+    }
+
+    /**
+     * Generates a new game stats properties panel
+     * 
+     * @param gameStats The game stats to generate the panel for
+     * @return The generated panel
+     */
+    private JPanel generateGameStatsPropertiesPanel(GameStats gameStats) {
+        GridBagConstraints gridBagConstraints = null;
+
+        JPanel gameStatsPropertiesPanel = new JPanel();
+        gameStatsPropertiesPanel.setMinimumSize(new java.awt.Dimension(200, 100));
+        gameStatsPropertiesPanel.setPreferredSize(new java.awt.Dimension(200, 100));
+        gameStatsPropertiesPanel.setLayout(new java.awt.GridBagLayout());
+
+        JLabel roundsPlayedLabel = new JLabel();
+        roundsPlayedLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        roundsPlayedLabel.setText("Rounds Played:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 8);
+        gameStatsPropertiesPanel.add(roundsPlayedLabel, gridBagConstraints);
+
+        JLabel currentRoundsPlayedLabel = new JLabel();
+        currentRoundsPlayedLabel.setText("----");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 8, 4, 4);
+        gameStatsPropertiesPanel.add(currentRoundsPlayedLabel, gridBagConstraints);
+
+        JLabel playerWonLabel = new JLabel();
+        playerWonLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        playerWonLabel.setText("Player Won:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 8);
+        gameStatsPropertiesPanel.add(playerWonLabel, gridBagConstraints);
+
+        JLabel currentPlayerWonLabel = new JLabel();
+        currentPlayerWonLabel.setText("----");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 8, 4, 4);
+        gameStatsPropertiesPanel.add(currentPlayerWonLabel, gridBagConstraints);
+
+        JLabel gamemodeIdLabel = new JLabel();
+        gamemodeIdLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        gamemodeIdLabel.setText("Gamemode ID:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 8);
+        gameStatsPropertiesPanel.add(gamemodeIdLabel, gridBagConstraints);
+
+        JLabel currentGamemodeIdLabel = new JLabel();
+        currentGamemodeIdLabel.setText("----");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 8, 4, 4);
+        gameStatsPropertiesPanel.add(currentGamemodeIdLabel, gridBagConstraints);
+
+        currentRoundsPlayedLabel.setText(Integer.toString(gameStats.getRoundsPlayed()));
+        currentPlayerWonLabel.setText(Boolean.toString(gameStats.isPlayerWon()));
+        currentGamemodeIdLabel.setText(gameStats.getGamemodeId());
+
+        return gameStatsPropertiesPanel;
     }
 
     /**
@@ -173,8 +258,8 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         ExportFolderChooser.setDialogTitle("Choose a Folder");
         ExportFolderChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
-        GameStatsPropertiesPanel.setMinimumSize(new java.awt.Dimension(200, 150));
-        GameStatsPropertiesPanel.setPreferredSize(new java.awt.Dimension(200, 150));
+        GameStatsPropertiesPanel.setMinimumSize(new java.awt.Dimension(200, 100));
+        GameStatsPropertiesPanel.setPreferredSize(new java.awt.Dimension(200, 100));
         GameStatsPropertiesPanel.setLayout(new java.awt.GridBagLayout());
 
         RoundsPlayedLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -344,6 +429,7 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         PropertiesScrollPane.setMinimumSize(new java.awt.Dimension(1, 1));
         PropertiesScrollPane.setPreferredSize(new java.awt.Dimension(1, 1));
 
+        PropertiesPanel.setPreferredSize(new java.awt.Dimension(232, 262));
         PropertiesPanel.setLayout(new java.awt.GridBagLayout());
 
         IDLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -469,10 +555,10 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(16, 8, 8, 16);
+        gridBagConstraints.insets = new java.awt.Insets(16, 8, 4, 16);
         PropertiesPanel.add(GameStatsLabel, gridBagConstraints);
 
-        GameStatsPanel.setPreferredSize(new java.awt.Dimension(200, 50));
+        GameStatsPanel.setPreferredSize(new java.awt.Dimension(200, 100));
         GameStatsPanel.setLayout(new java.awt.GridLayout(0, 1));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

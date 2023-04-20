@@ -118,7 +118,6 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         CurrentPlayerWonLabel = new javax.swing.JLabel();
         GamemodeIdLabel = new javax.swing.JLabel();
         CurrentGamemodeIdLabel = new javax.swing.JLabel();
-        ViewGamemodeButton = new javax.swing.JButton();
         HeaderPanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         TitleLabel = new javax.swing.JLabel();
@@ -224,15 +223,6 @@ public class ViewPlayersPanel extends UpdateableJPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 8, 4, 4);
         GameStatsPropertiesPanel.add(CurrentGamemodeIdLabel, gridBagConstraints);
-
-        ViewGamemodeButton.setText("View Gamemode");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(16, 4, 4, 4);
-        GameStatsPropertiesPanel.add(ViewGamemodeButton, gridBagConstraints);
 
         setMinimumSize(new java.awt.Dimension(1, 1));
         setName(""); // NOI18N
@@ -747,7 +737,6 @@ public class ViewPlayersPanel extends UpdateableJPanel {
     private javax.swing.JButton QuitToMainMenuButton;
     private javax.swing.JLabel RoundsPlayedLabel;
     private javax.swing.JLabel TitleLabel;
-    private javax.swing.JButton ViewGamemodeButton;
     private javax.swing.JLabel WinLossRatioLabel;
     private javax.swing.JLabel WinRateLabel;
     private javax.swing.JLabel WinsLabel;

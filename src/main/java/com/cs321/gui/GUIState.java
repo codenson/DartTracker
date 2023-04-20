@@ -2,6 +2,7 @@ package com.cs321.gui;
 
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import com.cs321.core.RoundsManager;
 import com.cs321.core.Team;
 import com.cs321.core.TeamsManager;
 import com.cs321.core.TurnManager;
+import com.cs321.io.IOUtils;
 
 /**
  * Holds the state of the GUI
@@ -207,4 +209,33 @@ public class GUIState {
     // The GameManager to use for the game
     GameManager gameManager = null;
 
+
+
+    /**
+     * After the game is over, update the players' data and persist it to the disk
+     * 
+     * @return true if there was no IO Error
+     */
+    public boolean updateAndPersistPlayersData() {
+        gameManager.updatePlayersData();
+        boolean IOError = false;
+
+        for (Player player : gameManager.getTeamsManager().getAllPlayers()) {
+            try {
+                IOUtils.deletePlayer(player);
+            } catch (IOException e) {
+                e.printStackTrace();
+                IOError = true;
+            }
+
+            try {
+                IOUtils.savePlayer(player);
+            } catch (IOException e) {
+                e.printStackTrace();
+                IOError = true;
+            }
+        }
+
+        return IOError == false;
+    }
 }
